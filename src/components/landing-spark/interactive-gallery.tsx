@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ElementType } from "react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Palette, Smartphone, Settings2, Zap } from "lucide-react";
 
 interface GalleryItem {
   id: string;
@@ -12,6 +12,7 @@ interface GalleryItem {
   description: string;
   imageUrl: string;
   imageHint: string;
+  icon: ElementType;
 }
 
 const galleryItems: GalleryItem[] = [
@@ -20,28 +21,32 @@ const galleryItems: GalleryItem[] = [
     title: "Sleek Design", 
     description: "Modern and visually appealing templates that captivate your audience.", 
     imageUrl: "https://picsum.photos/800/600?random=1",
-    imageHint: "minimalist architecture"
+    imageHint: "minimalist architecture",
+    icon: Palette,
   },
   { 
     id: "2", 
     title: "Fully Responsive", 
     description: "Perfect display on all devices, from desktops to smartphones.", 
     imageUrl: "https://picsum.photos/800/600?random=2",
-    imageHint: "devices responsive"
+    imageHint: "devices responsive",
+    icon: Smartphone,
   },
   { 
     id: "3", 
     title: "Easy Customization", 
     description: "Tailor every element to match your brand and vision effortlessly.", 
     imageUrl: "https://picsum.photos/800/600?random=3",
-    imageHint: "color palette tools"
+    imageHint: "color palette tools",
+    icon: Settings2,
   },
   { 
     id: "4", 
     title: "Optimized for Speed", 
     description: "Fast-loading pages to ensure a smooth user experience and better SEO.", 
     imageUrl: "https://picsum.photos/800/600?random=4",
-    imageHint: "speedometer abstract"
+    imageHint: "speedometer abstract",
+    icon: Zap,
   },
 ];
 
@@ -49,7 +54,7 @@ export function InteractiveGallery() {
   const [activeItem, setActiveItem] = useState<GalleryItem>(galleryItems[0]);
 
   return (
-    <section id="features" className="py-16 md:py-24 bg-background">
+    <section id="features" className="py-16 md:py-24 bg-theme-pink">
       <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl font-extrabold text-foreground sm:text-4xl md:text-5xl">
@@ -67,18 +72,27 @@ export function InteractiveGallery() {
                 key={item.id}
                 onMouseEnter={() => setActiveItem(item)}
                 className={cn(
-                  "cursor-pointer transition-all duration-300 ease-in-out shadow-md hover:shadow-xl",
-                  activeItem.id === item.id ? "bg-accent text-accent-foreground ring-2 ring-accent" : "bg-card hover:bg-secondary/50"
+                  "cursor-pointer transition-all duration-300 ease-in-out shadow-md",
+                  activeItem.id === item.id 
+                    ? "bg-accent text-accent-foreground ring-2 ring-accent" 
+                    : "bg-card opacity-70 hover:shadow-xl" // Non-active items are dimmed
                 )}
               >
                 <CardContent className="p-6">
-                  <h3 className={cn(
-                    "text-xl font-semibold mb-2 flex items-center justify-between",
-                     activeItem.id === item.id ? "text-accent-foreground" : "text-foreground"
-                  )}>
-                    {item.title}
-                    {activeItem.id === item.id && <ArrowRight className="h-5 w-5 transition-transform duration-300 transform group-hover:translate-x-1" />}
-                  </h3>
+                  <div className="flex items-center mb-3">
+                    <item.icon className={cn(
+                        "h-7 w-7 mr-3", 
+                        activeItem.id === item.id ? "text-accent-foreground" : "text-accent"
+                      )} 
+                    />
+                    <h3 className={cn(
+                      "text-xl font-semibold flex items-center justify-between flex-grow",
+                       activeItem.id === item.id ? "text-accent-foreground" : "text-foreground"
+                    )}>
+                      {item.title}
+                      {activeItem.id === item.id && <ArrowRight className="h-5 w-5 transition-transform duration-300 transform" />}
+                    </h3>
+                  </div>
                   <p className={cn(
                      "text-sm",
                      activeItem.id === item.id ? "text-accent-foreground/80" : "text-foreground/70"

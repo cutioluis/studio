@@ -18,7 +18,7 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-theme-pink/95 backdrop-blur supports-[backdrop-filter]:bg-theme-pink/60">
       <div className="container mx-auto flex h-16 max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
         <nav className="hidden md:flex items-center space-x-6">
@@ -41,7 +41,7 @@ export function Navbar() {
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full max-w-xs bg-background p-6">
+            <SheetContent side="right" className="w-full max-w-xs bg-theme-pink p-6"> {/* Updated background for mobile sheet */}
               <div className="flex flex-col space-y-6">
                 <div className="flex items-center justify-between">
                   <Logo />
