@@ -9,7 +9,7 @@ const WhatsAppIcon = () => (
 
 export function CallToActionSection() {
   return (
-    <section id="cta" className="py-16 md:py-24 bg-primary text-primary-foreground">
+    <section id="cta" className="py-16 md:py-24 bg-primary text-primary-foreground transition-all duration-500 ease-in-out">
       <div className="container mx-auto max-w-screen-md px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-3xl font-extrabold sm:text-4xl md:text-5xl">
           ¿Lista para Empezar tu Viaje en el Arte de las Uñas?
@@ -19,11 +19,14 @@ export function CallToActionSection() {
         </p>
         <div className="mt-10">
           <Button 
+            asChild
             size="lg" 
             className="text-lg px-10 py-4 bg-background text-foreground hover:bg-secondary shadow-lg transform transition-transform hover:scale-105"
           >
-            <WhatsAppIcon />
-            Inscríbete por WhatsApp
+            <a href="https://walink.co/bd3d37" target="_blank" rel="noopener noreferrer">
+              <WhatsAppIcon />
+              Inscríbete por WhatsApp
+            </a>
           </Button>
         </div>
       </div>

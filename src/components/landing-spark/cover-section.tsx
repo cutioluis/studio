@@ -11,7 +11,7 @@ const WhatsAppIcon = () => (
 export function CoverSection() {
   return (
     <section 
-      className="relative py-20 md:py-32 bg-gradient-to-b from-primary/20 via-primary/5 to-background/80 bg-cover bg-center"
+      className="relative py-20 md:py-32 bg-gradient-to-b from-primary/20 via-primary/5 to-background/80 bg-cover bg-center transition-all duration-500 ease-in-out"
       style={{
         backgroundImage: "url('https://picsum.photos/1920/1080?random=cover-background')",
       }}
@@ -48,11 +48,14 @@ export function CoverSection() {
             </p>
             <div className="mt-10 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
               <Button 
+                asChild
                 size="lg" 
                 className="text-lg px-8 py-4 bg-background text-foreground hover:bg-secondary hover:text-secondary-foreground shadow-lg transform transition-transform hover:scale-105"
               >
-                <WhatsAppIcon />
-                Contáctanos por WhatsApp
+                <a href="https://walink.co/bd3d37" target="_blank" rel="noopener noreferrer">
+                  <WhatsAppIcon />
+                  Contáctanos por WhatsApp
+                </a>
               </Button>
             </div>
           </div>
@@ -72,4 +75,3 @@ export function CoverSection() {
     </section>
   );
 }
-
