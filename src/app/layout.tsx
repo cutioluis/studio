@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: 'Curso de Técnico en Uñas Profesional | Landing Spark',
     description: 'Conviértete en técnico de uñas profesional con nuestro curso certificado. Aprende las últimas técnicas y tendencias del nail art. ¡Inscríbete ya!',
     url: siteUrl,
-    siteName: 'Landing Spark',
+    siteName: 'Ceci Glaom',
     images: [
       {
         url: `${siteUrl}/og-image-nail-course.jpg`, // Replace with your actual OG image URL

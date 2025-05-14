@@ -23,7 +23,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <Link href="/" className={`flex items-center space-x-2 text-2xl font-bold text-foreground transition-colors hover:text-accent ${className}`}>
       <SparkIcon className="text-accent" />
-      <span>Landing Spark</span>
+      <span>Ceci Glam</span>
     </Link>
   );
 }
