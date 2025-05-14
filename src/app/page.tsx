@@ -6,11 +6,13 @@ import { InteractiveGallery } from "@/components/landing-spark/interactive-galle
 import { InstructorSection } from "@/components/landing-spark/instructor-section";
 import { CallToActionSection } from "@/components/landing-spark/call-to-action-section";
 import { Toaster } from "@/components/ui/toaster";
+import { AnnouncementBanner } from "@/components/layout/announcement-banner";
 
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Navbar />
+      <AnnouncementBanner />
       <main className="flex-grow">
         <CoverSection />
         <InteractiveGallery />
