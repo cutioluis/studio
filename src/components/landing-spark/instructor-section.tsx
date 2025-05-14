@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { CheckCircle, Star } from "lucide-react";
 
 export function InstructorSection() {
+  const instructorName = "[Nombre de la Instructora]"; // Placeholder for instructor's name
+
   return (
     <section id="instructor" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -20,22 +22,22 @@ export function InstructorSection() {
           <div className="lg:col-span-2 relative aspect-[3/4] rounded-xl overflow-hidden shadow-2xl group mx-auto lg:mx-0 w-full max-w-md lg:max-w-none">
             <Image
               src="https://picsum.photos/600/800?random=instructor"
-              alt="Instructora del curso de uñas"
+              alt={`${instructorName}, instructora experta del curso de técnico en uñas en Landing Spark`}
               layout="fill"
               objectFit="cover"
               data-ai-hint="female instructor professional"
               className="transform transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <h3 className="text-white text-2xl font-bold">[Nombre de la Instructora]</h3>
-                <p className="text-primary text-sm font-semibold">Nail Artist & Educator</p> {/* Changed text-theme-pink to text-primary and added font-semibold */}
+                <h3 className="text-white text-2xl font-bold">{instructorName}</h3>
+                <p className="text-primary text-sm font-semibold">Nail Artist & Educator</p>
             </div>
           </div>
           
           <div className="lg:col-span-3 space-y-6">
             <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card rounded-xl">
               <CardHeader>
-                <CardTitle className="text-3xl font-bold text-accent">¡Hola! Soy [Nombre de la Instructora]</CardTitle>
+                <CardTitle className="text-3xl font-bold text-accent">¡Hola! Soy {instructorName}</CardTitle>
                 <CardDescription className="text-md text-foreground/75 pt-1">Tu guía en el fascinante mundo de las uñas.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4 text-foreground/80">

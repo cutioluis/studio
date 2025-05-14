@@ -30,7 +30,7 @@ const galleryItems: GalleryItem[] = [
     description: "Domina las técnicas de aplicación, esculpido y decoración para resultados impecables.", 
     imageUrl: "https://picsum.photos/800/600?random=nailtech2",
     imageHint: "nail tools professional",
-    icon: Settings2, // Changed from Smartphone to better fit "Técnicas"
+    icon: Settings2,
   },
   { 
     id: "3", 
@@ -38,7 +38,7 @@ const galleryItems: GalleryItem[] = [
     description: "Conoce todo sobre la salud de las uñas, higiene y productos seguros para ofrecer un servicio de calidad.", 
     imageUrl: "https://picsum.photos/800/600?random=nailcare3",
     imageHint: "nail health care",
-    icon: Zap, // Changed from Settings2, Zap could represent 'vitality' or 'health'
+    icon: Zap, 
   },
   { 
     id: "4", 
@@ -46,7 +46,7 @@ const galleryItems: GalleryItem[] = [
     description: "Desarrolla tu creatividad con decoración avanzada, desde encapsulados hasta diseños 3D.", 
     imageUrl: "https://picsum.photos/800/600?random=naildesign4",
     imageHint: "creative nail design",
-    icon: Palette, // Reused Palette for creativity, could be another icon if available
+    icon: Palette, 
   },
 ];
 
@@ -54,7 +54,7 @@ export function InteractiveGallery() {
   const [activeItem, setActiveItem] = useState<GalleryItem>(galleryItems[0]);
 
   return (
-    <section id="features" className="py-16 md:py-24 bg-secondary"> {/* Changed bg-theme-pink to bg-secondary */}
+    <section id="features" className="py-16 md:py-24 bg-secondary">
       <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl font-extrabold text-foreground sm:text-4xl md:text-5xl">
@@ -76,7 +76,7 @@ export function InteractiveGallery() {
                   activeItem.id === item.id 
                     ? "bg-accent text-accent-foreground ring-2 ring-accent" 
                     : "bg-card hover:opacity-100 hover:shadow-xl", 
-                  activeItem.id !== item.id && "opacity-70" // Apply opacity to non-active items
+                  activeItem.id !== item.id && "opacity-70"
                 )}
               >
                 <CardContent className="p-6">
@@ -112,7 +112,7 @@ export function InteractiveGallery() {
                   <Image
                     key={item.id}
                     src={item.imageUrl}
-                    alt={item.title}
+                    alt={`${item.title} - Contenido del curso de técnico en uñas Landing Spark`}
                     layout="fill"
                     objectFit="cover"
                     data-ai-hint={item.imageHint}
@@ -120,7 +120,7 @@ export function InteractiveGallery() {
                       "transition-opacity duration-500 ease-in-out rounded-lg",
                       activeItem.id === item.id ? "opacity-100" : "opacity-0"
                     )}
-                    priority={item.id === galleryItems[0].id} // Prioritize loading the first image
+                    priority={item.id === galleryItems[0].id}
                   />
                 ))}
               </div>

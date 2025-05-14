@@ -17,15 +17,15 @@ export function CoverSection() {
             <div className="flex items-center justify-center md:justify-start mb-6 w-full">
               <div className="flex -space-x-4 rtl:space-x-reverse mr-3">
                 <Avatar className="h-10 w-10 border-2 border-background shadow-md">
-                  <AvatarImage src="https://picsum.photos/40/40?random=avatar1" alt="Alumno 1" data-ai-hint="person face" />
+                  <AvatarImage src="https://picsum.photos/40/40?random=avatar1" alt="Alumna satisfecha del curso de uñas 1" data-ai-hint="person face" />
                   <AvatarFallback>A1</AvatarFallback>
                 </Avatar>
                 <Avatar className="h-10 w-10 border-2 border-background shadow-md">
-                  <AvatarImage src="https://picsum.photos/40/40?random=avatar2" alt="Alumno 2" data-ai-hint="person face" />
+                  <AvatarImage src="https://picsum.photos/40/40?random=avatar2" alt="Alumna satisfecha del curso de uñas 2" data-ai-hint="person face" />
                   <AvatarFallback>A2</AvatarFallback>
                 </Avatar>
                 <Avatar className="h-10 w-10 border-2 border-background shadow-md">
-                  <AvatarImage src="https://picsum.photos/40/40?random=avatar3" alt="Alumno 3" data-ai-hint="person face" />
+                  <AvatarImage src="https://picsum.photos/40/40?random=avatar3" alt="Alumna satisfecha del curso de uñas 3" data-ai-hint="person face" />
                   <AvatarFallback>A3</AvatarFallback>
                 </Avatar>
               </div>
@@ -50,11 +50,12 @@ export function CoverSection() {
           <div className="relative aspect-video rounded-lg overflow-hidden shadow-2xl">
             <Image
               src="https://picsum.photos/1200/900?random=hero"
-              alt="Landing Spark illustrative image"
+              alt="Manos con uñas artísticas detalladas, demostrando técnicas aprendidas en el curso de Landing Spark"
               layout="fill"
               objectFit="cover"
               data-ai-hint="nail art design"
               className="transform transition-transform duration-500 hover:scale-105"
+              priority
             />
           </div>
         </div>

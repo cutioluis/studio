@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: /sitemap.xml
+# Replace [YOUR_SITE_URL] with your actual domain if generating sitemap externally or for specific needs.
+# For Next.js generated sitemaps (e.g., using app/sitemap.ts), /sitemap.xml is the conventional path.
