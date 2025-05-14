@@ -49,7 +49,7 @@ export function CoverSection() {
             <div className="mt-10 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
               <Button 
                 size="lg" 
-                className="text-lg px-8 py-4 bg-background text-foreground hover:bg-secondary hover:text-secondary-foreground shadow-lg"
+                className="text-lg px-8 py-4 bg-background text-foreground hover:bg-secondary hover:text-secondary-foreground shadow-lg transform transition-transform hover:scale-105"
               >
                 <WhatsAppIcon />
                 Contáctanos por WhatsApp
@@ -72,3 +72,4 @@ export function CoverSection() {
     </section>
   );
 }
+
