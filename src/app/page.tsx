@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/footer";
 import { CoverSection } from "@/components/landing-spark/cover-section";
 import { InteractiveGallery } from "@/components/landing-spark/interactive-gallery";
 import { InstructorSection } from "@/components/landing-spark/instructor-section";
+import { CallToActionSection } from "@/components/landing-spark/call-to-action-section";
 import { Toaster } from "@/components/ui/toaster";
 
 export default function HomePage() {
@@ -36,6 +37,7 @@ export default function HomePage() {
             {/* Contact form or info would go here */}
           </div>
         </section>
+        <CallToActionSection />
       </main>
       <Footer />
       <Toaster />
