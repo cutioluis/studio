@@ -11,7 +11,7 @@ const WhatsAppIcon = () => (
 export function CoverSection() {
   return (
     <section className="relative py-20 md:py-32 bg-gradient-to-br from-accent/20 via-background to-background">
-      <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-screen-lg px-4 sm:px-6 lg:px-8"> {/* Changed max-w-screen-xl to max-w-screen-lg */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col items-center text-center">
             <div className="flex items-center justify-center mb-6">
@@ -62,3 +62,4 @@ export function CoverSection() {
     </section>
   );
 }
+
