@@ -8,93 +8,95 @@ body {
 
 @layer base {
   :root {
-    --background: 30 100% 98%; /* Very Light Peach */
-    --foreground: 25 30% 20%; /* Warm Dark Brown */
+    --background: 0 0% 98%; /* Very Light Gray (Almost White) */
+    --foreground: 0 0% 20%; /* Dark Gray */
 
-    --card: 30 100% 98%; /* Very Light Peach */
-    --card-foreground: 25 30% 20%; /* Warm Dark Brown */
-    --popover: 30 100% 98%; /* Very Light Peach */
-    --popover-foreground: 25 30% 20%; /* Warm Dark Brown */
+    --card: 0 0% 98%; /* Consistent with background */
+    --card-foreground: 0 0% 20%; /* Consistent with foreground */
+    --popover: 0 0% 98%; /* Consistent with background */
+    --popover-foreground: 0 0% 20%; /* Consistent with foreground */
 
-    --primary: 350 85% 65%; /* Soft Coral/Rose */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 302 100% 87%; /* Light Pink (#FFBDFB) */
+    --primary-foreground: 302 30% 25%; /* Dark Desaturated Pink/Purple */
 
-    --secondary: 35 90% 90%; /* Light Apricot/Peach */
-    --secondary-foreground: 25 30% 20%; /* Warm Dark Brown */
+    --secondary: 270 80% 92%; /* Soft Lavender */
+    --secondary-foreground: 270 30% 30%; /* Darker Lavender */
 
-    --muted: 35 70% 94%; /* Lighter Apricot/Peach */
-    --muted-foreground: 25 25% 45%; /* Warm Medium Gray */
+    --muted: 0 0% 94%; /* Lighter Gray */
+    --muted-foreground: 0 0% 45%; /* Medium Gray */
 
-    --accent: 45 95% 60%; /* Warm Gold */
-    --accent-foreground: 25 30% 15%; /* Darker Warm Brown for contrast on Gold */
+    --accent: 320 100% 80%; /* Vibrant Pink/Magenta (brighter/deeper than primary) */
+    --accent-foreground: 320 30% 20%; /* Dark contrast for accent */
     
     --destructive: 0 70% 55%; /* Standard Red */
     --destructive-foreground: 0 0% 98%; /* White */
 
-    --border: 30 50% 90%; /* Soft Warm Beige Border */
-    --input: 30 50% 92%; /* Slightly lighter than border */
-    --ring: 350 85% 65%; /* Soft Coral/Rose - same as primary */
+    --border: 0 0% 90%; /* Light Gray Border */
+    --input: 0 0% 92%; /* Slightly lighter than border for input */
+    --ring: 302 100% 87%; /* Primary Pink for focus rings */
 
     --radius: 0.5rem;
 
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --chart-1: 302 70% 70%; /* Shades related to pink/lavender */
+    --chart-2: 270 60% 65%;
+    --chart-3: 320 70% 75%;
+    --chart-4: 280 50% 60%;
+    --chart-5: 300 60% 80%;
 
-    --sidebar-background: 30 70% 96%; /* Light warm sidebar */
-    --sidebar-foreground: 25 30% 25%; /* Warm dark text for sidebar */
-    --sidebar-primary: 350 80% 60%; /* Primary color for sidebar highlights */
-    --sidebar-primary-foreground: 0 0% 100%; /* White */
-    --sidebar-accent: 35 85% 88%; /* Secondary color for sidebar accents */
-    --sidebar-accent-foreground: 25 30% 20%; /* Warm dark text for sidebar accents */
-    --sidebar-border: 30 50% 85%; /* Warm border for sidebar */
-    --sidebar-ring: 350 80% 60%; /* Primary color for sidebar ring */
+    /* Sidebar Light Theme */
+    --sidebar-background: 0 0% 96%; /* Very light gray, slightly off-white */
+    --sidebar-foreground: 0 0% 25%; /* Dark Gray for text */
+    --sidebar-primary: 302 100% 87%; /* Primary Pink */
+    --sidebar-primary-foreground: 302 30% 25%; /* Dark contrast for primary */
+    --sidebar-accent: 270 80% 92%; /* Soft Lavender for sidebar accents */
+    --sidebar-accent-foreground: 270 30% 30%; /* Darker Lavender for accent text */
+    --sidebar-border: 0 0% 88%; /* Light gray border for sidebar */
+    --sidebar-ring: 302 100% 87%; /* Primary Pink for ring */
   }
 
   .dark {
-    --background: 25 15% 12%; /* Deep Warm Charcoal */
-    --foreground: 30 30% 92%; /* Off-White Warm */
+    --background: 280 10% 12%; /* Deep Cool Charcoal/Purple */
+    --foreground: 300 20% 92%; /* Off-White with a cool/pinkish tint */
 
-    --card: 25 15% 18%; /* Darker Warm Charcoal */
-    --card-foreground: 30 30% 92%; /* Off-White Warm */
-    --popover: 25 15% 18%; /* Darker Warm Charcoal */
-    --popover-foreground: 30 30% 92%; /* Off-White Warm */
+    --card: 280 10% 18%; /* Darker Cool Charcoal/Purple */
+    --card-foreground: 300 20% 92%;
+    --popover: 280 10% 18%;
+    --popover-foreground: 300 20% 92%;
 
-    --primary: 350 75% 70%; /* Brighter Soft Coral/Rose */
-    --primary-foreground: 25 10% 5%; /* Very Dark for contrast */
+    --primary: 302 90% 75%; /* Brighter Pink for dark mode */
+    --primary-foreground: 302 20% 15%; /* Very dark for contrast */
 
-    --secondary: 35 30% 25%; /* Muted Dark Apricot/Peach */
-    --secondary-foreground: 30 30% 88%; /* Light Warm Beige */
+    --secondary: 270 40% 30%; /* Muted Dark Lavender */
+    --secondary-foreground: 270 30% 88%; /* Light Lavender */
 
-    --muted: 35 25% 30%; /* Darker Muted Apricot/Peach */
-    --muted-foreground: 30 25% 65%; /* Lighter Muted Warm Gray */
+    --muted: 280 10% 25%; /* Darker Cool Muted Purple/Gray */
+    --muted-foreground: 300 15% 65%; /* Lighter Muted Cool Gray */
 
-    --accent: 45 80% 65%; /* Brighter Warm Gold */
-    --accent-foreground: 25 15% 10%; /* Very Dark for contrast on Gold */
+    --accent: 320 90% 70%; /* Brighter Vibrant Pink/Magenta */
+    --accent-foreground: 320 20% 10%; /* Very dark for contrast on accent */
     
     --destructive: 0 60% 50%; /* Standard Red for dark mode */
-    --destructive-foreground: 0 0% 98%; /* White */
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 30 15% 28%; /* Dark Warm Beige Border */
-    --input: 30 15% 30%; /* Dark Warm Input */
-    --ring: 350 75% 70%; /* Brighter Soft Coral/Rose - same as primary dark */
+    --border: 280 10% 28%; /* Dark Cool Purple/Gray Border */
+    --input: 280 10% 30%; /* Dark Cool Input */
+    --ring: 302 90% 75%; /* Brighter Pink for ring */
 
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --chart-1: 302 70% 60%;
+    --chart-2: 270 60% 55%;
+    --chart-3: 320 70% 65%;
+    --chart-4: 280 50% 50%;
+    --chart-5: 300 60% 70%;
 
-    --sidebar-background: 25 15% 15%; /* Dark warm sidebar */
-    --sidebar-foreground: 30 30% 90%; /* Light warm text for sidebar */
-    --sidebar-primary: 350 70% 65%; /* Primary color for dark sidebar highlights */
-    --sidebar-primary-foreground: 25 10% 5%; /* Very Dark for contrast */
-    --sidebar-accent: 35 25% 28%; /* Secondary color for dark sidebar accents */
-    --sidebar-accent-foreground: 30 30% 85%; /* Light warm text for dark sidebar accents */
-    --sidebar-border: 30 15% 25%; /* Dark warm border for sidebar */
-    --sidebar-ring: 350 70% 65%; /* Primary color for dark sidebar ring */
+    /* Sidebar Dark Theme */
+    --sidebar-background: 280 10% 15%; /* Dark cool charcoal/purple */
+    --sidebar-foreground: 300 20% 90%; /* Light cool off-white text */
+    --sidebar-primary: 302 90% 75%; /* Brighter Pink */
+    --sidebar-primary-foreground: 302 20% 15%; /* Very dark contrast */
+    --sidebar-accent: 270 40% 30%; /* Muted Dark Lavender for accents */
+    --sidebar-accent-foreground: 270 30% 85%; /* Light Lavender for accent text */
+    --sidebar-border: 280 10% 25%; /* Dark cool border */
+    --sidebar-ring: 302 90% 75%; /* Brighter Pink for ring */
   }
 }
 

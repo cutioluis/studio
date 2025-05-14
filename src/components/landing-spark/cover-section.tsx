@@ -10,11 +10,11 @@ const WhatsAppIcon = () => (
 
 export function CoverSection() {
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-br from-accent/20 via-background to-background">
-      <div className="container mx-auto max-w-screen-lg px-4 sm:px-6 lg:px-8"> {/* Changed max-w-screen-xl to max-w-screen-lg */}
+    <section className="relative py-20 md:py-32 bg-gradient-to-b from-primary/10 to-background">
+      <div className="container mx-auto max-w-screen-lg px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="flex flex-col items-center text-center">
-            <div className="flex items-center justify-center mb-6">
+          <div className="flex flex-col items-center text-center md:items-start md:text-left">
+            <div className="flex items-center justify-center md:justify-start mb-6 w-full">
               <div className="flex -space-x-4 rtl:space-x-reverse mr-3">
                 <Avatar className="h-10 w-10 border-2 border-background shadow-md">
                   <AvatarImage src="https://picsum.photos/40/40?random=avatar1" alt="Alumno 1" data-ai-hint="person face" />
@@ -37,7 +37,7 @@ export function CoverSection() {
             <p className="mt-6 max-w-2xl text-lg text-foreground/80 sm:text-xl md:text-2xl">
               Conviértete en profesional, incluye certificado.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+            <div className="mt-10 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
               <Button 
                 size="lg" 
                 className="text-lg px-8 py-4 bg-background text-foreground hover:bg-secondary shadow-lg"
@@ -62,4 +62,3 @@ export function CoverSection() {
     </section>
   );
 }
-
