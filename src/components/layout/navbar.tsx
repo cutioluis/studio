@@ -9,16 +9,16 @@ import { Logo } from "@/components/logo";
 
 const navLinks = [
   { href: "#features", label: "Features" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  // { href: "#pricing", label: "Pricing" }, // Removed as per user request
+  // { href: "#about", label: "About" }, // Removed as per user request
+  // { href: "#contact", label: "Contact" }, // Removed as per user request
 ];
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-theme-pink/95 backdrop-blur supports-[backdrop-filter]:bg-theme-pink/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
         <nav className="hidden md:flex items-center space-x-6">
@@ -31,7 +31,7 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Button size="sm" variant="default">Get Started</Button>
+          <Button size="sm" variant="default" onClick={() => window.location.href='#cta'}>Inscríbete</Button>
         </nav>
         <div className="md:hidden">
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
@@ -41,7 +41,7 @@ export function Navbar() {
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full max-w-xs bg-theme-pink p-6"> {/* Updated background for mobile sheet */}
+            <SheetContent side="right" className="w-full max-w-xs bg-background p-6"> {/* Updated background for mobile sheet */}
               <div className="flex flex-col space-y-6">
                 <div className="flex items-center justify-between">
                   <Logo />
@@ -56,13 +56,26 @@ export function Navbar() {
                       key={link.label}
                       href={link.href}
                       className="text-lg font-medium text-foreground transition-colors hover:text-accent"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        // Smooth scroll for mobile might need direct handling if NextLink alone doesn't suffice for hashes
+                        const element = document.querySelector(link.href);
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
                     >
                       {link.label}
                     </Link>
                   ))}
                 </nav>
-                <Button variant="default" className="w-full">Get Started</Button>
+                <Button variant="default" className="w-full" onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  const element = document.querySelector('#cta');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}>Inscríbete</Button>
               </div>
             </SheetContent>
           </Sheet>

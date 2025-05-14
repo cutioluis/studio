@@ -28,7 +28,7 @@ export function InstructorSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                 <h3 className="text-white text-2xl font-bold">[Nombre de la Instructora]</h3>
-                <p className="text-theme-pink text-sm">Nail Artist & Educator</p>
+                <p className="text-primary text-sm font-semibold">Nail Artist & Educator</p> {/* Changed text-theme-pink to text-primary and added font-semibold */}
             </div>
           </div>
           

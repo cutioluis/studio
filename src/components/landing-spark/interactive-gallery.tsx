@@ -18,35 +18,35 @@ interface GalleryItem {
 const galleryItems: GalleryItem[] = [
   { 
     id: "1", 
-    title: "Sleek Design", 
-    description: "Modern and visually appealing templates that captivate your audience.", 
-    imageUrl: "https://picsum.photos/800/600?random=1",
-    imageHint: "minimalist architecture",
+    title: "Diseños Modernos", 
+    description: "Aprende a crear uñas con estilos actuales y visualmente atractivos que cautivarán a tus clientas.", 
+    imageUrl: "https://picsum.photos/800/600?random=nailart1",
+    imageHint: "nail art modern",
     icon: Palette,
   },
   { 
     id: "2", 
-    title: "Fully Responsive", 
-    description: "Perfect display on all devices, from desktops to smartphones.", 
-    imageUrl: "https://picsum.photos/800/600?random=2",
-    imageHint: "devices responsive",
-    icon: Smartphone,
+    title: "Técnicas Profesionales", 
+    description: "Domina las técnicas de aplicación, esculpido y decoración para resultados impecables.", 
+    imageUrl: "https://picsum.photos/800/600?random=nailtech2",
+    imageHint: "nail tools professional",
+    icon: Settings2, // Changed from Smartphone to better fit "Técnicas"
   },
   { 
     id: "3", 
-    title: "Easy Customization", 
-    description: "Tailor every element to match your brand and vision effortlessly.", 
-    imageUrl: "https://picsum.photos/800/600?random=3",
-    imageHint: "color palette tools",
-    icon: Settings2,
+    title: "Cuidado y Salud", 
+    description: "Conoce todo sobre la salud de las uñas, higiene y productos seguros para ofrecer un servicio de calidad.", 
+    imageUrl: "https://picsum.photos/800/600?random=nailcare3",
+    imageHint: "nail health care",
+    icon: Zap, // Changed from Settings2, Zap could represent 'vitality' or 'health'
   },
   { 
     id: "4", 
-    title: "Optimized for Speed", 
-    description: "Fast-loading pages to ensure a smooth user experience and better SEO.", 
-    imageUrl: "https://picsum.photos/800/600?random=4",
-    imageHint: "speedometer abstract",
-    icon: Zap,
+    title: "Creatividad sin Límites", 
+    description: "Desarrolla tu creatividad con decoración avanzada, desde encapsulados hasta diseños 3D.", 
+    imageUrl: "https://picsum.photos/800/600?random=naildesign4",
+    imageHint: "creative nail design",
+    icon: Palette, // Reused Palette for creativity, could be another icon if available
   },
 ];
 
@@ -54,14 +54,14 @@ export function InteractiveGallery() {
   const [activeItem, setActiveItem] = useState<GalleryItem>(galleryItems[0]);
 
   return (
-    <section id="features" className="py-16 md:py-24 bg-theme-pink">
+    <section id="features" className="py-16 md:py-24 bg-secondary"> {/* Changed bg-theme-pink to bg-secondary */}
       <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl font-extrabold text-foreground sm:text-4xl md:text-5xl">
-            Discover What <span className="text-accent">Landing Spark</span> Offers
+            Descubre lo que Aprenderás en Nuestro <span className="text-accent">Curso de Uñas</span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-foreground/70 sm:text-xl">
-            Explore the powerful features that make creating stunning landing pages a breeze.
+            Explora las habilidades y conocimientos clave que te convertirán en una técnica de uñas experta.
           </p>
         </div>
 
@@ -75,7 +75,8 @@ export function InteractiveGallery() {
                   "cursor-pointer transition-all duration-300 ease-in-out shadow-md",
                   activeItem.id === item.id 
                     ? "bg-accent text-accent-foreground ring-2 ring-accent" 
-                    : "bg-card opacity-70 hover:shadow-xl" // Non-active items are dimmed
+                    : "bg-card hover:opacity-100 hover:shadow-xl", 
+                  activeItem.id !== item.id && "opacity-70" // Apply opacity to non-active items
                 )}
               >
                 <CardContent className="p-6">
@@ -105,7 +106,7 @@ export function InteractiveGallery() {
           </div>
 
           <div className="md:col-span-8 sticky top-24">
-            <Card className="overflow-hidden shadow-xl">
+            <Card className="overflow-hidden shadow-xl rounded-lg">
               <div className="aspect-w-16 aspect-h-9 relative w-full h-[450px] md:h-[550px]">
                 {galleryItems.map((item) => (
                   <Image
@@ -116,7 +117,7 @@ export function InteractiveGallery() {
                     objectFit="cover"
                     data-ai-hint={item.imageHint}
                     className={cn(
-                      "transition-opacity duration-500 ease-in-out",
+                      "transition-opacity duration-500 ease-in-out rounded-lg",
                       activeItem.id === item.id ? "opacity-100" : "opacity-0"
                     )}
                     priority={item.id === galleryItems[0].id} // Prioritize loading the first image
@@ -125,7 +126,7 @@ export function InteractiveGallery() {
               </div>
             </Card>
              <p className="mt-2 text-sm text-center text-foreground/60">
-                Currently viewing: <span className="font-semibold text-accent">{activeItem.title}</span>
+                Actualmente viendo: <span className="font-semibold text-accent">{activeItem.title}</span>
             </p>
           </div>
         </div>
