@@ -1,7 +1,9 @@
+
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { CoverSection } from "@/components/landing-spark/cover-section";
 import { InteractiveGallery } from "@/components/landing-spark/interactive-gallery";
+import { InstructorSection } from "@/components/landing-spark/instructor-section";
 import { Toaster } from "@/components/ui/toaster";
 
 export default function HomePage() {
@@ -11,6 +13,7 @@ export default function HomePage() {
       <main className="flex-grow">
         <CoverSection />
         <InteractiveGallery />
+        <InstructorSection />
         {/* Placeholder for other sections like Pricing, About, Contact Form */}
         <section id="pricing" className="py-16 md:py-24 bg-secondary">
           <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 text-center">
