@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const WhatsAppIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
@@ -10,19 +11,36 @@ const WhatsAppIcon = () => (
 export function CoverSection() {
   return (
     <section className="relative py-20 md:py-32 bg-gradient-to-br from-accent/20 via-background to-background">
-      <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 text-center">
+      <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="md:text-left">
+          <div className="flex flex-col items-center text-center">
+            <div className="flex items-center justify-center mb-6">
+              <div className="flex -space-x-4 rtl:space-x-reverse mr-3">
+                <Avatar className="h-10 w-10 border-2 border-background shadow-md">
+                  <AvatarImage src="https://picsum.photos/40/40?random=avatar1" alt="Alumno 1" data-ai-hint="person face" />
+                  <AvatarFallback>A1</AvatarFallback>
+                </Avatar>
+                <Avatar className="h-10 w-10 border-2 border-background shadow-md">
+                  <AvatarImage src="https://picsum.photos/40/40?random=avatar2" alt="Alumno 2" data-ai-hint="person face" />
+                  <AvatarFallback>A2</AvatarFallback>
+                </Avatar>
+                <Avatar className="h-10 w-10 border-2 border-background shadow-md">
+                  <AvatarImage src="https://picsum.photos/40/40?random=avatar3" alt="Alumno 3" data-ai-hint="person face" />
+                  <AvatarFallback>A3</AvatarFallback>
+                </Avatar>
+              </div>
+              <p className="text-sm font-medium text-foreground/80">+50 alumnos activos</p>
+            </div>
             <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
               Tecnico en Uñas <span className="text-accent">Profesional</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg text-foreground/80 sm:text-xl md:text-2xl md:mx-0 mx-auto">
+            <p className="mt-6 max-w-2xl text-lg text-foreground/80 sm:text-xl md:text-2xl">
               Conviértete en profesional, incluye certificado.
             </p>
-            <div className="mt-10 flex flex-col sm:flex-row sm:justify-center md:justify-start gap-4">
+            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
               <Button 
                 size="lg" 
-                className="text-lg px-8 py-4 bg-background text-foreground hover:bg-secondary"
+                className="text-lg px-8 py-4 bg-background text-foreground hover:bg-secondary shadow-lg"
               >
                 <WhatsAppIcon />
                 Contáctanos por WhatsApp
@@ -35,7 +53,7 @@ export function CoverSection() {
               alt="Landing Spark illustrative image"
               layout="fill"
               objectFit="cover"
-              data-ai-hint="modern abstract design"
+              data-ai-hint="nail art design"
               className="transform transition-transform duration-500 hover:scale-105"
             />
           </div>
