@@ -1,10 +1,11 @@
+
 "use client";
 
 import { useState, type ElementType } from "react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Palette, Smartphone, Settings2, Zap } from "lucide-react";
+import { ArrowRight, Palette, Eye, Paintbrush, Briefcase, Wand } from "lucide-react"; // Corrected PaintBrush to Paintbrush
 
 interface GalleryItem {
   id: string;
@@ -18,35 +19,35 @@ interface GalleryItem {
 const galleryItems: GalleryItem[] = [
   { 
     id: "1", 
-    title: "Diseños Modernos", 
-    description: "Aprende a crear uñas con estilos actuales y visualmente atractivos que cautivarán a tus clientas.", 
-    imageUrl: "https://picsum.photos/800/600?random=nailart1",
-    imageHint: "nail art modern",
+    title: "Arte en Uñas Avanzado", 
+    description: "Desde manicura básica hasta las últimas tendencias en acrílico, gel, polygel y diseños 3D. ¡Tus manos serán lienzos!", 
+    imageUrl: "https://placehold.co/800x600.png",
+    imageHint: "advanced nail art",
     icon: Palette,
   },
   { 
     id: "2", 
-    title: "Técnicas Profesionales", 
-    description: "Domina las técnicas de aplicación, esculpido y decoración para resultados impecables.", 
-    imageUrl: "https://picsum.photos/800/600?random=nailtech2",
-    imageHint: "nail tools professional",
-    icon: Settings2,
+    title: "Experta en Pestañas (Lashista)", 
+    description: "Aprende aplicación de extensiones clásicas, volumen ruso, lifting, tinte y diseño de cejas para miradas que cautivan.", 
+    imageUrl: "https://placehold.co/800x600.png",
+    imageHint: "eyelash extensions model",
+    icon: Eye,
   },
   { 
     id: "3", 
-    title: "Cuidado y Salud", 
-    description: "Conoce todo sobre la salud de las uñas, higiene y productos seguros para ofrecer un servicio de calidad.", 
-    imageUrl: "https://picsum.photos/800/600?random=nailcare3",
-    imageHint: "nail health care",
-    icon: Zap, 
+    title: "Maquillaje Profesional y Automaquillaje", 
+    description: "Domina técnicas de automaquillaje para el día a día y looks profesionales para eventos. ¡Realza la belleza!", 
+    imageUrl: "https://placehold.co/800x600.png",
+    imageHint: "makeup artist working",
+    icon: Paintbrush, 
   },
   { 
     id: "4", 
-    title: "Creatividad sin Límites", 
-    description: "Desarrolla tu creatividad con decoración avanzada, desde encapsulados hasta diseños 3D.", 
-    imageUrl: "https://picsum.photos/800/600?random=naildesign4",
-    imageHint: "creative nail design",
-    icon: Palette, 
+    title: "Emprendimiento y Gestión de Salón", 
+    description: "Adquiere herramientas para iniciar y gestionar tu negocio de belleza, marketing, atención al cliente y finanzas.", 
+    imageUrl: "https://placehold.co/800x600.png",
+    imageHint: "beauty salon interior",
+    icon: Briefcase, 
   },
 ];
 
@@ -58,10 +59,10 @@ export function InteractiveGallery() {
       <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl font-extrabold text-foreground sm:text-4xl md:text-5xl">
-            Descubre lo que Aprenderás en Nuestro <span className="text-accent">Curso de Uñas</span>
+            Un Mundo de Belleza te Espera: <span className="text-accent">¿Qué Aprenderás?</span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-foreground/70 sm:text-xl">
-            Explora las habilidades y conocimientos clave que te convertirán en una técnica de uñas experta.
+            Explora las habilidades y conocimientos clave que te convertirán en una profesional integral de la belleza.
           </p>
         </div>
 
@@ -112,7 +113,7 @@ export function InteractiveGallery() {
                   <Image
                     key={item.id}
                     src={item.imageUrl}
-                    alt={`${item.title} - Contenido del curso de técnico en uñas Landing Spark`}
+                    alt={`${item.title} - Contenido del curso integral de belleza Landing Spark`}
                     layout="fill"
                     objectFit="cover"
                     data-ai-hint={item.imageHint}

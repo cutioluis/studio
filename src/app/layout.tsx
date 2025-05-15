@@ -6,9 +6,9 @@ import { Toaster } from '@/components/ui/toaster';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:9002'; // Fallback for local dev
 
 export const metadata: Metadata = {
-  title: 'Curso de Técnico en Uñas Profesional | Landing Spark',
-  description: 'Conviértete en técnico de uñas profesional con nuestro curso certificado. Aprende las últimas técnicas y tendencias del nail art. ¡Inscríbete ya!',
-  keywords: ['curso de uñas', 'técnico en uñas', 'uñas acrílicas', 'nail art', 'manicura profesional', 'certificación de uñas', 'Landing Spark', 'curso online uñas', 'aprender uñas'],
+  title: 'Curso Integral de Belleza: Uñas, Pestañas y Automaquillaje | Landing Spark',
+  description: 'Conviértete en una experta en uñas, extensiones de pestañas y automaquillaje con nuestro curso certificado. Domina las técnicas más demandadas y emprende. ¡Inscríbete ya!',
+  keywords: ['curso de uñas', 'curso de pestañas', 'curso de lashista', 'curso de automaquillaje', 'belleza profesional', 'nail art', 'extensiones de pestañas', 'maquillaje', 'certificación de belleza', 'Landing Spark', 'curso online belleza'],
   authors: [{ name: 'Landing Spark' }],
   creator: 'Landing Spark',
   publisher: 'Landing Spark',
@@ -24,16 +24,16 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Curso de Técnico en Uñas Profesional | Landing Spark',
-    description: 'Conviértete en técnico de uñas profesional con nuestro curso certificado. Aprende las últimas técnicas y tendencias del nail art. ¡Inscríbete ya!',
+    title: 'Curso Integral de Belleza: Uñas, Pestañas y Automaquillaje | Landing Spark',
+    description: 'Domina las técnicas de uñas, pestañas y automaquillaje. ¡Conviértete en una profesional certificada!',
     url: siteUrl,
-    siteName: 'Ceci Glaom',
+    siteName: 'Ceci Glam',
     images: [
       {
-        url: `${siteUrl}/og-image-nail-course.jpg`, // Replace with your actual OG image URL
+        url: `${siteUrl}/og-image-beauty-course.jpg`, // Replace with your actual OG image URL
         width: 1200,
         height: 630,
-        alt: 'Promoción del Curso de Técnico en Uñas Profesional de Landing Spark',
+        alt: 'Promoción del Curso Integral de Belleza de Landing Spark',
       },
     ],
     locale: 'es_ES', // Assuming Spanish content
@@ -41,11 +41,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Curso de Técnico en Uñas Profesional | Landing Spark',
-    description: 'Conviértete en técnico de uñas profesional con nuestro curso certificado. Aprende las últimas técnicas y tendencias del nail art. ¡Inscríbete ya!',
+    title: 'Curso Integral de Belleza: Uñas, Pestañas y Automaquillaje | Landing Spark',
+    description: 'Aprende uñas, pestañas y automaquillaje con nuestro curso certificado. ¡Inscríbete hoy!',
     // site: '@YourTwitterHandle', // Replace with your Twitter handle
     // creator: '@YourTwitterHandle', // Replace with your Twitter handle
-    images: [`${siteUrl}/twitter-image-nail-course.jpg`], // Replace with your actual Twitter image URL
+    images: [`${siteUrl}/twitter-image-beauty-course.jpg`], // Replace with your actual Twitter image URL
   },
   icons: {
     // icon: '/favicon.ico', // Example, ensure favicon exists in public

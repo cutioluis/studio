@@ -1,3 +1,4 @@
+
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
@@ -20,6 +21,12 @@ const nextConfig: NextConfig = {
         protocol: 'http', // Or 'https' if your site is served over HTTPS
         hostname: 'localhost', // Or your actual domain in production
         port: '9002', // Or your actual port
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+        port: '',
         pathname: '/**',
       },
       // Add your production domain here as well if NEXT_PUBLIC_SITE_URL is different

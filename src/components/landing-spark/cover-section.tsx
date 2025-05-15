@@ -13,9 +13,9 @@ export function CoverSection() {
     <section 
       className="relative py-20 md:py-32 bg-gradient-to-b from-primary/20 via-primary/5 to-background/80 bg-cover bg-center transition-all duration-500 ease-in-out"
       style={{
-        backgroundImage: "url('https://picsum.photos/1920/1080?random=cover-background')",
+        backgroundImage: "url('https://placehold.co/1920x1080.png')",
       }}
-      data-ai-hint="nail polish bottles"
+      data-ai-hint="beauty salon background"
     >
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div> {/* Overlay for better text readability */}
       <div className="container relative z-10 mx-auto max-w-screen-lg px-4 sm:px-6 lg:px-8">
@@ -24,27 +24,27 @@ export function CoverSection() {
             <div className="flex items-center justify-center md:justify-start mb-6 w-full">
               <div className="flex -space-x-4 rtl:space-x-reverse mr-3">
                 <Avatar className="h-10 w-10 border-2 border-background shadow-md">
-                  <AvatarImage src="https://picsum.photos/40/40?random=avatar1" alt="Alumna satisfecha del curso de uñas 1" data-ai-hint="person face" />
+                  <AvatarImage src="https://placehold.co/40x40.png" alt="Alumna satisfecha del curso 1" data-ai-hint="person face" />
                   <AvatarFallback>A1</AvatarFallback>
                 </Avatar>
                 <Avatar className="h-10 w-10 border-2 border-background shadow-md">
-                  <AvatarImage src="https://picsum.photos/40/40?random=avatar2" alt="Alumna satisfecha del curso de uñas 2" data-ai-hint="person face" />
+                  <AvatarImage src="https://placehold.co/40x40.png" alt="Alumna satisfecha del curso 2" data-ai-hint="person face" />
                   <AvatarFallback>A2</AvatarFallback>
                 </Avatar>
                 <Avatar className="h-10 w-10 border-2 border-background shadow-md">
-                  <AvatarImage src="https://picsum.photos/40/40?random=avatar3" alt="Alumna satisfecha del curso de uñas 3" data-ai-hint="person face" />
+                  <AvatarImage src="https://placehold.co/40x40.png" alt="Alumna satisfecha del curso 3" data-ai-hint="person face" />
                   <AvatarFallback>A3</AvatarFallback>
                 </Avatar>
               </div>
               <p className="text-sm font-medium text-background/90"> {/* Adjusted text color for better contrast */}
-                +50 alumnos activos
+                +50 alumnas activas
               </p>
             </div>
             <h1 className="text-4xl font-extrabold tracking-tight text-background sm:text-5xl md:text-6xl lg:text-7xl"> {/* Adjusted text color */}
-              Tecnico en Uñas <span className="text-accent">Profesional</span>
+              Domina Uñas, Pestañas y Automaquillaje <span className="text-accent">Profesional</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-background/90 sm:text-xl md:text-2xl"> {/* Adjusted text color */}
-              Conviértete en profesional, incluye certificado.
+              Conviértete en una experta integral de la belleza. ¡Certifícate y emprende!
             </p>
             <div className="mt-10 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
               <Button 
@@ -61,11 +61,11 @@ export function CoverSection() {
           </div>
           <div className="relative aspect-video rounded-lg overflow-hidden shadow-2xl">
             <Image
-              src="https://picsum.photos/1200/900?random=hero"
-              alt="Manos con uñas artísticas detalladas, demostrando técnicas aprendidas en el curso de Landing Spark"
+              src="https://placehold.co/1200x900.png"
+              alt="Profesional de belleza aplicando técnicas de uñas, pestañas o maquillaje aprendidas en el curso de Landing Spark"
               layout="fill"
               objectFit="cover"
-              data-ai-hint="nail art design"
+              data-ai-hint="beauty techniques application"
               className="transform transition-transform duration-500 hover:scale-105"
               priority
             />
