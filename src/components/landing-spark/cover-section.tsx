@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const WhatsAppIcon = () => (
@@ -13,11 +12,11 @@ export function CoverSection() {
     <section 
       className="relative py-20 md:py-32 bg-gradient-to-b from-primary/20 via-primary/5 to-background/80 bg-cover bg-center transition-all duration-500 ease-in-out"
       style={{
-        backgroundImage: "url('https://placehold.co/1920x1080.png')",
+        backgroundImage: "url('/images/1-rs.webp')",
       }}
       data-ai-hint="beauty salon background"
     >
-      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div> {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div> 
       <div className="container relative z-10 mx-auto max-w-screen-lg px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col items-center text-center md:items-start md:text-left">

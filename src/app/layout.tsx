@@ -1,7 +1,11 @@
+
 import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
+// Remove direct Script import if no longer needed for other scripts, or keep if used elsewhere
+// import Script from 'next/script'; 
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
+import CalendlyWidget from '@/components/utils/calendly-widget'; // Import the new component
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:9002'; // Fallback for local dev
 
@@ -9,16 +13,16 @@ export const metadata: Metadata = {
   title: 'Curso de Uñas, Pestañas y Automaquillaje en Quito | Ceci Glam',
   description: 'Aprende técnicas profesionales de uñas, pestañas y automaquillaje en Quito, Ecuador. Curso certificado por Ceci Glam. ¡Inscríbete y emprende!',
   keywords: [
-    'curso de uñas Quito', 
-    'curso de pestañas Quito', 
-    'curso de lashista Quito', 
-    'curso de automaquillaje Quito', 
-    'academia de belleza Quito', 
-    'uñas acrílicas Quito', 
-    'extensiones de pestañas Ecuador', 
-    'maquillaje profesional Quito', 
-    'Ceci Glam Ecuador', 
-    'cursos de belleza en Quito', 
+    'curso de uñas Quito',
+    'curso de pestañas Quito',
+    'curso de lashista Quito',
+    'curso de automaquillaje Quito',
+    'academia de belleza Quito',
+    'uñas acrílicas Quito',
+    'extensiones de pestañas Ecuador',
+    'maquillaje profesional Quito',
+    'Ceci Glam Ecuador',
+    'cursos de belleza en Quito',
     'certificación belleza Quito',
     'aprender uñas Quito',
     'aprender pestañas Quito',
@@ -51,7 +55,7 @@ export const metadata: Metadata = {
         alt: 'Curso Integral de Belleza Ceci Glam en Quito: Uñas, Pestañas, Automaquillaje',
       },
     ],
-    locale: 'es_EC', 
+    locale: 'es_EC',
     type: 'website',
   },
   twitter: {
@@ -75,10 +79,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={GeistSans.variable}> {/* Corrected: GeistSans.variable */}
+    <html lang="es" className={GeistSans.variable}>
+      <head>
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+      </head>
       <body className="antialiased font-sans">
         {children}
         <Toaster />
+        <CalendlyWidget /> {/* Use the new CalendlyWidget component */}
       </body>
     </html>
   );
