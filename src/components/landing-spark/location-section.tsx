@@ -8,7 +8,7 @@ export function LocationSection() {
         <div className="text-center mb-12 md:mb-16">
           <MapPin className="h-12 w-12 mx-auto text-accent mb-4" />
           <h2 className="text-3xl font-extrabold text-foreground sm:text-4xl md:text-5xl">
-            Visita Nuestro <span className="text-accent">Estudio de Belleza</span>
+            Visita Nuestro <span className="text-accent">Academia de Belleza</span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-foreground/70 sm:text-xl">
             Encuéntranos fácilmente y ven a conocer el lugar donde tu transformación y aprendizaje comienzan. ¡Te esperamos!

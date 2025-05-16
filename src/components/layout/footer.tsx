@@ -65,7 +65,7 @@ export function Footer() {
       <div className="container mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-sm text-foreground/70">
-            &copy; {currentYear} Landing Spark. All rights reserved.
+            &copy; {currentYear} Design and Develop in Ecuador - Quito 💖.
           </p>
           <div className="flex space-x-4">
             <Link href="#" aria-label="Facebook" className="text-foreground/70 transition-colors hover:text-accent">

@@ -37,7 +37,7 @@ export function CoverSection() {
                 </Avatar>
               </div>
               <p className="text-sm font-medium text-background/90"> {/* Adjusted text color for better contrast */}
-                +50 alumnas activas
+                +100 Alumas Certificadas
               </p>
             </div>
             <h1 className="text-4xl font-extrabold tracking-tight text-background sm:text-5xl md:text-6xl lg:text-7xl"> {/* Adjusted text color */}
@@ -58,17 +58,6 @@ export function CoverSection() {
                 </a>
               </Button>
             </div>
-          </div>
-          <div className="relative aspect-video rounded-lg overflow-hidden shadow-2xl">
-            <Image
-              src="https://placehold.co/1200x900.png"
-              alt="Profesional de belleza aplicando técnicas de uñas, pestañas o maquillaje aprendidas en el curso de Landing Spark"
-              layout="fill"
-              objectFit="cover"
-              data-ai-hint="beauty techniques application"
-              className="transform transition-transform duration-500 hover:scale-105"
-              priority
-            />
           </div>
         </div>
       </div>
