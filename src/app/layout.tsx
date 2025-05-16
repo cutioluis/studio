@@ -6,12 +6,27 @@ import { Toaster } from '@/components/ui/toaster';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:9002'; // Fallback for local dev
 
 export const metadata: Metadata = {
-  title: 'Curso Integral de Belleza: Uñas, Pestañas y Automaquillaje | Landing Spark',
-  description: 'Conviértete en una experta en uñas, extensiones de pestañas y automaquillaje con nuestro curso certificado. Domina las técnicas más demandadas y emprende. ¡Inscríbete ya!',
-  keywords: ['curso de uñas', 'curso de pestañas', 'curso de lashista', 'curso de automaquillaje', 'belleza profesional', 'nail art', 'extensiones de pestañas', 'maquillaje', 'certificación de belleza', 'Landing Spark', 'curso online belleza'],
-  authors: [{ name: 'Landing Spark' }],
-  creator: 'Landing Spark',
-  publisher: 'Landing Spark',
+  title: 'Curso de Uñas, Pestañas y Automaquillaje en Quito | Ceci Glam',
+  description: 'Aprende técnicas profesionales de uñas, pestañas y automaquillaje en Quito, Ecuador. Curso certificado por Ceci Glam. ¡Inscríbete y emprende!',
+  keywords: [
+    'curso de uñas Quito', 
+    'curso de pestañas Quito', 
+    'curso de lashista Quito', 
+    'curso de automaquillaje Quito', 
+    'academia de belleza Quito', 
+    'uñas acrílicas Quito', 
+    'extensiones de pestañas Ecuador', 
+    'maquillaje profesional Quito', 
+    'Ceci Glam Ecuador', 
+    'cursos de belleza en Quito', 
+    'certificación belleza Quito',
+    'aprender uñas Quito',
+    'aprender pestañas Quito',
+    'aprender automaquillaje Quito',
+  ],
+  authors: [{ name: 'Ceci Glam' }],
+  creator: 'Ceci Glam',
+  publisher: 'Ceci Glam',
   robots: {
     index: true,
     follow: true,
@@ -24,28 +39,28 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Curso Integral de Belleza: Uñas, Pestañas y Automaquillaje | Landing Spark',
-    description: 'Domina las técnicas de uñas, pestañas y automaquillaje. ¡Conviértete en una profesional certificada!',
+    title: 'Curso Profesional de Uñas, Pestañas y Automaquillaje en Quito | Ceci Glam',
+    description: '¡Conviértete en experta! Aprende uñas, pestañas y automaquillaje con Ceci Glam en Quito. Certificación incluida.',
     url: siteUrl,
     siteName: 'Ceci Glam',
     images: [
       {
-        url: `${siteUrl}/og-image-beauty-course.jpg`, // Replace with your actual OG image URL
+        url: `${siteUrl}/og-image-beauty-course-quito.jpg`, // Consider creating a Quito-specific OG image
         width: 1200,
         height: 630,
-        alt: 'Promoción del Curso Integral de Belleza de Landing Spark',
+        alt: 'Curso Integral de Belleza Ceci Glam en Quito: Uñas, Pestañas, Automaquillaje',
       },
     ],
-    locale: 'es_ES', // Assuming Spanish content
+    locale: 'es_EC', 
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Curso Integral de Belleza: Uñas, Pestañas y Automaquillaje | Landing Spark',
-    description: 'Aprende uñas, pestañas y automaquillaje con nuestro curso certificado. ¡Inscríbete hoy!',
-    // site: '@YourTwitterHandle', // Replace with your Twitter handle
-    // creator: '@YourTwitterHandle', // Replace with your Twitter handle
-    images: [`${siteUrl}/twitter-image-beauty-course.jpg`], // Replace with your actual Twitter image URL
+    title: 'Ceci Glam: Curso de Belleza en Quito (Uñas, Pestañas, Automaquillaje)',
+    description: 'Fórmate como profesional de la belleza en Quito con Ceci Glam. Cursos de uñas, pestañas y automaquillaje. ¡Inscríbete!',
+    // site: '@CeciGlamQuito', // Example, replace with your actual Twitter handle
+    // creator: '@CeciGlamQuito', // Example
+    images: [`${siteUrl}/twitter-image-beauty-course-quito.jpg`], // Consider creating a Quito-specific Twitter image
   },
   icons: {
     // icon: '/favicon.ico', // Example, ensure favicon exists in public
@@ -60,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={GeistSans.variable}> {/* Set language to Spanish */}
+    <html lang="es" className={GeistSans.variable}> {/* Corrected: GeistSans.variable */}
       <body className="antialiased font-sans">
         {children}
         <Toaster />
