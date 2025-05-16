@@ -3,9 +3,10 @@
 
 import { useState, type ElementType } from "react";
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Palette, Eye, Paintbrush, Briefcase, Wand } from "lucide-react"; // Corrected PaintBrush to Paintbrush
+import { ArrowRight, Palette, Eye, Paintbrush, Briefcase } from "lucide-react";
 
 interface GalleryItem {
   id: string;
@@ -14,6 +15,7 @@ interface GalleryItem {
   imageUrl: string;
   imageHint: string;
   icon: ElementType;
+  temario?: string[]; // Temario as an array of strings
 }
 
 const galleryItems: GalleryItem[] = [
@@ -24,6 +26,36 @@ const galleryItems: GalleryItem[] = [
     imageUrl: "https://placehold.co/800x600.png",
     imageHint: "advanced nail art",
     icon: Palette,
+    temario: [
+      "💅 Curso de UÑAS",
+      "1. Manicura y Pedicura:",
+      "\t•\tManicura clásica",
+      "\t•\tManicura spa",
+      "\t•\tManicura combinada",
+      "\t•\tPedicura spa",
+      "2. Nivelación y Construcción:",
+      "\t•\tBuilder gel + gel UV",
+      "\t•\tTip con polygel",
+      "\t•\tDual System",
+      "\t•\tExtensiones con Dual System",
+      "3. Decoración y Arte:",
+      "\t•\tArte en gel",
+      "\t•\tSofgel",
+      "\t•\tEncapsulados en polygel",
+      "\t•\tTipos y calibración de perlas",
+      "\t•\t3D básico",
+      "4. Efectos Especiales:",
+      "\t•\tBaby boomer",
+      "\t•\tBaby glitter ✨",
+      "\t•\tBaby glam",
+      "\t•\tMármoleados",
+      "5. Tipos de Puntas:",
+      "\t•\tCoffin ☕",
+      "\t•\tAlmond",
+      "\t•\tSquare ⬜",
+      "\t•\tStiletto",
+      "6. Uñas Esculpidas"
+    ]
   },
   { 
     id: "2", 
@@ -32,6 +64,29 @@ const galleryItems: GalleryItem[] = [
     imageUrl: "https://placehold.co/800x600.png",
     imageHint: "eyelash extensions model",
     icon: Eye,
+    temario: [
+      "✨ Curso de CEJAS Y PESTAÑAS",
+      "1. Diseño de Cejas:",
+      "\t•\tVisajismo según el rostro",
+      "\t•\tDiseño y depilación",
+      "\t•\tMaquillaje de cejas",
+      "\t•\tEfecto maquillaje y orgánico",
+      "2. Aplicación de Pestañas Punto a Punto:",
+      "\t•\tPunto a punto",
+      "\t•\tFoxy eyes",
+      "\t•\tEstilo muñeca",
+      "\t•\tCon color",
+      "3. Henna y Tratamientos:",
+      "\t•\tHenna efecto maquillaje degradé",
+      "\t•\tLaminado de cejas",
+      "\t•\tLaminado + tinte",
+      "\t•\tLifting y rizado de pestañas",
+      "4. Depilación Facial y Corporal:",
+      "\t•\tCejas y bozo",
+      "\t•\tAxilas",
+      "\t•\tMedia pierna",
+      "\t•\tPierna completa"
+    ]
   },
   { 
     id: "3", 
@@ -40,6 +95,17 @@ const galleryItems: GalleryItem[] = [
     imageUrl: "https://placehold.co/800x600.png",
     imageHint: "makeup artist working",
     icon: Paintbrush, 
+    temario: [
+      "💄 Curso de AUTOMAQUILLAJE",
+      "\t•\tPreparación de piel",
+      "\t•\tBase, correctores y contornos",
+      "\t•\tMaquillaje de ojos (día/noche)",
+      "\t•\tCejas con maquillaje",
+      "\t•\tTipos de depilado (pinza, cera, navaja)",
+      "\t•\tPestañas en banda",
+      "\t•\tLabios",
+      "\t•\tFace chart – práctica en papel"
+    ]
   },
   { 
     id: "4", 
@@ -48,6 +114,7 @@ const galleryItems: GalleryItem[] = [
     imageUrl: "https://placehold.co/800x600.png",
     imageHint: "beauty salon interior",
     icon: Briefcase, 
+    temario: undefined // No temario provided for this item
   },
 ];
 
@@ -106,9 +173,9 @@ export function InteractiveGallery() {
             ))}
           </div>
 
-          <div className="md:col-span-8 sticky top-24">
+          <div className="md:col-span-8 sticky top-24 space-y-6">
             <Card className="overflow-hidden shadow-xl rounded-lg">
-              <div className="aspect-w-16 aspect-h-9 relative w-full h-[450px] md:h-[550px]">
+              <div className="aspect-w-16 aspect-h-9 relative w-full h-[400px] md:h-[450px]">
                 {galleryItems.map((item) => (
                   <Image
                     key={item.id}
@@ -126,12 +193,37 @@ export function InteractiveGallery() {
                 ))}
               </div>
             </Card>
-             <p className="mt-2 text-sm text-center text-foreground/60">
+             <p className="text-sm text-center text-foreground/60">
                 Actualmente viendo: <span className="font-semibold text-accent">{activeItem.title}</span>
             </p>
+            
+            {activeItem.temario && activeItem.temario.length > 0 && (
+              <Card className="shadow-lg rounded-lg">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-semibold text-accent">Temario del Módulo</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ScrollArea className="h-[300px] w-full pr-4">
+                    <ul className="space-y-2 text-foreground/80">
+                      {activeItem.temario.map((point, index) => (
+                        <li key={index} className="text-sm whitespace-pre-line">
+                          {/* Basic formatting for titles vs bullet points */}
+                          {point.startsWith("💅") || point.startsWith("✨") || point.startsWith("💄") || /^\d+\./.test(point) ? (
+                            <strong className="text-foreground block mt-2 mb-1">{point.replace(/\t•\t/g, '• ')}</strong>
+                          ) : (
+                            <span className="ml-4 block">{point.replace(/\t•\t/g, '• ')}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </ScrollArea>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
