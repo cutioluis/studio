@@ -114,7 +114,7 @@ const galleryItems: GalleryItem[] = [
     imageUrl: "https://placehold.co/800x600.png",
     imageHint: "beauty salon interior",
     icon: Briefcase, 
-    temario: undefined // No temario for this item yet
+    temario: undefined
   },
 ];
 
@@ -199,7 +199,7 @@ export function InteractiveGallery() {
 
             {/* Temario Section - Appears in the right column if temario exists */}
             {activeItem.temario && activeItem.temario.length > 0 && (
-              <Card className="shadow-lg rounded-lg bg-card">
+              <Card className="shadow-xl rounded-lg bg-card border border-border/60">
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold text-accent">
                     Temario: {activeItem.title}
@@ -207,16 +207,39 @@ export function InteractiveGallery() {
                 </CardHeader>
                 <CardContent>
                   <ScrollArea className="h-[200px] w-full pr-3 text-sm">
-                    <ul className="space-y-1 whitespace-pre-line text-foreground/80">
-                      {activeItem.temario.map((point, index) => (
-                        <li key={index}>
-                          {point.startsWith("💅") || point.startsWith("✨") || point.startsWith("💄") || /^\d+\./.test(point) ? (
-                            <strong className="block mt-1 mb-0.5 text-foreground">{point.replace(/\t•\t/g, '• ')}</strong>
-                          ) : (
-                            <span className="ml-4 block">{point.replace(/\t•\t/g, '• ')}</span>
-                          )}
-                        </li>
-                      ))}
+                    <ul className="space-y-1.5 whitespace-pre-line text-sm">
+                      {activeItem.temario.map((point, index) => {
+                        const cleanedPoint = point.replace(/^\t•\t/, '• ');
+                        const isMainEmojiHeading = point.startsWith("💅") || point.startsWith("✨") || point.startsWith("💄");
+                        const isNumberedHeading = /^\d+\./.test(point);
+
+                        if (isMainEmojiHeading) {
+                          return (
+                            <li key={index}>
+                               <h4 className="text-base font-medium text-accent mt-2 mb-1">{cleanedPoint}</h4>
+                            </li>
+                          );
+                        } else if (isNumberedHeading) {
+                          return (
+                            <li key={index}>
+                               <h5 className="text-sm font-semibold text-foreground mt-1.5 mb-0.5">{cleanedPoint}</h5>
+                            </li>
+                          );
+                        } else { 
+                          return (
+                            <li key={index} className="flex items-start ml-4 text-foreground/80">
+                              {cleanedPoint.startsWith('• ') ? (
+                                <>
+                                  <span className="text-accent mr-2 mt-0.5 shrink-0">•</span>
+                                  <span className="flex-grow">{cleanedPoint.substring(2)}</span>
+                                </>
+                              ) : (
+                                <span className="flex-grow">{cleanedPoint}</span>
+                              )}
+                            </li>
+                          );
+                        }
+                      })}
                     </ul>
                   </ScrollArea>
                 </CardContent>
