@@ -55,7 +55,7 @@ export function Navbar() {
           <Button 
             size="sm" 
             variant="default" 
-            className="text-xs px-3" // Adjusted for potentially better fit on mobile
+            className="text-xs px-3"
             onClick={() => handleSmoothScroll('#cta')}
           >
             Inscríbete
@@ -69,12 +69,9 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="w-full max-w-xs bg-background p-6">
               <div className="flex flex-col space-y-6">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-4"> {/* Added mb-4 for spacing */}
                   <Logo />
-                  <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)}>
-                    <X className="h-6 w-6" />
-                    <span className="sr-only">Cerrar menú</span>
-                  </Button>
+                  {/* The SheetContent component itself provides a close button, so the manual one is removed */}
                 </div>
                 <nav className="flex flex-col space-y-4">
                   {navLinks.map((link) => (
