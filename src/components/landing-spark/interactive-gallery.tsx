@@ -114,7 +114,7 @@ const galleryItems: GalleryItem[] = [
     imageUrl: "https://placehold.co/800x600.png",
     imageHint: "beauty salon interior",
     icon: Briefcase, 
-    temario: undefined
+    temario: undefined // No temario for this item yet
   },
 ];
 
@@ -168,32 +168,6 @@ export function InteractiveGallery() {
                   )}>
                     {item.description}
                   </p>
-                  {activeItem.id === item.id && item.temario && item.temario.length > 0 && (
-                    <div className="mt-4 pt-4 border-t border-accent-foreground/20">
-                      <h4 className={cn(
-                        "text-sm font-semibold mb-2",
-                        activeItem.id === item.id ? "text-accent-foreground/90" : "text-accent"
-                        )}>
-                        Temario del Módulo:
-                      </h4>
-                      <ScrollArea className="h-[150px] w-full pr-2 text-xs">
-                        <ul className={cn(
-                          "space-y-1 whitespace-pre-line",
-                          activeItem.id === item.id ? "text-accent-foreground/80" : "text-foreground/70"
-                          )}>
-                          {item.temario.map((point, index) => (
-                            <li key={index}>
-                              {point.startsWith("💅") || point.startsWith("✨") || point.startsWith("💄") || /^\d+\./.test(point) ? (
-                                <strong className="block mt-1 mb-0.5">{point.replace(/\t•\t/g, '• ')}</strong>
-                              ) : (
-                                <span className="ml-4 block">{point.replace(/\t•\t/g, '• ')}</span>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      </ScrollArea>
-                    </div>
-                  )}
                 </CardContent>
               </Card>
             ))}
@@ -222,9 +196,36 @@ export function InteractiveGallery() {
              <p className="text-sm text-center text-foreground/60">
                 Actualmente viendo: <span className="font-semibold text-accent">{activeItem.title}</span>
             </p>
+
+            {/* Temario Section - Appears in the right column if temario exists */}
+            {activeItem.temario && activeItem.temario.length > 0 && (
+              <Card className="shadow-lg rounded-lg bg-card">
+                <CardHeader>
+                  <CardTitle className="text-xl font-semibold text-accent">
+                    Temario: {activeItem.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ScrollArea className="h-[200px] w-full pr-3 text-sm">
+                    <ul className="space-y-1 whitespace-pre-line text-foreground/80">
+                      {activeItem.temario.map((point, index) => (
+                        <li key={index}>
+                          {point.startsWith("💅") || point.startsWith("✨") || point.startsWith("💄") || /^\d+\./.test(point) ? (
+                            <strong className="block mt-1 mb-0.5 text-foreground">{point.replace(/\t•\t/g, '• ')}</strong>
+                          ) : (
+                            <span className="ml-4 block">{point.replace(/\t•\t/g, '• ')}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </ScrollArea>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
