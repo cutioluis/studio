@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CalendarDays, Clock, XCircle, CheckCircle2, AlertTriangle, UsersRound, PhoneOutgoing, CalendarPlus } from "lucide-react";
@@ -53,7 +53,7 @@ export function ScheduleSection() {
   const getStatusIcon = (status: ScheduleOption["status"]) => {
     switch (status) {
       case "agotado":
-        return <XCircle className="h-5 w-5 text-destructive" />;
+        return <XCircle className="h-5 w-5" />; // text-destructive-foreground will be applied by Badge
       case "disponible":
         return <CheckCircle2 className="h-5 w-5 text-green-500" />;
       case "ultimas":
@@ -72,7 +72,8 @@ export function ScheduleSection() {
       case "ultimas":
         return "secondary"; 
       default:
-        return "outline";
+        // Should not happen, but provide a fallback
+        return "default";
     }
   };
 
@@ -105,7 +106,7 @@ export function ScheduleSection() {
                 <div className="flex items-center justify-between mb-2">
                   <CardTitle className="text-xl font-semibold text-accent">{schedule.days}</CardTitle>
                   {schedule.type && (
-                    <Badge variant="outline" className="text-xs border-primary/50 text-primary">
+                    <Badge variant="secondary" className="text-xs">
                       {schedule.type}
                     </Badge>
                   )}
@@ -138,22 +139,9 @@ export function ScheduleSection() {
         <p className="mt-12 text-center text-foreground/70">
           ¿No encuentras un horario que te funcione o tienes dudas? <a href="#" onClick={handleCalendlyPopup} className="text-accent font-semibold hover:underline">Agenda una asesoría gratuita</a>, ¡podemos ayudarte!
         </p>
-        <div className="mt-12 pt-8 border-t border-border/30 text-center">
-          <PhoneOutgoing className="h-8 w-8 mx-auto text-accent mb-3" />
-          <h3 className="text-xl font-semibold text-foreground mb-2">
-            ¿Necesitas Asesoría Personalizada?
-          </h3>
-          <p className="text-foreground/70 mb-4 max-w-md mx-auto">
-            Si tienes dudas sobre el curso, horarios o cualquier otro detalle, agenda una breve llamada gratuita con nosotros.
-          </p>
-          <Button
-            onClick={handleCalendlyPopup}
-            className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-accent-foreground bg-accent hover:bg-accent/90 transition-colors shadow-md hover:shadow-lg transform hover:scale-105"
-          >
-            Agendar Asesoría Gratuita
-          </Button>
-        </div>
+        {/* Removed redundant Calendly CTA section */}
       </div>
     </section>
   );
 }
+
