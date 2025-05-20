@@ -11,7 +11,7 @@ export function CoverSection() {
   return (
     <section 
       className="relative py-20 md:py-32 bg-gradient-to-b from-primary/20 via-primary/5 to-background/80 bg-cover bg-center transition-all duration-500 ease-in-out"
-      style={{
+      style={{  
         backgroundImage: "url('/images/1-rs.webp')",
       }}
       data-ai-hint="beauty salon background"

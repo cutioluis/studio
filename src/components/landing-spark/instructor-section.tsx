@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { CheckCircle, Star } from "lucide-react";
 
 export function InstructorSection() {
-  const instructorName = "[Nombre de la Instructora]"; // Placeholder for instructor's name
+  const instructorName = "Carmen Cecilia"
 
   return (
     <section id="instructor" className="py-16 md:py-24 bg-background">
@@ -21,7 +21,7 @@ export function InstructorSection() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
           <div className="lg:col-span-2 relative aspect-[3/4] rounded-xl overflow-hidden shadow-2xl group mx-auto lg:mx-0 w-full max-w-md lg:max-w-none">
             <Image
-              src="https://placehold.co/600x800.png"
+              src="/images/profesora-rs.webp"
               alt={`${instructorName}, instructora experta del curso integral de belleza en Landing Spark`}
               layout="fill"
               objectFit="cover"

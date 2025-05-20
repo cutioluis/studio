@@ -30,7 +30,7 @@ const pricingFeatures: PricingFeature[] = [
     id: "monthly", 
     title: "Pago Mensual Accesible", 
     description: "$80 al mes para una formación completa y de alta calidad en uñas, pestañas y automaquillaje.", 
-    imageUrl: "https://placehold.co/800x600.png",
+    imageUrl: "/images/uniforme-rs.webp",
     imageHint: "happy student learning",
     icon: DollarSign,
   },
