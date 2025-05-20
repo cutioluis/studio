@@ -114,7 +114,7 @@ const galleryItems: GalleryItem[] = [
     imageUrl: "/images/5-rs.webp",
     imageHint: "beauty salon interior",
     icon: Briefcase,
-    temario: undefined // No temario for this one, will show "Próximamente"
+    temario: undefined
   },
 ];
 
@@ -143,17 +143,21 @@ const processTemario = (temario?: string[]): GroupedTemarioItem[] => {
       currentSection = { type: 'section', title: cleanedPoint, items: [] };
     } else if (currentSection && currentSection.type === 'section' && currentSection.items && point.startsWith("\t•\t")) {
       currentSection.items.push(cleanedPoint);
-    } else if (point.startsWith("\t•\t")) { // For items directly under a main heading like Automaquillaje
+    } else if (point.startsWith("\t•\t")) { 
         if (grouped.length > 0 && grouped[grouped.length-1].type === 'main') {
-             // This item belongs to a new "section" under the last main heading
              if (currentSection && currentSection.type === 'section') grouped.push(currentSection);
              currentSection = { type: 'section', title: '', items: [cleanedPoint] };
         } else {
-             grouped.push({ type: 'raw', content: cleanedPoint });
+             // This case handles points that might not directly follow a main or numbered heading
+             // It tries to add them to an existing section or creates a new 'raw' type if no section is active
+             if (currentSection && currentSection.type === 'section' && currentSection.items) {
+                currentSection.items.push(cleanedPoint);
+             } else {
+                if (currentSection && currentSection.type === 'section') grouped.push(currentSection);
+                currentSection = { type: 'section', title: '', items: [cleanedPoint] };
+             }
         }
-    }
-     else {
-      // Fallback for any other lines, though ideally all temario points should be structured
+    } else {
       if (currentSection && currentSection.type === 'section') grouped.push(currentSection);
       currentSection = null;
       grouped.push({ type: 'raw', content: cleanedPoint });
@@ -161,9 +165,6 @@ const processTemario = (temario?: string[]): GroupedTemarioItem[] => {
   }
   if (currentSection) grouped.push(currentSection);
   
-  // Special handling for cases where a main heading is followed directly by bullet points
-  // without numbered subheadings (like Automaquillaje)
-  // This block tries to group such bullet points into one "section"
   const finalGrouped: GroupedTemarioItem[] = [];
   let tempSectionForMainBullets: GroupedTemarioItem | null = null;
 
@@ -175,7 +176,6 @@ const processTemario = (temario?: string[]): GroupedTemarioItem[] => {
         tempSectionForMainBullets = null;
       }
       finalGrouped.push(group);
-      // Check if next items are 'section' with no title and items, meaning they are bullets under main
       if(grouped[i+1] && grouped[i+1].type === 'section' && grouped[i+1].title === '' && grouped[i+1].items && grouped[i+1].items.length > 0){
         tempSectionForMainBullets = {type: 'section', title: '', items: []};
       }
@@ -301,7 +301,7 @@ export function InteractiveGallery() {
                     activeItem.id === item.id
                       ? "bg-accent text-accent-foreground ring-2 ring-accent"
                       : "bg-card hover:opacity-100 hover:shadow-xl",
-                    activeItem.id !== item.id && "opacity-70"
+                    activeItem.id !== item.id && "opacity-60" // Reduced opacity for inactive cards
                   )}
                 >
                   <CardContent className="p-6">
@@ -384,5 +384,3 @@ export function InteractiveGallery() {
     </section>
   );
 }
-
-    

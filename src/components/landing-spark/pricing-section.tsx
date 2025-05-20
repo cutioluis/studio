@@ -102,7 +102,7 @@ export function PricingSection() {
                   activeFeature.id === feature.id 
                     ? "bg-accent text-accent-foreground ring-2 ring-accent" 
                     : "bg-card hover:opacity-100 hover:shadow-xl", 
-                  activeFeature.id !== feature.id && "opacity-70"
+                  activeFeature.id !== feature.id && "opacity-60" // Reduced opacity for inactive cards
                 )}
               >
                 <CardContent className="p-6">
