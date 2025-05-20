@@ -1,8 +1,6 @@
 
 import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
-// Remove direct Script import if no longer needed for other scripts, or keep if used elsewhere
-// import Script from 'next/script'; 
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import CalendlyWidget from '@/components/utils/calendly-widget'; // Import the new component
@@ -49,7 +47,7 @@ export const metadata: Metadata = {
     siteName: 'Ceci Glam',
     images: [
       {
-        url: `${siteUrl}/og-image-beauty-course-quito.jpg`, // Consider creating a Quito-specific OG image
+        url: `${siteUrl}/og-image-beauty-course-quito.jpg`, 
         width: 1200,
         height: 630,
         alt: 'Curso Integral de Belleza Ceci Glam en Quito: Uñas, Pestañas, Automaquillaje',
@@ -64,13 +62,13 @@ export const metadata: Metadata = {
     description: 'Fórmate como profesional de la belleza en Quito con Ceci Glam. Cursos de uñas, pestañas y automaquillaje. ¡Inscríbete!',
     // site: '@CeciGlamQuito', // Example, replace with your actual Twitter handle
     // creator: '@CeciGlamQuito', // Example
-    images: [`${siteUrl}/twitter-image-beauty-course-quito.jpg`], // Consider creating a Quito-specific Twitter image
+    images: [`${siteUrl}/twitter-image-beauty-course-quito.jpg`], 
   },
   icons: {
     // icon: '/favicon.ico', // Example, ensure favicon exists in public
     // apple: '/apple-touch-icon.png', // Example
   },
-  manifest: `${siteUrl}/site.webmanifest`, // Example, ensure manifest exists
+  manifest: `${siteUrl}/site.webmanifest`, 
 };
 
 export default function RootLayout({
@@ -86,7 +84,7 @@ export default function RootLayout({
       <body className="antialiased font-sans">
         {children}
         <Toaster />
-        <CalendlyWidget /> {/* Use the new CalendlyWidget component */}
+        <CalendlyWidget /> 
       </body>
     </html>
   );

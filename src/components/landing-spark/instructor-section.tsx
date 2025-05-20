@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { CheckCircle, Star } from "lucide-react";
 
 export function InstructorSection() {
-  const instructorName = "Carmen Cecilia"
+  const instructorName = "Carmen Cecilia"; // Updated instructor name
 
   return (
     <section id="instructor" className="py-16 md:py-24 bg-background">

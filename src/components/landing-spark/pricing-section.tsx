@@ -6,7 +6,8 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Gift, DollarSign, CalendarClock, BadgePercent } from "lucide-react";
+import { ArrowRight, Gift, DollarSign, CalendarClock } from "lucide-react";
+import WhatsAppIcon from "@/components/icons/whatsapp-icon"; // Import consolidated icon
 
 interface PricingFeature {
   id: string;
@@ -22,7 +23,7 @@ const pricingFeatures: PricingFeature[] = [
     id: "inscription", 
     title: "Inscripción Inteligente", 
     description: "Solo $30 y recibe tu uniforme profesional para empezar con todo.", 
-    imageUrl: "https://placehold.co/800x600.png",
+    imageUrl: "/images/inscripcion.webp",
     imageHint: "student uniform beauty",
     icon: Gift,
   },
@@ -30,7 +31,7 @@ const pricingFeatures: PricingFeature[] = [
     id: "monthly", 
     title: "Pago Mensual Accesible", 
     description: "$80 al mes para una formación completa y de alta calidad en uñas, pestañas y automaquillaje.", 
-    imageUrl: "/images/uniforme-rs.webp",
+    imageUrl: "/images/uniforme.webp",
     imageHint: "happy student learning",
     icon: DollarSign,
   },
@@ -38,18 +39,11 @@ const pricingFeatures: PricingFeature[] = [
     id: "duration", 
     title: "Formación Intensiva y Completa", 
     description: "Conviértete en una experta integral de la belleza en solo 5 meses con nuestro programa enfocado.", 
-    imageUrl: "https://placehold.co/800x600.png",
+    imageUrl: "/images/intensiva.webp",
     imageHint: "graduation beauty course",
     icon: CalendarClock, 
   },
 ];
-
-const WhatsAppIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
-    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.33 3.4 16.8L2 22L7.31 20.65C8.73 21.33 10.33 21.7 12.04 21.7C17.5 21.7 21.95 17.25 21.95 11.81C21.95 6.35 17.5 2 12.04 2ZM17.94 16.11C17.69 16.69 16.94 17.08 16.39 17.18C15.93 17.26 15.33 17.35 13.69 16.78C11.68 16.08 10.18 14.33 10.04 14.17C9.88 13.99 9.08 12.96 9.08 11.91C9.08 10.86 9.83 10.15 10.09 9.9C10.32 9.68 10.67 9.62 10.97 9.62C11.23 9.62 11.45 9.64 11.63 9.67C11.86 9.72 12.08 10.33 12.26 10.83C12.44 11.34 12.53 11.59 12.43 11.89C12.33 12.19 12.23 12.32 12.06 12.52C11.89 12.72 11.71 12.88 11.56 13.08C11.41 13.26 11.25 13.47 11.45 13.82C11.65 14.17 12.38 15.09 13.26 15.83C14.33 16.74 15.12 17.03 15.45 17.03C15.79 17.03 16.16 16.96 16.4 16.54C16.64 16.12 17.07 15.53 17.07 15.53C17.07 15.53 17.45 15.03 17.81 15.03C18.16 15.03 18.51 15.03 18.51 15.03L17.94 16.11Z"/>
-  </svg>
-);
-
 
 export function PricingSection() {
   const [activeFeature, setActiveFeature] = useState<PricingFeature>(pricingFeatures[0]);
@@ -102,7 +96,7 @@ export function PricingSection() {
                   activeFeature.id === feature.id 
                     ? "bg-accent text-accent-foreground ring-2 ring-accent" 
                     : "bg-card hover:opacity-100 hover:shadow-xl", 
-                  activeFeature.id !== feature.id && "opacity-60" // Reduced opacity for inactive cards
+                  activeFeature.id !== feature.id && "opacity-60" 
                 )}
               >
                 <CardContent className="p-6">
@@ -163,7 +157,7 @@ export function PricingSection() {
             className="text-lg px-10 py-4 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg transform transition-transform hover:scale-105"
           >
             <a href="https://walink.co/bd3d37" target="_blank" rel="noopener noreferrer">
-              <WhatsAppIcon />
+              <WhatsAppIcon className="h-4 w-4" />
               ¡Inscríbete Ahora y Asegura tu Futuro!
             </a>
           </Button>
