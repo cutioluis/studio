@@ -4,7 +4,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CalendarDays, Clock, XCircle, CheckCircle2, AlertTriangle, UsersRound, PhoneOutgoing, CalendarPlus } from "lucide-react";
+import { Clock, XCircle, CheckCircle2, AlertTriangle, UsersRound, PenSquare } from "lucide-react"; // Added PenSquare, removed CalendarPlus
 
 interface ScheduleOption {
   id: string;
@@ -53,7 +53,7 @@ export function ScheduleSection() {
   const getStatusIcon = (status: ScheduleOption["status"]) => {
     switch (status) {
       case "agotado":
-        return <XCircle className="h-5 w-5" />; // text-destructive-foreground will be applied by Badge
+        return <XCircle className="h-5 w-5" />;
       case "disponible":
         return <CheckCircle2 className="h-5 w-5 text-green-500" />;
       case "ultimas":
@@ -68,11 +68,10 @@ export function ScheduleSection() {
       case "agotado":
         return "destructive";
       case "disponible":
-        return "default"; 
+        return "default";
       case "ultimas":
-        return "secondary"; 
+        return "secondary";
       default:
-        // Should not happen, but provide a fallback
         return "default";
     }
   };
@@ -124,13 +123,25 @@ export function ScheduleSection() {
                     </Badge>
                     {schedule.notes && <p className="text-xs text-foreground/60 mt-2 text-center">{schedule.notes}</p>}
                 </div>
-                <Button 
-                  onClick={handleCalendlyPopup}
+                <Button
+                  asChild
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                   disabled={schedule.status === "agotado"}
                 >
-                   <CalendarPlus className="h-4 w-4 mr-2" />
-                  {schedule.status === "agotado" ? "No Disponible" : "Agendar Asesoría"}
+                  <a
+                    href={schedule.status !== "agotado" ? "https://walink.co/bd3d37" : undefined}
+                    target={schedule.status !== "agotado" ? "_blank" : undefined}
+                    rel={schedule.status !== "agotado" ? "noopener noreferrer" : undefined}
+                  >
+                    {schedule.status === "agotado"
+                      ? <XCircle className="h-4 w-4 mr-2" />
+                      : <PenSquare className="h-4 w-4 mr-2" />
+                    }
+                    {schedule.status === "agotado"
+                      ? schedule.statusText // Will show "Cupos Agotados"
+                      : "Inscríbete por WhatsApp"
+                    }
+                  </a>
                 </Button>
               </CardContent>
             </Card>
@@ -139,9 +150,7 @@ export function ScheduleSection() {
         <p className="mt-12 text-center text-foreground/70">
           ¿No encuentras un horario que te funcione o tienes dudas? <a href="#" onClick={handleCalendlyPopup} className="text-accent font-semibold hover:underline">Agenda una asesoría gratuita</a>, ¡podemos ayudarte!
         </p>
-        {/* Removed redundant Calendly CTA section */}
       </div>
     </section>
   );
 }
-
