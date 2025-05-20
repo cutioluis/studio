@@ -321,7 +321,7 @@ export function InteractiveGallery() {
                     </div>
                     <p className={cn(
                       "text-sm",
-                      activeItem.id === item.id ? "text-accent-foreground/80" : "text-foreground/70"
+                      activeItem.id === item.id ? "text-accent-foreground/80" : "text-foreground/60"
                     )}>
                       {item.description}
                     </p>
