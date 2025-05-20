@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -107,4 +108,74 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Basic styles for Markdown content if Tailwind Typography is not used */
+.prose-styles h1,
+.prose-styles h2,
+.prose-styles h3,
+.prose-styles h4,
+.prose-styles h5,
+.prose-styles h6 {
+  @apply font-bold text-foreground;
+}
+
+.prose-styles h1 {
+  @apply text-3xl sm:text-4xl my-6;
+}
+.prose-styles h2 {
+  @apply text-2xl sm:text-3xl my-5;
+}
+.prose-styles h3 {
+  @apply text-xl sm:text-2xl my-4;
+}
+.prose-styles p {
+  @apply my-4 leading-relaxed text-foreground/90;
+}
+.prose-styles ul,
+.prose-styles ol {
+  @apply my-4 ml-6;
+}
+.prose-styles ul {
+  @apply list-disc;
+}
+.prose-styles ol {
+  @apply list-decimal;
+}
+.prose-styles li {
+  @apply my-2;
+}
+.prose-styles li > p {
+  @apply my-1; /* Reduce margin for paragraphs inside list items */
+}
+.prose-styles li > ul,
+.prose-styles li > ol {
+  @apply my-2; /* Spacing for nested lists */
+}
+.prose-styles a {
+  @apply text-accent hover:underline hover:text-accent/80 transition-colors;
+}
+.prose-styles strong {
+  @apply font-semibold text-foreground;
+}
+.prose-styles em {
+  @apply italic;
+}
+.prose-styles blockquote {
+  @apply border-l-4 border-primary pl-4 italic my-6 text-muted-foreground;
+}
+.prose-styles code {
+  @apply bg-muted text-accent font-mono text-sm px-1.5 py-1 rounded-md;
+}
+.prose-styles pre {
+  @apply bg-muted/80 p-4 rounded-lg overflow-x-auto my-6;
+}
+.prose-styles pre code {
+  @apply bg-transparent p-0 text-sm;
+}
+.prose-styles hr {
+  @apply my-8 border-border;
+}
+.prose-styles img {
+  @apply rounded-lg my-6 shadow-md;
 }
