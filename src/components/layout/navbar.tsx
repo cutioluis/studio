@@ -12,6 +12,7 @@ const navLinks = [
   { href: "#features", label: "Temario" },
   { href: "#instructor", label: "Instructora" },
   { href: "#pricing", label: "Precios" },
+  { href: "#schedule", label: "Horarios" }, // Added Schedule link
   { href: "#location", label: "Ubicación" },
 ];
 
@@ -69,9 +70,8 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="w-full max-w-xs bg-background p-6">
               <div className="flex flex-col space-y-6">
-                <div className="flex items-center justify-between mb-4"> {/* Added mb-4 for spacing */}
+                <div className="flex items-center justify-between mb-4">
                   <Logo />
-                  {/* The SheetContent component itself provides a close button, so the manual one is removed */}
                 </div>
                 <nav className="flex flex-col space-y-4">
                   {navLinks.map((link) => (
@@ -93,7 +93,7 @@ export function Navbar() {
                   setIsMobileMenuOpen(false);
                   handleSmoothScroll('#cta');
                 }}>
-                  Inscríbete
+                  Inscríbete Ahora
                 </Button>
               </div>
             </SheetContent>
