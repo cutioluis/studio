@@ -4,7 +4,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Clock, XCircle, CheckCircle2, AlertTriangle, UsersRound, PenSquare } from "lucide-react"; // Added PenSquare, removed CalendarPlus
+import { Clock, XCircle, CheckCircle2, AlertTriangle, UsersRound, PenSquare, CalendarPlus } from "lucide-react"; 
 
 interface ScheduleOption {
   id: string;
@@ -68,9 +68,9 @@ export function ScheduleSection() {
       case "agotado":
         return "destructive";
       case "disponible":
-        return "default";
+        return "secondary"; // Changed from "default" to "secondary"
       case "ultimas":
-        return "secondary";
+        return "secondary"; 
       default:
         return "default";
     }
@@ -124,24 +124,27 @@ export function ScheduleSection() {
                     {schedule.notes && <p className="text-xs text-foreground/60 mt-2 text-center">{schedule.notes}</p>}
                 </div>
                 <Button
-                  asChild
+                  asChild={schedule.status !== "agotado"}
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                   disabled={schedule.status === "agotado"}
+                  onClick={schedule.status !== "agotado" ? undefined : (e) => e.preventDefault()} // Prevent action if not a link
                 >
-                  <a
-                    href={schedule.status !== "agotado" ? "https://walink.co/bd3d37" : undefined}
-                    target={schedule.status !== "agotado" ? "_blank" : undefined}
-                    rel={schedule.status !== "agotado" ? "noopener noreferrer" : undefined}
-                  >
-                    {schedule.status === "agotado"
-                      ? <XCircle className="h-4 w-4 mr-2" />
-                      : <PenSquare className="h-4 w-4 mr-2" />
-                    }
-                    {schedule.status === "agotado"
-                      ? schedule.statusText // Will show "Cupos Agotados"
-                      : "Inscríbete por WhatsApp"
-                    }
-                  </a>
+                  {schedule.status !== "agotado" ? (
+                    <a
+                      href={"https://walink.co/bd3d37"}
+                      target={"_blank"}
+                      rel={"noopener noreferrer"}
+                      className="flex items-center justify-center w-full" // Ensure anchor takes full button space
+                    >
+                      <PenSquare className="h-4 w-4 mr-2" />
+                      Inscríbete por WhatsApp
+                    </a>
+                  ) : (
+                    <span className="flex items-center justify-center w-full"> {/* Use span for disabled state */}
+                      <XCircle className="h-4 w-4 mr-2" />
+                      {schedule.statusText}
+                    </span>
+                  )}
                 </Button>
               </CardContent>
             </Card>
