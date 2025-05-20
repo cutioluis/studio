@@ -4,7 +4,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CalendarDays, Clock, XCircle, CheckCircle2, AlertTriangle, UsersRound } from "lucide-react";
+import { CalendarDays, Clock, XCircle, CheckCircle2, AlertTriangle, UsersRound, PhoneOutgoing } from "lucide-react";
 
 interface ScheduleOption {
   id: string;
@@ -74,11 +74,20 @@ export function ScheduleSection() {
       case "agotado":
         return "destructive";
       case "disponible":
-        return "default"; // Or your accent color for positive
+        return "default"; 
       case "ultimas":
-        return "secondary"; // Or a specific warning color
+        return "secondary"; 
       default:
         return "outline";
+    }
+  };
+
+  const handleCalendlyPopup = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (typeof window !== 'undefined' && (window as any).Calendly) {
+      (window as any).Calendly.initPopupWidget({
+        url: 'https://calendly.com/cutioluis?background_color=000000&text_color=f6b5e9',
+      });
     }
   };
 
@@ -135,9 +144,26 @@ export function ScheduleSection() {
           ))}
         </div>
         <p className="mt-12 text-center text-foreground/70">
-          ¿No encuentras un horario que te funcione? <a href="https://walink.co/bd3d37" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">Contáctanos</a>, ¡podemos tener más opciones!
+          ¿No encuentras un horario que te funcione? <a href="https://walink.co/bd3d37" target="_blank" rel="noopener noreferrer" className="text-accent font-semibold hover:underline">Contáctanos por WhatsApp</a>, ¡podemos tener más opciones!
         </p>
+        <div className="mt-12 pt-8 border-t border-border/30 text-center">
+          <PhoneOutgoing className="h-8 w-8 mx-auto text-accent mb-3" />
+          <h3 className="text-xl font-semibold text-foreground mb-2">
+            ¿Necesitas Asesoría Personalizada?
+          </h3>
+          <p className="text-foreground/70 mb-4 max-w-md mx-auto">
+            Si tienes dudas sobre el curso, horarios o cualquier otro detalle, agenda una breve llamada gratuita con nosotros.
+          </p>
+          <a
+            href="#"
+            onClick={handleCalendlyPopup}
+            className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-accent-foreground bg-accent hover:bg-accent/90 transition-colors shadow-md hover:shadow-lg transform hover:scale-105"
+          >
+            Agendar Asesoría Gratuita
+          </a>
+        </div>
       </div>
     </section>
   );
 }
+
