@@ -7,10 +7,12 @@ import { InstructorSection } from "@/components/landing-spark/instructor-section
 import { PricingSection } from "@/components/landing-spark/pricing-section";
 import { ScheduleSection } from "@/components/landing-spark/schedule-section";
 import { LocationSection } from "@/components/landing-spark/location-section";
-import { BlogTeaserSection } from "@/components/landing-spark/blog-teaser-section"; // Import BlogTeaserSection
+import { BlogTeaserSection } from "@/components/landing-spark/blog-teaser-section"; 
 import { CallToActionSection } from "@/components/landing-spark/call-to-action-section";
 import { Toaster } from "@/components/ui/toaster";
 import { AnnouncementBanner } from "@/components/layout/announcement-banner";
+import { Analytics } from "@vercel/analytics/next"
+
 
 export default function HomePage() {
   return (
@@ -29,6 +31,7 @@ export default function HomePage() {
       </main>
       <Footer />
       <Toaster />
+      <Analytics />
     </div>
   );
 }
