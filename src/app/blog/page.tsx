@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { CalendarDays, ArrowRight } from 'lucide-react';
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   title: 'Blog de Belleza y Emprendimiento | Ceci Glam',
@@ -83,6 +84,7 @@ export default function BlogPage() {
         )}
       </main>
       <Footer />
+      <Analytics />
     </div>
   );
 }
