@@ -1,283 +1,57 @@
-
 "use client";
 
-import React, { useState, useEffect, type ElementType } from "react";
-import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Palette, Eye, Paintbrush, Briefcase, Rocket } from "lucide-react";
+import { Palette, Sparkles, Scissors, ArrowRight } from "lucide-react";
+import type { ElementType } from "react";
+import Link from "next/link";
 
-interface GalleryItem {
+interface ProgramCard {
   id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  imageHint: string;
+  nombre: string;
+  descripcion: string;
+  duracion: string;
+  areas: string[];
   icon: ElementType;
-  temario?: string[];
+  color: string;
+  bgGradient: string;
 }
 
-const galleryItems: GalleryItem[] = [
+const programas: ProgramCard[] = [
   {
-    id: "1",
-    title: "Arte en Uñas Avanzado",
-    description: "Desde manicura básica hasta las últimas tendencias en acrílico, gel, polygel y diseños 3D. ¡Tus manos serán lienzos!",
-    imageUrl: "/images/unas-rs.webp",
-    imageHint: "advanced nail art",
+    id: "tecnica-integral-belleza",
+    nombre: "Técnica Integral en Belleza",
+    descripcion: "Programa completo de 5 meses que te convertirá en una profesional integral domando las técnicas esenciales de uñas, pestañas, cejas y maquillaje.",
+    duracion: "5 meses",
+    areas: ["Uñas", "Pestañas", "Cejas", "Automaquillaje"],
     icon: Palette,
-    temario: [
-      "💅 Curso de UÑAS",
-      "1. Manicura y Pedicura:",
-      "\t•\tManicura clásica",
-      "\t•\tManicura spa",
-      "\t•\tManicura combinada",
-      "\t•\tPedicura spa",
-      "2. Nivelación y Construcción:",
-      "\t•\tBuilder gel + gel UV",
-      "\t•\tTip con polygel",
-      "\t•\tDual System",
-      "\t•\tExtensiones con Dual System",
-      "3. Decoración y Arte:",
-      "\t•\tArte en gel",
-      "\t•\tSofgel",
-      "\t•\tEncapsulados en polygel",
-      "\t•\tTipos y calibración de perlas",
-      "\t•\t3D básico",
-      "4. Efectos Especiales:",
-      "\t•\tBaby boomer",
-      "\t•\tBaby glitter ✨",
-      "\t•\tBaby glam",
-      "\t•\tMármoleados",
-      "5. Tipos de Puntas:",
-      "\t•\tCoffin ☕",
-      "\t•\tAlmond",
-      "\t•\tSquare ⬜",
-      "\t•\tStiletto",
-      "6. Uñas Esculpidas"
-    ]
+    color: "from-pink-500 to-purple-500",
+    bgGradient: "bg-gradient-to-br from-pink-50 to-purple-50 dark:from-pink-950 dark:to-purple-950"
   },
   {
-    id: "2",
-    title: "Experta en Pestañas (Lashista)",
-    description: "Aprende aplicación de extensiones clásicas, volumen ruso, lifting, tinte y diseño de cejas para miradas que cautivan.",
-    imageUrl: "/images/3-rs.webp",
-    imageHint: "eyelash extensions model",
-    icon: Eye,
-    temario: [
-      "✨ Curso de CEJAS Y PESTAÑAS",
-      "1. Diseño de Cejas:",
-      "\t•\tVisajismo según el rostro",
-      "\t•\tDiseño y depilación",
-      "\t•\tMaquillaje de cejas",
-      "\t•\tEfecto maquillaje y orgánico",
-      "2. Aplicación de Pestañas Punto a Punto:",
-      "\t•\tPunto a punto",
-      "\t•\tFoxy eyes",
-      "\t•\tEstilo muñeca",
-      "\t•\tCon color",
-      "3. Henna y Tratamientos:",
-      "\t•\tHenna efecto maquillaje degradé",
-      "\t•\tLaminado de cejas",
-      "\t•\tLaminado + tinte",
-      "\t•\tLifting y rizado de pestañas",
-      "4. Depilación Facial y Corporal:",
-      "\t•\tCejas y bozo",
-      "\t•\tAxilas",
-      "\t•\tMedia pierna",
-      "\t•\tPierna completa"
-    ]
+    id: "maestra-artesanal-en-belleza",
+    nombre: "Maestra Artesanal en Belleza",
+    descripcion: "Carrera de 12 meses ultra completa con 12 módulos especializados. Domina desde uñas hasta barbería, colorimetría, química cosmética y más.",
+    duracion: "12 meses",
+    areas: ["Uñas", "Pestañas", "Maquillaje", "Peinados", "Cortes", "Tratamientos", "Colorimetría", "Barbería", "Cosmética", "Cosmetología"],
+    icon: Sparkles,
+    color: "from-rose-500 to-pink-500",
+    bgGradient: "bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-950 dark:to-pink-950"
   },
   {
-    id: "3",
-    title: "Maquillaje Profesional y Automaquillaje",
-    description: "Domina técnicas de automaquillaje para el día a día y looks profesionales para eventos. ¡Realza la belleza!",
-    imageUrl: "/images/4-rs.webp",
-    imageHint: "makeup artist working",
-    icon: Paintbrush,
-    temario: [
-      "💄 Curso de AUTOMAQUILLAJE",
-      "\t•\tPreparación de piel",
-      "\t•\tBase, correctores y contornos",
-      "\t•\tMaquillaje de ojos (día/noche)",
-      "\t•\tCejas con maquillaje",
-      "\t•\tTipos de depilado (pinza, cera, navaja)",
-      "\t•\tPestañas en banda",
-      "\t•\tLabios",
-      "\t•\tFace chart – práctica en papel"
-    ]
-  },
-  {
-    id: "4",
-    title: "Emprendimiento y Gestión de Salón",
-    description: "Adquiere herramientas para iniciar y gestionar tu negocio de belleza, marketing, atención al cliente y finanzas.",
-    imageUrl: "/images/5-rs.webp",
-    imageHint: "beauty salon interior",
-    icon: Briefcase,
-    temario: undefined
-  },
+    id: "especialista-unas-salon",
+    nombre: "Especialista en Uñas de Salón",
+    descripcion: "Especialización de 4 meses intensivos enfocada en técnicas profesionales de salón con fundamentos sólidos, nail art, polygel y acrílico.",
+    duracion: "4 meses",
+    areas: ["Fundamentos", "Nail Art", "Polygel", "Dual System", "Acrílico Profesional"],
+    icon: Scissors,
+    color: "from-fuchsia-500 to-purple-500",
+    bgGradient: "bg-gradient-to-br from-fuchsia-50 to-purple-50 dark:from-fuchsia-950 dark:to-purple-950"
+  }
 ];
 
-interface GroupedTemarioItem {
-  type: 'main' | 'section' | 'raw';
-  content?: string;
-  title?: string;
-  items?: string[];
-}
-
-const processTemario = (temario?: string[]): GroupedTemarioItem[] => {
-  if (!temario) return [];
-  const grouped: GroupedTemarioItem[] = [];
-  let currentSection: GroupedTemarioItem | null = null;
-  const isMainEmojiHeading = (point: string) => /^(💅|✨|💄)\s/.test(point.trim());
-  const isNumberedHeading = (point: string) => /^\d+\.\s/.test(point.trim());
-
-  for (const point of temario) {
-    const cleanedPoint = point.replace(/^\t•\t/, '').trim();
-    if (isMainEmojiHeading(point)) {
-      if (currentSection) grouped.push(currentSection);
-      currentSection = null;
-      grouped.push({ type: 'main', content: cleanedPoint });
-    } else if (isNumberedHeading(point)) {
-      if (currentSection && currentSection.type === 'section') grouped.push(currentSection);
-      currentSection = { type: 'section', title: cleanedPoint, items: [] };
-    } else if (currentSection && currentSection.type === 'section' && currentSection.items && point.startsWith("\t•\t")) {
-      currentSection.items.push(cleanedPoint);
-    } else if (point.startsWith("\t•\t")) { 
-        if (grouped.length > 0 && grouped[grouped.length-1].type === 'main') {
-             if (currentSection && currentSection.type === 'section') grouped.push(currentSection);
-             currentSection = { type: 'section', title: '', items: [cleanedPoint] };
-        } else {
-             // This case handles points that might not directly follow a main or numbered heading
-             // It tries to add them to an existing section or creates a new 'raw' type if no section is active
-             if (currentSection && currentSection.type === 'section' && currentSection.items) {
-                currentSection.items.push(cleanedPoint);
-             } else {
-                if (currentSection && currentSection.type === 'section') grouped.push(currentSection);
-                currentSection = { type: 'section', title: '', items: [cleanedPoint] };
-             }
-        }
-    } else {
-      if (currentSection && currentSection.type === 'section') grouped.push(currentSection);
-      currentSection = null;
-      grouped.push({ type: 'raw', content: cleanedPoint });
-    }
-  }
-  if (currentSection) grouped.push(currentSection);
-  
-  const finalGrouped: GroupedTemarioItem[] = [];
-  let tempSectionForMainBullets: GroupedTemarioItem | null = null;
-
-  for(let i=0; i < grouped.length; i++){
-    const group = grouped[i];
-    if(group.type === 'main'){
-      if(tempSectionForMainBullets){
-        finalGrouped.push(tempSectionForMainBullets);
-        tempSectionForMainBullets = null;
-      }
-      finalGrouped.push(group);
-      if(grouped[i+1] && grouped[i+1].type === 'section' && grouped[i+1].title === '' && grouped[i+1].items && grouped[i+1].items.length > 0){
-        tempSectionForMainBullets = {type: 'section', title: '', items: []};
-      }
-    } else if (group.type === 'section' && group.title === '' && group.items && tempSectionForMainBullets && tempSectionForMainBullets.items) {
-        tempSectionForMainBullets.items.push(...group.items);
-    } else {
-      if(tempSectionForMainBullets){
-        finalGrouped.push(tempSectionForMainBullets);
-        tempSectionForMainBullets = null;
-      }
-      finalGrouped.push(group);
-    }
-  }
-  if(tempSectionForMainBullets) finalGrouped.push(tempSectionForMainBullets);
-
-  return finalGrouped;
-};
-
-
 export function InteractiveGallery() {
-  const [activeItem, setActiveItem] = useState<GalleryItem>(galleryItems[0]);
-  const [groupedTemarioState, setGroupedTemarioState] = useState<GroupedTemarioItem[]>([]);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useEffect(() => {
-    setGroupedTemarioState(processTemario(activeItem.temario));
-  }, [activeItem]);
-
-  const renderTemarioContent = (isMobileView: boolean) => {
-    if (groupedTemarioState.length === 0 && activeItem.id === '4') {
-      return (
-        <Card className={cn(
-          "shadow-xl rounded-lg bg-card p-6 text-center",
-          isMobileView ? "mt-4" : "",
-          "border-2 border-transparent bg-gradient-to-br from-primary/20 to-accent/20 via-card"
-        )}>
-          <Rocket className="h-12 w-12 mx-auto text-accent mb-4 animate-pulse" />
-          <h3 className="text-xl font-semibold text-accent mb-2">🚀 Próximamente</h3>
-          <p className="text-foreground/70">
-            ¡Estamos preparando contenido exclusivo sobre emprendimiento y gestión de salón para potenciar tu carrera!
-          </p>
-        </Card>
-      );
-    }
-
-    if (groupedTemarioState.length > 0) {
-      return (
-        <Card className={cn("shadow-xl rounded-lg bg-card border border-border/60", isMobileView ? "mt-4" : "")}>
-          <CardHeader>
-            <CardTitle className={cn("font-semibold text-accent", isMobileView ? "text-lg" : "text-xl")}>
-              Temario: {activeItem.title}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ScrollArea className={cn("w-full pr-4", isMobileView ? "h-[200px]" : "h-[250px]")}>
-              <ul className="space-y-3">
-                {groupedTemarioState.map((group, groupIndex) => {
-                  if (group.type === 'main') {
-                    return <li key={`main-${groupIndex}`} className="mb-3"><h4 className={cn("font-semibold text-accent mt-2 mb-1", isMobileView ? "text-base" : "text-lg")}>{group.content}</h4></li>;
-                  }
-                  if (group.type === 'section') {
-                    const sectionsOnly = groupedTemarioState.filter(g => g.type === 'section');
-                    const isLastSection = sectionsOnly.length > 0 && sectionsOnly[sectionsOnly.length - 1] === group;
-                    
-                    return (
-                      <li key={`section-${groupIndex}`} className="flex items-start">
-                        <div className="flex flex-col items-center mr-3 shrink-0 pt-1">
-                          <div className="h-2.5 w-2.5 bg-accent rounded-full mt-1"></div>
-                          {!isLastSection && group.items && group.items.length > 0 && <div className="w-0.5 bg-accent/50 flex-grow min-h-[1.5rem]" style={{minHeight: `calc(${group.items.length} * 1.6rem + ${group.title ? '1.2rem' : '0rem'})`}}></div>}
-                        </div>
-                        <div className="flex-1">
-                          {group.title && <h5 className={cn("font-semibold text-foreground mb-1.5", isMobileView ? "text-sm" : "text-base")}>{group.title}</h5>}
-                          {group.items && group.items.length > 0 && (
-                            <ul className="space-y-1 pl-1 text-sm text-foreground/80">
-                              {group.items.map((subItem, itemIndex) => <li key={`item-${itemIndex}`}>{subItem}</li>)}
-                            </ul>
-                          )}
-                        </div>
-                      </li>
-                    );
-                  }
-                  if (group.type === 'raw') {
-                    return <li key={`raw-${groupIndex}`} className={cn("ml-7", isMobileView ? "text-sm" : "text-base", "text-foreground/80")}>{group.content}</li>;
-                  }
-                  return null;
-                })}
-              </ul>
-            </ScrollArea>
-          </CardContent>
-        </Card>
-      );
-    }
-    return null;
-  };
-
   return (
     <section id="features" className="py-16 md:py-24 bg-secondary">
       <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -286,99 +60,78 @@ export function InteractiveGallery() {
             Un Mundo de Belleza te Espera: <span className="text-accent">¿Qué Aprenderás?</span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-foreground/70 sm:text-xl">
-            Explora las habilidades y conocimientos clave que te convertirán en una profesional integral de la belleza.
+            Elige el programa que mejor se adapte a tus objetivos y comienza tu transformación profesional en belleza.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-          <div className="md:col-span-4 space-y-4">
-            {galleryItems.map((item) => (
-              <React.Fragment key={item.id}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {programas.map((programa) => {
+            const IconComponent = programa.icon;
+            return (
+              <Link
+                key={programa.id}
+                href={`/programs/${programa.id}`}
+                className="group h-full"
+              >
                 <Card
-                  onMouseEnter={() => setActiveItem(item)}
                   className={cn(
-                    "cursor-pointer transition-all duration-300 ease-in-out shadow-md",
-                    activeItem.id === item.id
-                      ? "bg-accent text-accent-foreground ring-2 ring-accent"
-                      : "bg-card hover:opacity-100 hover:shadow-xl",
-                    activeItem.id !== item.id && "opacity-60" // Reduced opacity for inactive cards
+                    "overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-300 border-0 h-full flex flex-col",
+                    programa.bgGradient
                   )}
                 >
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-3">
-                      <item.icon className={cn(
-                        "h-7 w-7 mr-3",
-                        activeItem.id === item.id ? "text-accent-foreground" : "text-accent"
-                      )}
-                      />
-                      <h3 className={cn(
-                        "text-xl font-semibold flex items-center justify-between flex-grow",
-                        activeItem.id === item.id ? "text-accent-foreground" : "text-foreground"
-                      )}>
-                        {item.title}
-                        {activeItem.id === item.id && <ArrowRight className="h-5 w-5 transition-transform duration-300 transform" />}
-                      </h3>
+                  <CardHeader className={cn("bg-gradient-to-r", programa.color, "text-white pb-8")}>
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <CardTitle className="text-2xl mb-2 text-white">{programa.nombre}</CardTitle>
+                        <p className="text-white/90 text-base font-semibold">
+                          {programa.duracion}
+                        </p>
+                      </div>
+                      <div className="bg-white/20 backdrop-blur-sm p-3 rounded-lg">
+                        <IconComponent className="h-8 w-8 text-white" />
+                      </div>
                     </div>
-                    <p className={cn(
-                      "text-sm",
-                      activeItem.id === item.id ? "text-accent-foreground/80" : "text-foreground/60"
-                    )}>
-                      {item.description}
+                  </CardHeader>
+
+                  <CardContent className="flex-1 pt-6 flex flex-col">
+                    <p className="text-foreground/80 text-sm leading-relaxed mb-6">
+                      {programa.descripcion}
                     </p>
+
+                    <div className="mb-6">
+                      <p className="text-xs font-semibold text-foreground/60 uppercase tracking-wider mb-3">
+                        Áreas de estudio
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {programa.areas.map((area, idx) => (
+                          <span
+                            key={idx}
+                            className={cn(
+                              "px-3 py-1 rounded-full text-xs font-medium",
+                              `bg-gradient-to-r ${programa.color} text-white`
+                            )}
+                          >
+                            {area}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <Button
+                      className={cn(
+                        "w-full mt-auto bg-gradient-to-r",
+                        programa.color,
+                        "text-white hover:opacity-90 transition-opacity pointer-events-none"
+                      )}
+                    >
+                      Conocer más
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
                   </CardContent>
                 </Card>
-
-                {isMobile && activeItem.id === item.id && (
-                  <div className="mt-6 space-y-4 p-4 bg-background/50 rounded-lg shadow-lg">
-                    <Card className="overflow-hidden shadow-xl rounded-lg">
-                      <div className="aspect-w-16 aspect-h-9 relative w-full h-[250px] sm:h-[300px]">
-                        <Image
-                          src={activeItem.imageUrl}
-                          alt={`${activeItem.title} - Contenido del curso integral de belleza Landing Spark`}
-                          layout="fill"
-                          objectFit="cover"
-                          data-ai-hint={activeItem.imageHint}
-                          className="rounded-lg"
-                        />
-                      </div>
-                    </Card>
-                     <p className="text-sm text-center text-foreground/60">
-                        Actualmente viendo: <span className="font-semibold text-accent">{activeItem.title}</span>
-                    </p>
-                    {renderTemarioContent(true)}
-                  </div>
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-
-          {!isMobile && (
-            <div className="md:col-span-8 sticky top-24 space-y-6">
-              <Card className="overflow-hidden shadow-xl rounded-lg">
-                <div className="aspect-w-16 aspect-h-9 relative w-full h-[400px] md:h-[450px]">
-                  {galleryItems.map((item) => (
-                    <Image
-                      key={item.id}
-                      src={item.imageUrl}
-                      alt={`${item.title} - Contenido del curso integral de belleza Landing Spark`}
-                      layout="fill"
-                      objectFit="cover"
-                      data-ai-hint={item.imageHint}
-                      className={cn(
-                        "transition-opacity duration-500 ease-in-out rounded-lg",
-                        activeItem.id === item.id ? "opacity-100" : "opacity-0"
-                      )}
-                      priority={item.id === galleryItems[0].id}
-                    />
-                  ))}
-                </div>
-              </Card>
-              <p className="text-sm text-center text-foreground/60">
-                Actualmente viendo: <span className="font-semibold text-accent">{activeItem.title}</span>
-              </p>
-              {renderTemarioContent(false)}
-            </div>
-          )}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>
