@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, ChevronDown, BookOpen } from "lucide-react";
+import { ArrowLeft, BookOpen } from "lucide-react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import temarios from "@/data/temarios.json";
@@ -36,7 +36,6 @@ export default function ProgramPage() {
   const router = useRouter();
   const programId = params.id as string;
 
-  const [expandedModulos, setExpandedModulos] = useState<number[]>([0]);
   const [selectedModuloIndex, setSelectedModuloIndex] = useState(0);
 
   const programa = useMemo(() => {
@@ -59,21 +58,6 @@ export default function ProgramPage() {
 
   const selectedModulo = programa.modulos[selectedModuloIndex];
   const colorGradient = colorMap[programId as keyof typeof colorMap] || "from-accent to-primary";
-
-  const toggleModulo = (index: number) => {
-    setExpandedModulos(prev =>
-      prev.includes(index)
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    );
-  };
-
-  const handleSelectModulo = (index: number) => {
-    setSelectedModuloIndex(index);
-    if (!expandedModulos.includes(index)) {
-      setExpandedModulos([...expandedModulos, index]);
-    }
-  };
 
   return (
     <>
@@ -112,48 +96,25 @@ export default function ProgramPage() {
               </CardHeader>
               <CardContent className="p-0">
                 <ScrollArea className="h-[600px]">
-                  <div className="space-y-1 p-4">
+                  <div className="space-y-2 p-4">
                     {programa.modulos.map((modulo, idx) => (
-                      <div key={modulo.numero}>
-                        <button
-                          onClick={() => {
-                            handleSelectModulo(idx);
-                            toggleModulo(idx);
-                          }}
-                          className={cn(
-                            "w-full text-left px-4 py-3 rounded-lg transition-all duration-200 flex items-start justify-between gap-2 group",
-                            selectedModuloIndex === idx
-                              ? cn("bg-gradient-to-r", colorGradient, "text-white shadow-md")
-                              : "hover:bg-accent/10 text-foreground"
-                          )}
-                        >
-                          <div className="flex-1 min-w-0">
-                            <p className={cn(
-                              "font-semibold text-sm line-clamp-2",
-                              selectedModuloIndex === idx ? "text-white" : ""
-                            )}>
-                              {modulo.nombre}
-                            </p>
-                          </div>
-                          <ChevronDown
-                            className={cn(
-                              "h-4 w-4 shrink-0 transition-transform duration-200",
-                              expandedModulos.includes(idx) ? "rotate-180" : ""
-                            )}
-                          />
-                        </button>
-
-                        {/* Temario expandible */}
-                        {expandedModulos.includes(idx) && (
-                          <div className="pl-6 pr-4 py-2 space-y-1 border-l-2 border-accent/20 ml-2">
-                            {modulo.temario.map((item, itemIdx) => (
-                              <div key={itemIdx} className="text-xs text-foreground/60 py-1">
-                                {item.replace(/^\t•\t/, "").trim()}
-                              </div>
-                            ))}
-                          </div>
+                      <button
+                        key={modulo.numero}
+                        onClick={() => setSelectedModuloIndex(idx)}
+                        className={cn(
+                          "w-full text-left px-4 py-3 rounded-lg transition-all duration-200",
+                          selectedModuloIndex === idx
+                            ? cn("bg-gradient-to-r", colorGradient, "text-white shadow-md")
+                            : "hover:bg-accent/10 text-foreground border border-transparent hover:border-accent/20"
                         )}
-                      </div>
+                      >
+                        <p className={cn(
+                          "font-semibold text-sm",
+                          selectedModuloIndex === idx ? "text-white" : ""
+                        )}>
+                          {modulo.nombre}
+                        </p>
+                      </button>
                     ))}
                   </div>
                 </ScrollArea>

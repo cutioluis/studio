@@ -11,7 +11,7 @@ import { usePathname } from 'next/navigation';
 
 // Define icons for main page scroll links for mobile view
 const mainPageScrollLinks = [
-  { href: "#features", label: "Temario", type: "scroll" as const, icon: BookOpen },
+  { href: "#features", label: "Cursos-Carreras", type: "scroll" as const, icon: BookOpen },
   { href: "#instructor", label: "Instructora", type: "scroll" as const, icon: Sparkles }, // Using Sparkles as a placeholder for instructor
   { href: "#pricing", label: "Precios", type: "scroll" as const, icon: Tag },
   { href: "#schedule", label: "Horarios", type: "scroll" as const, icon: CalendarDays },
