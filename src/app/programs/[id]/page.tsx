@@ -123,8 +123,19 @@ export default function ProgramPage() {
           </div>
 
           {/* Detalles Módulo */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 space-y-6">
+            {/* Imagen del Programa */}
             <Card className="border-0 shadow-lg overflow-hidden">
+              <div className={cn("bg-gradient-to-br h-64 w-full flex items-center justify-center", colorGradient)}>
+                <div className="text-center text-white">
+                  <div className="text-6xl mb-4">🎓</div>
+                  <p className="text-lg font-semibold">{programa.nombre}</p>
+                </div>
+              </div>
+            </Card>
+
+            {/* Temario */}
+            <Card className="border-0 shadow-lg">
               <CardHeader className={cn("bg-gradient-to-r", colorGradient, "text-white pb-6")}>
                 <div className="space-y-2">
                   <div className="text-sm font-semibold opacity-90">
@@ -135,11 +146,11 @@ export default function ProgramPage() {
               </CardHeader>
 
               <CardContent className="pt-8">
-                <div className="space-y-6">
-                  <div>
-                    <h3 className={cn("text-xl font-bold mb-6 bg-gradient-to-r", colorGradient, "bg-clip-text text-transparent")}>
-                      Temario Completo
-                    </h3>
+                <div>
+                  <h3 className={cn("text-xl font-bold mb-6 bg-gradient-to-r", colorGradient, "bg-clip-text text-transparent")}>
+                    Temario Completo
+                  </h3>
+                  <ScrollArea className="h-[400px] pr-4">
                     <div className="space-y-3">
                       {selectedModulo.temario.map((item, idx) => {
                         const cleanItem = item.replace(/^\t•\t/, "").trim();
@@ -161,39 +172,90 @@ export default function ProgramPage() {
                         );
                       })}
                     </div>
+                  </ScrollArea>
+                </div>
+
+                {/* Áreas de Estudio */}
+                {programa.areas && programa.areas.length > 0 && (
+                  <div className="border-t pt-8 mt-8">
+                    <h3 className={cn("text-lg font-bold mb-4 bg-gradient-to-r", colorGradient, "bg-clip-text text-transparent")}>
+                      Áreas Cubiertas
+                    </h3>
+                    <div className="flex flex-wrap gap-3">
+                      {programa.areas.map((area, idx) => (
+                        <span
+                          key={idx}
+                          className={cn(
+                            "px-4 py-2 rounded-full text-sm font-medium text-white bg-gradient-to-r",
+                            colorGradient
+                          )}
+                        >
+                          {area}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Card de Suscripción */}
+            <Card className={cn("border-0 shadow-lg overflow-hidden bg-gradient-to-br", colorGradient, "text-white")}>
+              <CardContent className="pt-8 pb-8">
+                <div className="space-y-6">
+                  {/* Título */}
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">{programa.nombre}</h3>
+                    <p className="text-white/80">Acceso completo al programa</p>
                   </div>
 
-                  {/* Áreas de Estudio */}
-                  {programa.areas && programa.areas.length > 0 && (
-                    <div className="border-t pt-8">
-                      <h3 className={cn("text-lg font-bold mb-4 bg-gradient-to-r", colorGradient, "bg-clip-text text-transparent")}>
-                        Áreas Cubiertas en este Programa
-                      </h3>
-                      <div className="flex flex-wrap gap-3">
-                        {programa.areas.map((area, idx) => (
-                          <span
-                            key={idx}
-                            className={cn(
-                              "px-4 py-2 rounded-full text-sm font-medium text-white bg-gradient-to-r",
-                              colorGradient
-                            )}
-                          >
-                            {area}
-                          </span>
-                        ))}
-                      </div>
+                  {/* Información */}
+                  <div className="space-y-3 border-t border-white/20 pt-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-white/90">Cupos limitados:</span>
+                      <span className="font-semibold">Disponibles</span>
                     </div>
-                  )}
+                    <div className="flex justify-between items-center">
+                      <span className="text-white/90">Duración:</span>
+                      <span className="font-semibold">{programa.duracion}</span>
+                    </div>
+                  </div>
 
-                  {/* CTA */}
-                  <div className="border-t pt-8">
-                    <Button
-                      size="lg"
-                      className={cn("w-full bg-gradient-to-r", colorGradient, "text-white hover:opacity-90")}
-                      onClick={() => window.open('https://walink.co/bd3d37', '_blank')}
-                    >
-                      Inscríbete Ahora
-                    </Button>
+                  {/* Precio */}
+                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                    <div className="space-y-2">
+                      <p className="text-sm text-white/80">Precio especial</p>
+                      <div className="text-4xl font-bold">$90</div>
+                      <p className="text-sm text-white/70">o 3 cuotas sin interés de $30</p>
+                    </div>
+                  </div>
+
+                  {/* Código de descuento */}
+                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                    <p className="text-xs text-white/80 mb-2">Código de descuento (opcional)</p>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        placeholder="CODIGO"
+                        className="flex-1 px-3 py-2 rounded text-sm bg-white/20 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/40"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Botón de inscripción */}
+                  <Button
+                    size="lg"
+                    className="w-full bg-white text-foreground font-semibold hover:bg-white/90"
+                    onClick={() => window.open('https://walink.co/bd3d37', '_blank')}
+                  >
+                    Inscribirse Ahora
+                  </Button>
+
+                  {/* Beneficios */}
+                  <div className="text-center text-xs text-white/70 space-y-1">
+                    <p>✓ Acceso de por vida</p>
+                    <p>✓ Certificado incluido</p>
+                    <p>✓ Garantía de satisfacción</p>
                   </div>
                 </div>
               </CardContent>
