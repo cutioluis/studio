@@ -24,6 +24,7 @@ const homeLink = { href: "/", label: "Inicio", type: "link" as const, icon: Home
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState<string | null>(null);
   const pathname = usePathname();
   const isOnHomePage = pathname === '/';
   const isOnBlogPage = pathname.startsWith('/blog');
@@ -53,7 +54,13 @@ export function Navbar() {
     const baseClasses = isMobile
       ? "text-lg font-medium text-foreground transition-colors hover:text-accent flex items-center gap-3 py-2" // Added py-2 for better spacing
       : "text-sm font-medium text-foreground/80 transition-colors hover:text-accent";
-    
+    const isActive = link.type === "scroll" ? activeHref === link.href : pathname === link.href;
+    // Pink underline under the selected option
+    const underlineClasses = `relative w-fit after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:rounded-full after:bg-primary after:transition-transform after:duration-300 after:origin-left ${
+      isActive ? "after:scale-x-100 text-accent" : "after:scale-x-0"
+    }`;
+    const linkClasses = `${baseClasses} ${underlineClasses}`;
+
     const IconComponent = link.icon;
 
     if (link.type === "scroll" && isOnHomePage) {
@@ -63,10 +70,11 @@ export function Navbar() {
           href={link.href}
           onClick={(e) => {
             e.preventDefault();
+            setActiveHref(link.href);
             if (isMobile) setIsMobileMenuOpen(false);
             handleSmoothScroll(link.href);
           }}
-          className={baseClasses}
+          className={linkClasses}
         >
           {isMobile && IconComponent && <IconComponent className="h-5 w-5 text-accent" />}
           {link.label}
@@ -78,7 +86,7 @@ export function Navbar() {
         key={link.label}
         href={link.href}
         onClick={() => { if (isMobile) setIsMobileMenuOpen(false);}}
-        className={baseClasses}
+        className={linkClasses}
         aria-current={pathname === link.href ? "page" : undefined}
       >
         {isMobile && IconComponent && <IconComponent className="h-5 w-5 text-accent" />}

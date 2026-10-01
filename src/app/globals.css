@@ -9,95 +9,94 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 98%; /* Very Light Gray (Almost White) */
-    --foreground: 0 0% 20%; /* Dark Gray */
+    --background: 240 9% 7%; /* #0F0F12 - Deep Black */
+    --foreground: 0 0% 100%; /* #FFFFFF - White */
 
-    --card: 0 0% 98%; /* Consistent with background */
-    --card-foreground: 0 0% 20%; /* Consistent with foreground */
-    --popover: 0 0% 98%; /* Consistent with background */
-    --popover-foreground: 0 0% 20%; /* Consistent with foreground */
+    --card: 240 7% 11%; /* #1A1A1E - Charcoal Gray */
+    --card-foreground: 0 0% 100%; /* #FFFFFF */
+    --popover: 240 7% 11%; /* #1A1A1E */
+    --popover-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --primary: 302 100% 87%; /* Light Pink (#FFBDFB) */
-    --primary-foreground: 302 30% 25%; /* Dark Desaturated Pink/Purple */
+    --primary: 8 57% 85%; /* #EEC7C1 - Light Rose Gold */
+    --primary-foreground: 240 9% 7%; /* #0F0F12 - Deep black on rose gold */
 
-    --secondary: 270 80% 92%; /* Soft Lavender */
-    --secondary-foreground: 270 30% 30%; /* Darker Lavender */
+    --secondary: 240 7% 14%; /* Slightly lifted charcoal for chips/secondary surfaces */
+    --secondary-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --muted: 0 0% 94%; /* Lighter Gray */
-    --muted-foreground: 0 0% 45%; /* Medium Gray */
+    --muted: 240 6% 16%; /* Muted charcoal surface */
+    --muted-foreground: 240 3% 64%; /* #A0A0A5 - Light Gray */
 
-    --accent: 320 100% 80%; /* Vibrant Pink/Magenta (brighter/deeper than primary) */
-    --accent-foreground: 320 30% 20%; /* Dark contrast for accent */
-    
-    --destructive: 0 70% 55%; /* Standard Red */
-    --destructive-foreground: 0 0% 98%; /* White */
+    --accent: 8 57% 85%; /* #EEC7C1 - Light Rose Gold */
+    --accent-foreground: 240 9% 7%; /* #0F0F12 */
 
-    --border: 0 0% 90%; /* Light Gray Border */
-    --input: 0 0% 92%; /* Slightly lighter than border for input */
-    --ring: 302 100% 87%; /* Primary Pink for focus rings */
+    --destructive: 0 65% 52%; /* Red */
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --border: 240 6% 18%; /* Subtle dark border - rose gold reserved for emphasis */
+    --input: 240 6% 16%; /* Dark input surface */
+    --ring: 0 36% 74%; /* #D4A4A4 - Medium Rose Gold focus ring */
 
     --radius: 0.5rem;
 
-    --chart-1: 302 70% 70%; /* Shades related to pink/lavender */
-    --chart-2: 270 60% 65%;
-    --chart-3: 320 70% 75%;
-    --chart-4: 280 50% 60%;
-    --chart-5: 300 60% 80%;
+    --chart-1: 8 57% 85%; /* #EEC7C1 */
+    --chart-2: 0 36% 74%; /* #D4A4A4 */
+    --chart-3: 240 3% 64%; /* #A0A0A5 */
+    --chart-4: 8 30% 60%;
+    --chart-5: 240 6% 35%;
 
-    /* Sidebar Light Theme */
-    --sidebar-background: 0 0% 96%; /* Very light gray, slightly off-white */
-    --sidebar-foreground: 0 0% 25%; /* Dark Gray for text */
-    --sidebar-primary: 302 100% 87%; /* Primary Pink */
-    --sidebar-primary-foreground: 302 30% 25%; /* Dark contrast for primary */
-    --sidebar-accent: 270 80% 92%; /* Soft Lavender for sidebar accents */
-    --sidebar-accent-foreground: 270 30% 30%; /* Darker Lavender for accent text */
-    --sidebar-border: 0 0% 88%; /* Light gray border for sidebar */
-    --sidebar-ring: 302 100% 87%; /* Primary Pink for ring */
+    /* Sidebar - Luxury Dark */
+    --sidebar-background: 240 7% 11%; /* #1A1A1E */
+    --sidebar-foreground: 0 0% 100%; /* #FFFFFF */
+    --sidebar-primary: 8 57% 85%; /* #EEC7C1 */
+    --sidebar-primary-foreground: 240 9% 7%; /* #0F0F12 */
+    --sidebar-accent: 240 6% 16%; /* Muted charcoal */
+    --sidebar-accent-foreground: 8 57% 85%; /* #EEC7C1 */
+    --sidebar-border: 240 6% 18%; /* Subtle dark border */
+    --sidebar-ring: 0 36% 74%; /* #D4A4A4 */
   }
 
   .dark {
-    --background: 280 10% 12%; /* Deep Cool Charcoal/Purple */
-    --foreground: 300 20% 92%; /* Off-White with a cool/pinkish tint */
+    --background: 240 9% 7%;
+    --foreground: 0 0% 100%;
 
-    --card: 280 10% 18%; /* Darker Cool Charcoal/Purple */
-    --card-foreground: 300 20% 92%;
-    --popover: 280 10% 18%;
-    --popover-foreground: 300 20% 92%;
+    --card: 240 7% 11%;
+    --card-foreground: 0 0% 100%;
+    --popover: 240 7% 11%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 302 90% 75%; /* Brighter Pink for dark mode */
-    --primary-foreground: 302 20% 15%; /* Very dark for contrast */
+    --primary: 8 57% 85%;
+    --primary-foreground: 240 9% 7%;
 
-    --secondary: 270 40% 30%; /* Muted Dark Lavender */
-    --secondary-foreground: 270 30% 88%; /* Light Lavender */
+    --secondary: 240 7% 14%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 280 10% 25%; /* Darker Cool Muted Purple/Gray */
-    --muted-foreground: 300 15% 65%; /* Lighter Muted Cool Gray */
+    --muted: 240 6% 16%;
+    --muted-foreground: 240 3% 64%;
 
-    --accent: 320 90% 70%; /* Brighter Vibrant Pink/Magenta */
-    --accent-foreground: 320 20% 10%; /* Very dark for contrast on accent */
-    
-    --destructive: 0 60% 50%; /* Standard Red for dark mode */
-    --destructive-foreground: 0 0% 98%;
+    --accent: 8 57% 85%;
+    --accent-foreground: 240 9% 7%;
 
-    --border: 280 10% 28%; /* Dark Cool Purple/Gray Border */
-    --input: 280 10% 30%; /* Dark Cool Input */
-    --ring: 302 90% 75%; /* Brighter Pink for ring */
+    --destructive: 0 65% 52%;
+    --destructive-foreground: 0 0% 100%;
 
-    --chart-1: 302 70% 60%;
-    --chart-2: 270 60% 55%;
-    --chart-3: 320 70% 65%;
-    --chart-4: 280 50% 50%;
-    --chart-5: 300 60% 70%;
+    --border: 240 6% 18%;
+    --input: 240 6% 16%;
+    --ring: 0 36% 74%;
 
-    /* Sidebar Dark Theme */
-    --sidebar-background: 280 10% 15%; /* Dark cool charcoal/purple */
-    --sidebar-foreground: 300 20% 90%; /* Light cool off-white text */
-    --sidebar-primary: 302 90% 75%; /* Brighter Pink */
-    --sidebar-primary-foreground: 302 20% 15%; /* Very dark contrast */
-    --sidebar-accent: 270 40% 30%; /* Muted Dark Lavender for accents */
-    --sidebar-accent-foreground: 270 30% 85%; /* Light Lavender for accent text */
-    --sidebar-border: 280 10% 25%; /* Dark cool border */
-    --sidebar-ring: 302 90% 75%; /* Brighter Pink for ring */
+    --chart-1: 8 57% 85%;
+    --chart-2: 0 36% 74%;
+    --chart-3: 240 3% 64%;
+    --chart-4: 8 30% 60%;
+    --chart-5: 240 6% 35%;
+
+    --sidebar-background: 240 7% 11%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 8 57% 85%;
+    --sidebar-primary-foreground: 240 9% 7%;
+    --sidebar-accent: 240 6% 16%;
+    --sidebar-accent-foreground: 8 57% 85%;
+    --sidebar-border: 240 6% 18%;
+    --sidebar-ring: 0 36% 74%;
   }
 }
 

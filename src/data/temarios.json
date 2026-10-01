@@ -2,6 +2,17 @@
   "programas": [
     {
       "id": "tecnica-integral-belleza",
+      "tarjeta": {
+        "nombre": "Técnica Integral en Belleza",
+        "descripcion": "Programa completo de 5 meses que te convertirá en una profesional integral domando las técnicas esenciales de uñas, pestañas, cejas y maquillaje.",
+        "icono": "palette",
+        "areas": [
+          "Uñas",
+          "Pestañas",
+          "Cejas",
+          "Automaquillaje"
+        ]
+      },
       "nombre": "Nuestra Carrera Técnica en Belleza",
       "duracion": "5 meses",
       "areas": [
@@ -105,6 +116,23 @@
 
     {
       "id": "maestra-artesanal-en-belleza",
+      "tarjeta": {
+        "nombre": "Maestra Artesanal en Belleza",
+        "descripcion": "Carrera de 12 meses ultra completa con 12 módulos especializados. Domina desde uñas hasta barbería, colorimetría, química cosmética y más.",
+        "icono": "sparkles",
+        "areas": [
+          "Uñas",
+          "Pestañas",
+          "Maquillaje",
+          "Peinados",
+          "Cortes",
+          "Tratamientos",
+          "Colorimetría",
+          "Barbería",
+          "Cosmética",
+          "Cosmetología"
+        ]
+      },
       "nombre": "Carrera Maestra Artesanal en Belleza",
       "duracion": "12 meses",
       "areas": [
@@ -410,6 +438,18 @@
 
     {
       "id": "especialista-unas-salon",
+      "tarjeta": {
+        "nombre": "Especialista en Uñas de Salón",
+        "descripcion": "Especialización de 4 meses intensivos enfocada en técnicas profesionales de salón con fundamentos sólidos, nail art, polygel y acrílico.",
+        "icono": "scissors",
+        "areas": [
+          "Fundamentos",
+          "Nail Art",
+          "Polygel",
+          "Dual System",
+          "Acrílico Profesional"
+        ]
+      },
       "nombre": "Carrera Especialista en Uñas de Salón",
       "duracion": "4 meses",
       "modulos": [
@@ -537,6 +577,220 @@
             "Perfeccionamiento de estructuras.",
             "Corrección de imperfecciones.",
             "Acabado profesional de salón."
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "marketing-digital-ia-principiante",
+      "tarjeta": {
+        "nombre": "Marketing Digital e IA · Principiante",
+        "descripcion": "Programa de 2 meses para emprendedoras de belleza: crea contenido profesional con tu celular, apóyate en la inteligencia artificial y vende más por redes sociales y WhatsApp.",
+        "icono": "megaphone"
+      },
+      "nombre": "Marketing Digital e Inteligencia Artificial para Emprendedoras de Belleza – Nivel Principiante",
+      "duracion": "2 meses",
+      "areas": [
+        "Fotografía móvil",
+        "Edición de video",
+        "TikTok",
+        "Instagram",
+        "IA para contenido",
+        "Marca personal",
+        "WhatsApp Business",
+        "Ventas digitales"
+      ],
+      "modulos": [
+        {
+          "numero": 1,
+          "nombre": "Marca Personal y Estrategia",
+          "temario": [
+            "Definición del nombre, estilo visual y colores de la marca.",
+            "Identificación del cliente ideal.",
+            "Qué publicar y con qué frecuencia.",
+            "Creación de la biografía y perfil profesional en TikTok e Instagram."
+          ]
+        },
+        {
+          "numero": 2,
+          "nombre": "Fotografía de Belleza con el Celular",
+          "temario": [
+            "Uso de luz natural y ring light.",
+            "Ángulos para fotografiar uñas, pestañas, cejas y maquillaje.",
+            "Fotos de antes y después.",
+            "Fondos sencillos y composición.",
+            "Edición de fotos con Lightroom móvil y Snapseed."
+          ]
+        },
+        {
+          "numero": 3,
+          "nombre": "Video Vertical para TikTok y Reels",
+          "temario": [
+            "Grabación de procesos y resultados.",
+            "Ganchos para captar la atención en los primeros 3 segundos.",
+            "Tendencias, audios y transiciones.",
+            "Edición en CapCut: cortes, textos, subtítulos automáticos y plantillas."
+          ]
+        },
+        {
+          "numero": 4,
+          "nombre": "Inteligencia Artificial como Asistente",
+          "temario": [
+            "Uso de ChatGPT, Gemini, Claude y Meta AI desde el celular.",
+            "Creación de textos, guiones, hashtags e ideas de contenido con IA.",
+            "Calendario de contenido mensual con IA.",
+            "Respuestas a clientas con ayuda de la IA.",
+            "Funciones de IA en CapCut y Canva: quitar fondos, subtítulos y mejora de imagen.",
+            "Uso ético de la IA: nunca alterar el resultado real de un trabajo."
+          ]
+        },
+        {
+          "numero": 5,
+          "nombre": "Diseño con Canva",
+          "temario": [
+            "Flyers de promociones.",
+            "Lista de precios y catálogo visual.",
+            "Historias y portadas de reels.",
+            "Logo sencillo e identidad visual."
+          ]
+        },
+        {
+          "numero": 6,
+          "nombre": "Instagram y Facebook",
+          "temario": [
+            "Reels, historias y destacados.",
+            "Publicación y programación con Meta Business Suite.",
+            "Interpretación de estadísticas básicas."
+          ]
+        },
+        {
+          "numero": 7,
+          "nombre": "WhatsApp Business y Ventas",
+          "temario": [
+            "Creación del catálogo de servicios.",
+            "Respuestas rápidas, etiquetas y mensaje de bienvenida.",
+            "Cómo convertir un seguidor en una cita."
+          ]
+        },
+        {
+          "numero": 8,
+          "nombre": "Proyecto Final",
+          "temario": [
+            "Lanzamiento o renovación del perfil profesional.",
+            "Publicación de contenido durante 2 semanas.",
+            "Presentación y retroalimentación en clase."
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "marketing-digital-ia-avanzado",
+      "tarjeta": {
+        "nombre": "Marketing Digital e IA · Avanzado",
+        "descripcion": "Programa de 3 meses para llevar tu negocio de belleza al siguiente nivel con prompts profesionales, imagen y video con IA, publicidad pagada, automatización y analítica.",
+        "icono": "bot"
+      },
+      "nombre": "Marketing Digital e Inteligencia Artificial para Emprendedoras de Belleza – Nivel Avanzado",
+      "duracion": "3 meses",
+      "areas": [
+        "Prompts avanzados",
+        "Imagen con IA",
+        "Video con IA",
+        "Estrategia de contenido",
+        "Publicidad pagada",
+        "Automatización",
+        "Analítica",
+        "Marca personal"
+      ],
+      "modulos": [
+        {
+          "numero": 1,
+          "nombre": "Prompts Profesionales",
+          "temario": [
+            "Instrucciones con rol, tono, cliente ideal y formato.",
+            "Manual de marca para que la IA escriba con la voz de la emprendedora.",
+            "Biblioteca propia de prompts reutilizables."
+          ]
+        },
+        {
+          "numero": 2,
+          "nombre": "Imagen con IA para Campañas",
+          "temario": [
+            "Fondos, escenarios y piezas de temporada: Día de la Madre, Navidad y bodas.",
+            "Retoque, cambio de fondo y mockups.",
+            "Límite ético: no alterar el resultado del servicio para evitar publicidad engañosa."
+          ]
+        },
+        {
+          "numero": 3,
+          "nombre": "Video Avanzado y Video con IA",
+          "temario": [
+            "Storytelling: gancho, proceso, resultado y llamado a la acción.",
+            "CapCut avanzado: keyframes, máscaras, velocidad, color y cortes al ritmo.",
+            "Guiones, voz en off y subtítulos con IA.",
+            "Recorte de videos largos en clips cortos.",
+            "Avatares con IA: cuándo usarlos y cuándo mostrar la cara real."
+          ]
+        },
+        {
+          "numero": 4,
+          "nombre": "Sistema de Producción de Contenido",
+          "temario": [
+            "Planificación mensual de contenido con IA.",
+            "Grabación en lote: un día de grabación para dos semanas de publicaciones.",
+            "Reutilización de un video en TikTok, Reels, historias y estados.",
+            "Pilares de contenido: educar, mostrar trabajo, generar confianza y vender."
+          ]
+        },
+        {
+          "numero": 5,
+          "nombre": "Algoritmo y Crecimiento",
+          "temario": [
+            "Retención, reproducciones completas, guardados y compartidos.",
+            "SEO dentro de TikTok: palabras clave en texto y voz.",
+            "Transmisiones en vivo.",
+            "Colaboraciones con emprendedoras y microinfluencers locales."
+          ]
+        },
+        {
+          "numero": 6,
+          "nombre": "Publicidad Pagada desde el Celular",
+          "temario": [
+            "Promoción de publicaciones en TikTok e Instagram.",
+            "Campañas en Meta con segmentación por ubicación, edad e intereses.",
+            "Manejo de presupuestos pequeños y elección de la publicación a promocionar.",
+            "Cómo medir si la inversión funcionó."
+          ]
+        },
+        {
+          "numero": 7,
+          "nombre": "Automatización y Embudo de Ventas",
+          "temario": [
+            "El camino de la clienta: del video a la cita agendada.",
+            "WhatsApp Business avanzado: catálogo, mensajes automáticos y etiquetas por etapa.",
+            "Respuestas automáticas en Instagram por palabra clave.",
+            "Enlace en la biografía y agenda de citas en línea.",
+            "Estrategias de reseñas, referidos y clientas recurrentes."
+          ]
+        },
+        {
+          "numero": 8,
+          "nombre": "Analítica y Toma de Decisiones",
+          "temario": [
+            "Alcance, retención, clics y mensajes recibidos.",
+            "Pruebas con dos ganchos distintos para el mismo video.",
+            "Uso de IA para analizar estadísticas y proponer mejoras."
+          ]
+        },
+        {
+          "numero": 9,
+          "nombre": "Proyecto Final: Lanzamiento Real",
+          "temario": [
+            "Campaña de 30 días para el negocio propio o un servicio nuevo.",
+            "Definición de una meta medible: seguidores, mensajes o citas.",
+            "Presentación de resultados con cifras reales."
           ]
         }
       ]

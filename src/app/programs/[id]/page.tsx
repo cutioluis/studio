@@ -6,30 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, BookOpen } from "lucide-react";
+import { ArrowLeft, BookOpen, Check } from "lucide-react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import temarios from "@/data/temarios.json";
 
-const colorMap = {
-  "tecnica-integral-belleza": "from-pink-500 to-purple-500",
-  "maestra-artesanal-en-belleza": "from-rose-500 to-pink-500",
-  "especialista-unas-salon": "from-fuchsia-500 to-purple-500"
-};
-
-interface Modulo {
-  numero: number;
-  nombre: string;
-  temario: string[];
-}
-
-interface Programa {
-  id: string;
-  nombre: string;
-  duracion: string;
-  areas?: string[];
-  modulos: Modulo[];
-}
+const ROSE_GRADIENT = "bg-gradient-to-r from-[#EEC7C1] to-[#D4A4A4]";
 
 export default function ProgramPage() {
   const params = useParams();
@@ -39,117 +21,99 @@ export default function ProgramPage() {
   const [selectedModuloIndex, setSelectedModuloIndex] = useState(0);
 
   const programa = useMemo(() => {
-    const found = temarios.programas.find(p => p.id === programId);
-    return found;
+    return temarios.programas.find(p => p.id === programId);
   }, [programId]);
 
   if (!programa) {
     return (
-      <div className="min-h-screen bg-secondary flex items-center justify-center">
-        <Card className="text-center p-8">
-          <CardTitle className="text-2xl mb-4">Programa no encontrado</CardTitle>
-          <Button onClick={() => router.back()}>
-            Volver
-          </Button>
+      <div className="min-h-screen bg-[#0F0F12] flex items-center justify-center">
+        <Card className="border border-white/[0.08] bg-[#1A1A1E] p-8 text-center">
+          <CardTitle className="mb-4 text-2xl text-white">Programa no encontrado</CardTitle>
+          <Button onClick={() => router.back()}>Volver</Button>
         </Card>
       </div>
     );
   }
 
   const selectedModulo = programa.modulos[selectedModuloIndex];
-  const colorGradient = colorMap[programId as keyof typeof colorMap] || "from-accent to-primary";
 
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-secondary">
+      <main className="min-h-screen bg-[#0F0F12]">
         {/* Header */}
-        <div className={cn("bg-gradient-to-r", colorGradient, "text-white py-8 md:py-12")}>
-        <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-white hover:bg-white/20 mb-4"
-            onClick={() => router.back()}
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Volver
-          </Button>
-          <div className="space-y-2">
-            <h1 className="text-4xl md:text-5xl font-bold">{programa.nombre}</h1>
-            <p className="text-white/80 text-lg">Duración: {programa.duracion}</p>
+        <div className="border-b border-white/[0.08] bg-[#1A1A1E]">
+          <div className="container mx-auto max-w-screen-xl px-4 py-10 sm:px-6 md:py-14 lg:px-8">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="mb-6 text-[#A0A0A5] hover:bg-white/[0.05] hover:text-[#EEC7C1]"
+              onClick={() => router.back()}
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Volver
+            </Button>
+            <div className="space-y-3">
+              <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
+                {programa.nombre}
+              </h1>
+              <p className="text-lg text-[#A0A0A5]">Duración: {programa.duracion}</p>
+              <div className={cn("h-px w-24", ROSE_GRADIENT)} />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Content */}
-      <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Módulos Sidebar */}
-          <div className="lg:col-span-1">
-            <Card className="border-0 shadow-lg">
-              <CardHeader className={cn("bg-gradient-to-r", colorGradient, "text-white pb-4")}>
-                <CardTitle className="flex items-center gap-2">
-                  <BookOpen className="h-5 w-5" />
-                  Módulos ({programa.modulos.length})
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-0">
-                <ScrollArea className="h-[600px]">
-                  <div className="space-y-2 p-4">
-                    {programa.modulos.map((modulo, idx) => (
-                      <button
-                        key={modulo.numero}
-                        onClick={() => setSelectedModuloIndex(idx)}
-                        className={cn(
-                          "w-full text-left px-4 py-3 rounded-lg transition-all duration-200",
-                          selectedModuloIndex === idx
-                            ? cn("bg-gradient-to-r", colorGradient, "text-white shadow-md")
-                            : "hover:bg-accent/10 text-foreground border border-transparent hover:border-accent/20"
-                        )}
-                      >
-                        <p className={cn(
-                          "font-semibold text-sm",
-                          selectedModuloIndex === idx ? "text-white" : ""
-                        )}>
+        {/* Content */}
+        <div className="container mx-auto max-w-screen-xl px-4 py-10 sm:px-6 md:py-14 lg:px-8">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
+            {/* Módulos */}
+            <div className="lg:col-span-1">
+              <Card className="overflow-hidden border border-white/[0.08] bg-[#1A1A1E]">
+                <CardHeader className="border-b border-white/[0.08] pb-4">
+                  <CardTitle className="flex items-center gap-2 text-base text-white">
+                    <BookOpen className="h-5 w-5 text-[#EEC7C1]" />
+                    Módulos ({programa.modulos.length})
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <ScrollArea className="h-[600px]">
+                    <div className="space-y-1.5 p-3">
+                      {programa.modulos.map((modulo, idx) => (
+                        <button
+                          key={modulo.numero}
+                          onClick={() => setSelectedModuloIndex(idx)}
+                          className={cn(
+                            "w-full rounded-lg border px-4 py-3 text-left text-sm font-medium transition-all duration-200",
+                            selectedModuloIndex === idx
+                              ? "border-[#D4A4A4]/50 bg-white/[0.06] text-[#EEC7C1]"
+                              : "border-transparent text-[#A0A0A5] hover:border-white/[0.08] hover:bg-white/[0.03] hover:text-white"
+                          )}
+                        >
                           {modulo.nombre}
-                        </p>
-                      </button>
-                    ))}
-                  </div>
-                </ScrollArea>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Detalles Módulo */}
-          <div className="lg:col-span-3 space-y-6">
-            {/* Imagen del Programa */}
-            <Card className="border-0 shadow-lg overflow-hidden">
-              <div className={cn("bg-gradient-to-br h-64 w-full flex items-center justify-center", colorGradient)}>
-                <div className="text-center text-white">
-                  <div className="text-6xl mb-4">🎓</div>
-                  <p className="text-lg font-semibold">{programa.nombre}</p>
-                </div>
-              </div>
-            </Card>
+                        </button>
+                      ))}
+                    </div>
+                  </ScrollArea>
+                </CardContent>
+              </Card>
+            </div>
 
             {/* Temario */}
-            <Card className="border-0 shadow-lg">
-              <CardHeader className={cn("bg-gradient-to-r", colorGradient, "text-white pb-6")}>
-                <div className="space-y-2">
-                  <div className="text-sm font-semibold opacity-90">
-                    Módulo {selectedModulo.numero}
+            <div className="lg:col-span-2">
+              <Card className="overflow-hidden border border-white/[0.08] bg-[#1A1A1E]">
+                <CardHeader className="border-b border-white/[0.08] pb-6">
+                  <div className="space-y-2">
+                    <div className="text-xs font-semibold uppercase tracking-[0.12em] text-[#EEC7C1]">
+                      Módulo {selectedModulo.numero}
+                    </div>
+                    <CardTitle className="text-2xl text-white md:text-3xl">
+                      {selectedModulo.nombre}
+                    </CardTitle>
                   </div>
-                  <CardTitle className="text-3xl">{selectedModulo.nombre}</CardTitle>
-                </div>
-              </CardHeader>
+                </CardHeader>
 
-              <CardContent className="pt-8">
-                <div>
-                  <h3 className={cn("text-xl font-bold mb-6 bg-gradient-to-r", colorGradient, "bg-clip-text text-transparent")}>
-                    Temario Completo
-                  </h3>
+                <CardContent className="pt-8">
+                  <h3 className="mb-6 text-lg font-bold text-white">Temario Completo</h3>
                   <ScrollArea className="h-[400px] pr-4">
                     <div className="space-y-3">
                       {selectedModulo.temario.map((item, idx) => {
@@ -162,107 +126,110 @@ export default function ProgramPage() {
                             key={idx}
                             className={cn(
                               isMainHeading && "mt-6 mb-2",
-                              isMainHeading ? "font-bold text-foreground text-base" : "text-foreground/70 text-sm",
+                              isMainHeading
+                                ? "text-base font-bold text-white"
+                                : "text-sm text-[#A0A0A5]",
                               isSubItem && "ml-4"
                             )}
                           >
-                            {isSubItem && <span className="text-accent mr-2">•</span>}
+                            {isSubItem && <span className="mr-2 text-[#D4A4A4]">•</span>}
                             {cleanItem}
                           </div>
                         );
                       })}
                     </div>
                   </ScrollArea>
-                </div>
 
-                {/* Áreas de Estudio */}
-                {programa.areas && programa.areas.length > 0 && (
-                  <div className="border-t pt-8 mt-8">
-                    <h3 className={cn("text-lg font-bold mb-4 bg-gradient-to-r", colorGradient, "bg-clip-text text-transparent")}>
-                      Áreas Cubiertas
-                    </h3>
-                    <div className="flex flex-wrap gap-3">
-                      {programa.areas.map((area, idx) => (
-                        <span
-                          key={idx}
-                          className={cn(
-                            "px-4 py-2 rounded-full text-sm font-medium text-white bg-gradient-to-r",
-                            colorGradient
-                          )}
-                        >
-                          {area}
-                        </span>
-                      ))}
+                  {programa.areas && programa.areas.length > 0 && (
+                    <div className="mt-8 border-t border-white/[0.08] pt-8">
+                      <h3 className="mb-4 text-base font-bold text-white">Áreas Cubiertas</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {programa.areas.map((area) => (
+                          <span
+                            key={area}
+                            className="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-xs font-medium text-[#A0A0A5]"
+                          >
+                            {area}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
 
-            {/* Card de Suscripción */}
-            <Card className={cn("border-0 shadow-lg overflow-hidden bg-gradient-to-br", colorGradient, "text-white")}>
-              <CardContent className="pt-8 pb-8">
-                <div className="space-y-6">
-                  {/* Título */}
+            {/* Inscripción */}
+            <div className="lg:col-span-1">
+              <Card className="overflow-hidden border border-[#D4A4A4]/30 bg-[#1A1A1E]">
+                <div className={cn("h-px w-full", ROSE_GRADIENT)} />
+                <CardContent className="space-y-6 p-6">
                   <div>
-                    <h3 className="text-2xl font-bold mb-2">{programa.nombre}</h3>
-                    <p className="text-white/80">Acceso completo al programa</p>
+                    <h3 className="text-lg font-semibold leading-snug text-white">
+                      {programa.nombre}
+                    </h3>
+                    <p className="mt-1 text-sm text-[#A0A0A5]">Acceso completo al programa</p>
                   </div>
 
-                  {/* Información */}
-                  <div className="space-y-3 border-t border-white/20 pt-4">
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/90">Cupos limitados:</span>
-                      <span className="font-semibold">Disponibles</span>
+                  <div className="space-y-3 border-t border-white/[0.08] pt-5 text-sm">
+                    <div>
+                      <p className="text-[#A0A0A5]">Cupos limitados</p>
+                      <p className="font-semibold text-white">Disponibles</p>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/90">Duración:</span>
-                      <span className="font-semibold">{programa.duracion}</span>
-                    </div>
-                  </div>
-
-                  {/* Precio */}
-                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                    <div className="space-y-2">
-                      <p className="text-sm text-white/80">Precio especial</p>
-                      <div className="text-4xl font-bold">$90</div>
-                      <p className="text-sm text-white/70">o 3 cuotas sin interés de $30</p>
+                    <div>
+                      <p className="text-[#A0A0A5]">Duración</p>
+                      <p className="font-semibold text-white">{programa.duracion}</p>
                     </div>
                   </div>
 
-                  {/* Código de descuento */}
-                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
-                    <p className="text-xs text-white/80 mb-2">Código de descuento (opcional)</p>
-                    <div className="flex gap-2">
-                      <input
-                        type="text"
-                        placeholder="CODIGO"
-                        className="flex-1 px-3 py-2 rounded text-sm bg-white/20 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/40"
-                      />
-                    </div>
+                  <div className="rounded-lg border border-white/[0.08] bg-white/[0.03] p-4">
+                    <p className="text-xs uppercase tracking-[0.12em] text-[#A0A0A5]">
+                      Precio especial
+                    </p>
+                    <div className="mt-1 text-3xl font-bold text-white">$90</div>
+                    <p className="mt-1 text-xs text-[#A0A0A5]">o 3 cuotas de $30</p>
                   </div>
 
-                  {/* Botón de inscripción */}
-                  <Button
-                    size="lg"
-                    className="w-full bg-white text-foreground font-semibold hover:bg-white/90"
-                    onClick={() => window.open('https://walink.co/bd3d37', '_blank')}
+                  <div>
+                    <label
+                      htmlFor="codigo-descuento"
+                      className="mb-2 block text-xs text-[#A0A0A5]"
+                    >
+                      Código de descuento
+                    </label>
+                    <input
+                      id="codigo-descuento"
+                      type="text"
+                      placeholder="CODIGO"
+                      className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-sm text-white placeholder-[#A0A0A5]/60 focus:border-[#D4A4A4]/60 focus:outline-none"
+                    />
+                  </div>
+
+                  <button
+                    onClick={() => window.open("https://walink.co/bd3d37", "_blank")}
+                    className={cn(
+                      "w-full rounded-lg px-4 py-3 text-sm font-semibold text-[#0F0F12] transition-opacity hover:opacity-90",
+                      ROSE_GRADIENT
+                    )}
                   >
                     Inscribirse Ahora
-                  </Button>
+                  </button>
 
-                  {/* Beneficios */}
-                  <div className="text-center text-xs text-white/70 space-y-1">
-                    <p>✓ Acceso de por vida</p>
-                    <p>✓ Certificado incluido</p>
-                    <p>✓ Garantía de satisfacción</p>
+                  <div className="space-y-2 border-t border-white/[0.08] pt-5 text-xs text-[#A0A0A5]">
+                    {["Acceso de por vida", "Certificado incluido", "Garantía de satisfacción"].map(
+                      (beneficio) => (
+                        <div key={beneficio} className="flex items-center gap-2">
+                          <Check className="h-3.5 w-3.5 flex-shrink-0 text-[#EEC7C1]" />
+                          {beneficio}
+                        </div>
+                      )
+                    )}
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
-      </div>
       </main>
       <Footer />
     </>
