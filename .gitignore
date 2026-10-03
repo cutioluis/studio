@@ -39,7 +39,15 @@ next-env.d.ts
 
 .genkit/*
 .env*
+!.env.example
+
+# cloudflare (opennextjs)
+.open-next/
+.dev.vars
+.wrangler/
 
 # firebase
 firebase-debug.log
 firestore-debug.log
+# local AI tooling cache
+.atl/

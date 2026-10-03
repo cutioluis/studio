@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, Home, BookOpen, ShoppingCart, Sparkles, Info, Tag, CalendarDays, MapPinIcon } from "lucide-react";
+import { Menu, Home, BookOpen, Sparkles, CalendarDays, MapPinIcon, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Logo } from "@/components/logo";
@@ -12,8 +12,7 @@ import { usePathname } from 'next/navigation';
 // Define icons for main page scroll links for mobile view
 const mainPageScrollLinks = [
   { href: "#features", label: "Cursos-Carreras", type: "scroll" as const, icon: BookOpen },
-  { href: "#instructor", label: "Instructora", type: "scroll" as const, icon: Sparkles }, // Using Sparkles as a placeholder for instructor
-  { href: "#pricing", label: "Precios", type: "scroll" as const, icon: Tag },
+  { href: "#instructor", label: "Tu equipo", type: "scroll" as const, icon: Sparkles },
   { href: "#schedule", label: "Horarios", type: "scroll" as const, icon: CalendarDays },
   { href: "#location", label: "Ubicación", type: "scroll" as const, icon: MapPinIcon },
 ];
@@ -36,7 +35,7 @@ export function Navbar() {
     }
   };
 
-  let currentNavLinks: Array<{ href: string; label: string; type: 'scroll' | 'link'; icon?: any }> = [];
+  let currentNavLinks: Array<{ href: string; label: string; type: 'scroll' | 'link'; icon?: LucideIcon }> = [];
 
   if (isOnHomePage) {
     currentNavLinks = [...mainPageScrollLinks, blogLink];
@@ -95,37 +94,21 @@ export function Navbar() {
     );
   };
 
-  const handleCtaClick = () => {
-    if (isOnHomePage) {
-      handleSmoothScroll('#cta');
-    } else {
-      window.open('https://walink.co/bd3d37', '_blank', 'noopener,noreferrer');
-    }
-    if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
-    }
-  };
-
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex max-w-screen-2xl items-center justify-between px-2 py-2 sm:px-6 lg:px-8">
+      <div className="container mx-auto flex max-w-screen-2xl items-center justify-between gap-3 px-4 py-2 sm:px-6 lg:px-8">
         <Logo />
         
         <nav className="hidden md:flex items-center space-x-6">
           {currentNavLinks.map(link => renderLink(link))}
-          <Button size="sm" variant="default" onClick={handleCtaClick}>
-            Inscríbete
+          <Button asChild size="sm" variant="default">
+            <Link href="/inscripcion">Inscríbete</Link>
           </Button>
         </nav>
 
-        <div className="flex items-center gap-2 md:hidden">
-          <Button 
-            size="sm" 
-            variant="default" 
-            className="text-xs px-3"
-            onClick={handleCtaClick}
-          >
-            Inscríbete
+        <div className="flex shrink-0 items-center gap-1 md:hidden">
+          <Button asChild size="sm" variant="default" className="text-xs px-3">
+            <Link href="/inscripcion">Inscríbete</Link>
           </Button>
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
@@ -142,8 +125,10 @@ export function Navbar() {
                 <nav className="flex flex-col space-y-1"> {/* Reduced space-y for denser mobile nav links */}
                   {currentNavLinks.map(link => renderLink(link, true))}
                 </nav>
-                <Button variant="default" className="w-full mt-auto" onClick={handleCtaClick}> {/* Added mt-auto to push to bottom */}
-                  Inscríbete Ahora
+                <Button asChild variant="default" className="w-full mt-auto">
+                  <Link href="/inscripcion" onClick={() => setIsMobileMenuOpen(false)}>
+                    Inscríbete Ahora
+                  </Link>
                 </Button>
               </div>
             </SheetContent>

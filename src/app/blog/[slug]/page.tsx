@@ -2,90 +2,85 @@
 import { getPostData, getAllPostSlugs, type PostData } from '@/lib/posts';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import type { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata } from 'next';
 import { CalendarDays, UserCircle, ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import WhatsAppIcon from '@/components/icons/whatsapp-icon'; // Import consolidated icon
+import WhatsAppIcon from '@/components/icons/whatsapp-icon';
+import { siteConfig } from '@/config/site';
+import { JsonLd } from '@/components/utils/json-ld';
+import { blogPostingJsonLd, breadcrumbJsonLd } from '@/lib/seo';
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   try {
-    const post = await getPostData(params.slug);
-    const parentOpenGraph = await parent;
-    const previousImages = parentOpenGraph.openGraph?.images || [];
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:9002';
+    const post = await getPostData(slug);
+    const description = post.summary || `Lee el artículo "${post.title}" en el blog de ${siteConfig.name}.`;
 
     return {
-      title: `${post.title} | Blog Ceci Glam`,
-      description: post.summary || `Lee el artículo "${post.title}" en el blog de Ceci Glam.`,
+      title: post.title,
+      description,
+      alternates: { canonical: `/blog/${post.slug}` },
       openGraph: {
-        title: `${post.title} | Ceci Glam`,
-        description: post.summary || `Un artículo del blog de Ceci Glam sobre ${post.title}.`,
-        url: `${siteUrl}/blog/${post.slug}`,
-        siteName: 'Ceci Glam',
+        title: `${post.title} | ${siteConfig.name}`,
+        description,
+        url: `/blog/${post.slug}`,
+        siteName: siteConfig.name,
+        locale: siteConfig.locale,
         type: 'article',
-        publishedTime: new Date(post.date).toISOString(),
-        authors: post.author ? [post.author] : ['Ceci Glam'],
-        images: [
-          {
-            url: `${siteUrl}/og-image-beauty-course-quito.jpg`, 
-            width: 1200,
-            height: 630,
-            alt: post.title,
-          },
-          ...previousImages,
-        ],
+        publishedTime: post.date,
+        authors: [post.author],
+        images: [{ url: siteConfig.ogImage, alt: post.title }],
       },
       twitter: {
         card: 'summary_large_image',
-        title: `${post.title} | Ceci Glam`,
-        description: post.summary,
+        title: `${post.title} | ${siteConfig.name}`,
+        description,
       },
     };
-  } catch (error) {
-    return {
-      title: "Artículo no encontrado | Blog Ceci Glam",
-      description: "El artículo que buscas no pudo ser encontrado.",
-    }
+  } catch {
+    return {};
   }
 }
 
-export async function generateStaticParams() {
-  const paths = getAllPostSlugs();
-  return paths.map(path => ({ slug: path.slug }));
+// Only posts that exist at build time are served; any other slug returns a real 404.
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return getAllPostSlugs();
+}
+
+async function getPostOrNotFound(slug: string): Promise<PostData> {
+  try {
+    return await getPostData(slug);
+  } catch {
+    notFound();
+  }
 }
 
 export default async function PostPage({ params }: Props) {
-  let post: PostData;
-  try {
-    post = await getPostData(params.slug);
-  } catch (error) {
-    return (
-      <div className="flex flex-col min-h-screen bg-background text-foreground">
-        <Navbar />
-        <main className="flex-grow container mx-auto max-w-screen-md px-4 py-12 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl font-bold mt-10">Artículo no encontrado</h1>
-          <p className="mt-4 text-lg">El post que estás buscando no existe o ha sido movido.</p>
-          <Button asChild className="mt-8">
-            <Link href="/blog">Volver al Blog</Link>
-          </Button>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  const { slug } = await params;
+  const post = await getPostOrNotFound(slug);
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
+      <JsonLd
+        data={[
+          blogPostingJsonLd(post),
+          breadcrumbJsonLd([
+            { name: 'Inicio', path: '/' },
+            { name: 'Blog', path: '/blog' },
+            { name: post.title, path: `/blog/${post.slug}` },
+          ]),
+        ]}
+      />
       <Navbar />
       <main className="flex-grow container mx-auto max-w-screen-md px-4 py-12 sm:px-6 lg:px-8">
         <article className="bg-card p-6 sm:p-8 md:p-10 rounded-xl shadow-xl my-8">
@@ -104,12 +99,10 @@ export default async function PostPage({ params }: Props) {
                 <CalendarDays className="mr-2 h-4 w-4 text-primary" />
                 <time dateTime={post.date}>{format(new Date(post.date), 'dd MMMM, yyyy', { locale: es })}</time>
               </div>
-              {post.author && (
-                <div className="flex items-center">
-                  <UserCircle className="mr-2 h-4 w-4 text-primary" />
-                  <span>Por: {post.author}</span>
-                </div>
-              )}
+              <div className="flex items-center">
+                <UserCircle className="mr-2 h-4 w-4 text-primary" />
+                <span>Por: {post.author}</span>
+              </div>
             </div>
           </header>
           
@@ -127,10 +120,10 @@ export default async function PostPage({ params }: Props) {
               Transforma tu pasión por las uñas, pestañas y el maquillaje en una profesión exitosa. ¡Contáctanos para más información e inscríbete hoy mismo!
             </p>
             <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all transform hover:scale-105">
-              <Link href="https://walink.co/bd3d37" target="_blank" rel="noopener noreferrer">
+              <a href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer">
                 <WhatsAppIcon className="h-5 w-5" />
                 Inscríbete por WhatsApp
-              </Link>
+              </a>
             </Button>
           </div>
         </article>

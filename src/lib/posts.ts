@@ -1,99 +1,69 @@
-
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
+import { siteConfig } from '@/config/site';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
+const MARKDOWN_EXTENSION = /\.md$/;
 
 export interface PostData {
   slug: string;
   title: string;
   date: string;
-  summary?: string;
-  author?: string;
+  summary: string;
+  author: string;
   contentHtml?: string;
-  [key: string]: any; // For other frontmatter fields
 }
 
-export function getSortedPostsData(): PostData[] {
-  let fileNames: string[];
+function getPostFileNames(): string[] {
   try {
-    fileNames = fs.readdirSync(postsDirectory);
+    return fs.readdirSync(postsDirectory).filter((fileName) => MARKDOWN_EXTENSION.test(fileName));
   } catch (error) {
-    console.warn('Could not read posts directory. Returning empty array. Error:', error);
-    return []; // Return empty array if directory doesn't exist or is not readable
+    console.warn('Could not read posts directory:', error);
+    return [];
   }
-  
-  const allPostsData = fileNames
-    .filter(fileName => fileName.endsWith('.md')) // Ensure only markdown files are processed
-    .map((fileName) => {
-      const slug = fileName.replace(/\.md$/, '');
-      const fullPath = path.join(postsDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const matterResult = matter(fileContents);
-
-      return {
-        slug,
-        title: matterResult.data.title || 'Post Sin Título',
-        date: matterResult.data.date || new Date().toISOString(),
-        summary: matterResult.data.summary || '',
-        author: matterResult.data.author || 'Ceci Glam',
-        ...matterResult.data,
-      } as PostData;
-    });
-
-  return allPostsData.sort((a, b) => {
-    if (new Date(a.date) < new Date(b.date)) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
 }
 
-export function getAllPostSlugs() {
-   let fileNames: string[];
-  try {
-    fileNames = fs.readdirSync(postsDirectory);
-  } catch (error) {
-    return []; 
-  }
-  return fileNames
-    .filter(fileName => fileName.endsWith('.md'))
-    .map((fileName) => {
-      return {
-        slug: fileName.replace(/\.md$/, ''),
-      };
-    });
+function readPost(slug: string) {
+  const fileContents = fs.readFileSync(path.join(postsDirectory, `${slug}.md`), 'utf8');
+  return matter(fileContents);
 }
 
-export async function getPostData(slug: string): Promise<PostData> {
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
-  let fileContents;
-  try {
-    fileContents = fs.readFileSync(fullPath, 'utf8');
-  } catch (error) {
-    // You might want to throw a more specific error or handle it differently
-    console.error(`Error reading post ${slug}:`, error);
-    throw new Error(`Post with slug "${slug}" not found.`);
-  }
-
-  const matterResult = matter(fileContents);
-
-  const processedContent = await remark()
-    .use(html, { sanitize: false }) // Consider security implications of sanitize: false
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+// gray-matter parses YAML dates into Date objects; normalize to an ISO string.
+function toPostData(slug: string, data: Record<string, unknown>): PostData {
+  const date = data.date instanceof Date ? data.date.toISOString() : String(data.date ?? new Date().toISOString());
 
   return {
     slug,
-    title: matterResult.data.title || 'Post Sin Título',
-    date: matterResult.data.date || new Date().toISOString(),
-    summary: matterResult.data.summary || '',
-    author: matterResult.data.author || 'Ceci Glam',
-    contentHtml,
-    ...matterResult.data,
+    title: typeof data.title === 'string' ? data.title : 'Post Sin Título',
+    date,
+    summary: typeof data.summary === 'string' ? data.summary : '',
+    author: typeof data.author === 'string' ? data.author : siteConfig.name,
   };
+}
+
+export function getAllPostSlugs(): { slug: string }[] {
+  return getPostFileNames().map((fileName) => ({ slug: fileName.replace(MARKDOWN_EXTENSION, '') }));
+}
+
+export function getSortedPostsData(): PostData[] {
+  return getAllPostSlugs()
+    .map(({ slug }) => toPostData(slug, readPost(slug).data))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+export async function getPostData(slug: string): Promise<PostData> {
+  let post: matter.GrayMatterFile<string>;
+  try {
+    post = readPost(slug);
+  } catch {
+    throw new Error(`Post with slug "${slug}" not found.`);
+  }
+
+  // Sanitized so raw HTML or scripts inside a post can never reach the page.
+  const processedContent = await remark().use(html, { sanitize: true }).process(post.content);
+
+  return { ...toPostData(slug, post.data), contentHtml: processedContent.toString() };
 }

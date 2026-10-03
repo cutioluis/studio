@@ -4,34 +4,34 @@ import { Footer } from "@/components/layout/footer";
 import { CoverSection } from "@/components/landing-spark/cover-section";
 import { InteractiveGallery } from "@/components/landing-spark/interactive-gallery";
 import { InstructorSection } from "@/components/landing-spark/instructor-section";
-import { PricingSection } from "@/components/landing-spark/pricing-section";
 import { ScheduleSection } from "@/components/landing-spark/schedule-section";
 import { LocationSection } from "@/components/landing-spark/location-section";
-import { BlogTeaserSection } from "@/components/landing-spark/blog-teaser-section"; 
+import { BlogTeaserSection } from "@/components/landing-spark/blog-teaser-section";
 import { CallToActionSection } from "@/components/landing-spark/call-to-action-section";
-import { Toaster } from "@/components/ui/toaster";
 import { AnnouncementBanner } from "@/components/layout/announcement-banner";
-import { Analytics } from "@vercel/analytics/next"
+import { getCareers } from "@/features/catalog/infrastructure/catalog-repository";
 
 
-export default function HomePage() {
+// Hourly ISR: careers and schedules come from the database.
+export const revalidate = 3600;
+
+export default async function HomePage() {
+  const careers = await getCareers();
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Navbar />
       <AnnouncementBanner />
       <main className="flex-grow">
         <CoverSection />
-        <InteractiveGallery />
+        <InteractiveGallery programas={careers} />
         <InstructorSection />
-        <PricingSection /> 
-        <ScheduleSection />
+        <ScheduleSection programas={careers} />
         <LocationSection />
-        <BlogTeaserSection /> {/* Added BlogTeaserSection */}
+        <BlogTeaserSection />
         <CallToActionSection />
       </main>
       <Footer />
-      <Toaster />
-      <Analytics />
     </div>
   );
 }

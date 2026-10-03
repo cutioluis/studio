@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
-import WhatsAppIcon from "@/components/icons/whatsapp-icon"; // Import consolidated icon
+import WhatsAppIcon from "@/components/icons/whatsapp-icon";
+import { siteConfig } from "@/config/site";
 
 export function CallToActionSection() {
   return (
@@ -16,9 +17,9 @@ export function CallToActionSection() {
           <Button 
             asChild
             size="lg" 
-            className="text-lg px-10 py-4 bg-background text-foreground hover:bg-secondary shadow-lg transform transition-transform hover:scale-105"
+            className="h-auto w-full whitespace-normal py-4 text-base sm:w-auto sm:px-10 sm:text-lg bg-background text-foreground hover:bg-secondary shadow-lg transform transition-transform hover:scale-105"
           >
-            <a href="https://walink.co/bd3d37" target="_blank" rel="noopener noreferrer">
+            <a href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer">
               <WhatsAppIcon className="h-5 w-5" />
               Inscríbete por WhatsApp
             </a>

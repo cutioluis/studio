@@ -19,6 +19,7 @@ body {
 
     --primary: 8 57% 85%; /* #EEC7C1 - Light Rose Gold */
     --primary-foreground: 240 9% 7%; /* #0F0F12 - Deep black on rose gold */
+    --primary-deep: 0 36% 74%; /* #D4A4A4 - Medium Rose Gold for gradients and hovers */
 
     --secondary: 240 7% 14%; /* Slightly lifted charcoal for chips/secondary surfaces */
     --secondary-foreground: 0 0% 100%; /* #FFFFFF */
@@ -107,6 +108,11 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Toggled by CalendlyWidget on pages where the floating badge would cover the content. */
+body[data-hide-calendly-badge] .calendly-badge-widget {
+  display: none;
 }
 
 /* Basic styles for Markdown content if Tailwind Typography is not used */

@@ -2,33 +2,39 @@
 import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import './globals.css';
-import { Toaster } from '@/components/ui/toaster';
-import CalendlyWidget from '@/components/utils/calendly-widget'; // Import the new component
+import CalendlyWidget from '@/components/utils/calendly-widget';
+import { siteConfig } from '@/config/site';
+import { JsonLd } from '@/components/utils/json-ld';
+import { organizationJsonLd } from '@/lib/seo';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:9002'; // Fallback for local dev
+// Regenerate static pages daily so date-based content (banner month, footer year) stays current.
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: 'Curso de Uñas, Pestañas y Automaquillaje en Quito | Ceci Glam',
-  description: 'Aprende técnicas profesionales de uñas, pestañas y automaquillaje en Quito, Ecuador. Curso certificado por Ceci Glam. ¡Inscríbete y emprende!',
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `Academia de Belleza en Quito | ${siteConfig.name}`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
   keywords: [
+    'academia de belleza Quito',
+    'cursos de belleza Quito',
+    'carrera de belleza Ecuador',
     'curso de uñas Quito',
     'curso de pestañas Quito',
-    'curso de lashista Quito',
-    'curso de automaquillaje Quito',
-    'academia de belleza Quito',
+    'curso de maquillaje Quito',
+    'curso de colorimetría Quito',
+    'curso de barbería Quito',
+    'escuela de cosmetología Quito',
     'uñas acrílicas Quito',
-    'extensiones de pestañas Ecuador',
-    'maquillaje profesional Quito',
-    'Ceci Glam Ecuador',
-    'cursos de belleza en Quito',
-    'certificación belleza Quito',
-    'aprender uñas Quito',
-    'aprender pestañas Quito',
-    'aprender automaquillaje Quito',
+    'Ceciglam Quito',
   ],
-  authors: [{ name: 'Ceci Glam' }],
-  creator: 'Ceci Glam',
-  publisher: 'Ceci Glam',
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  alternates: { canonical: '/' },
   robots: {
     index: true,
     follow: true,
@@ -41,34 +47,22 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Curso Profesional de Uñas, Pestañas y Automaquillaje en Quito | Ceci Glam',
-    description: '¡Conviértete en experta! Aprende uñas, pestañas y automaquillaje con Ceci Glam en Quito. Certificación incluida.',
-    url: siteUrl,
-    siteName: 'Ceci Glam',
-    images: [
-      {
-        url: `${siteUrl}/og-image-beauty-course-quito.jpg`, 
-        width: 1200,
-        height: 630,
-        alt: 'Curso Integral de Belleza Ceci Glam en Quito: Uñas, Pestañas, Automaquillaje',
-      },
-    ],
-    locale: 'es_EC',
+    title: `Academia de Belleza en Quito | ${siteConfig.name}`,
+    description: siteConfig.description,
+    url: '/',
+    siteName: siteConfig.name,
+    images: [{ url: siteConfig.ogImage, alt: `Instalaciones de ${siteConfig.name}, academia de belleza en Quito` }],
+    locale: siteConfig.locale,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ceci Glam: Curso de Belleza en Quito (Uñas, Pestañas, Automaquillaje)',
-    description: 'Fórmate como profesional de la belleza en Quito con Ceci Glam. Cursos de uñas, pestañas y automaquillaje. ¡Inscríbete!',
-    // site: '@CeciGlamQuito', // Example, replace with your actual Twitter handle
-    // creator: '@CeciGlamQuito', // Example
-    images: [`${siteUrl}/twitter-image-beauty-course-quito.jpg`], 
+    title: `Academia de Belleza en Quito | ${siteConfig.name}`,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
   },
-  icons: {
-    // icon: '/favicon.ico', // Example, ensure favicon exists in public
-    // apple: '/apple-touch-icon.png', // Example
-  },
-  manifest: `${siteUrl}/site.webmanifest`, 
+  // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION with the Google Search Console token.
+  verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
 };
 
 export default function RootLayout({
@@ -77,14 +71,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={GeistSans.variable}>
-      <head>
-        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-      </head>
+    <html lang={siteConfig.language} className={GeistSans.variable}>
       <body className="antialiased font-sans">
+        <JsonLd data={organizationJsonLd()} />
         {children}
-        <Toaster />
-        <CalendlyWidget /> 
+        <CalendlyWidget />
       </body>
     </html>
   );

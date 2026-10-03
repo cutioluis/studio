@@ -1,6 +1,7 @@
 
 import Link from 'next/link';
-import { getSortedPostsData, type PostData } from '@/lib/posts';
+import { getSortedPostsData } from '@/lib/posts';
+import { siteConfig } from '@/config/site';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import type { Metadata } from 'next';
@@ -9,31 +10,28 @@ import { Button } from '@/components/ui/button';
 import { CalendarDays, ArrowRight } from 'lucide-react';
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { Analytics } from '@vercel/analytics/next';
+
+const BLOG_TITLE = 'Blog de Belleza y Emprendimiento';
+const BLOG_DESCRIPTION = `Artículos, consejos y novedades sobre uñas, pestañas, maquillaje y emprendimiento en belleza por ${siteConfig.name}, academia de belleza en Quito.`;
 
 export const metadata: Metadata = {
-  title: 'Blog de Belleza y Emprendimiento | Ceci Glam',
-  description: 'Artículos, consejos y novedades sobre uñas, pestañas, automaquillaje y emprendimiento en el mundo de la belleza por Ceci Glam.',
+  title: BLOG_TITLE,
+  description: BLOG_DESCRIPTION,
+  alternates: { canonical: '/blog' },
   openGraph: {
-    title: 'Blog de Belleza y Emprendimiento | Ceci Glam',
-    description: 'Descubre artículos y consejos sobre belleza y emprendimiento.',
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog`,
-    siteName: 'Ceci Glam',
+    title: `${BLOG_TITLE} | ${siteConfig.name}`,
+    description: BLOG_DESCRIPTION,
+    url: '/blog',
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
     type: 'website',
-     images: [
-      {
-        url: `${process.env.NEXT_PUBLIC_SITE_URL}/og-image-beauty-course-quito.jpg`,
-        width: 1200,
-        height: 630,
-        alt: 'Blog de Ceci Glam',
-      },
-    ],
+    images: [{ url: siteConfig.ogImage, alt: `Blog de ${siteConfig.name}` }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog de Belleza y Emprendimiento | Ceci Glam',
-    description: 'Consejos y tendencias del mundo de la belleza.',
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/twitter-image-beauty-course-quito.jpg`],
+    title: `${BLOG_TITLE} | ${siteConfig.name}`,
+    description: BLOG_DESCRIPTION,
+    images: [siteConfig.ogImage],
   },
 };
 
@@ -84,7 +82,6 @@ export default function BlogPage() {
         )}
       </main>
       <Footer />
-      <Analytics />
     </div>
   );
 }

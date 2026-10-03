@@ -1,159 +1,141 @@
+import Link from "next/link";
+import { ArrowRight, Clock } from "lucide-react";
+import type { Horario, Programa, WeekDay } from "@/features/catalog/domain/types";
+import { CalendlyLink } from "@/components/utils/calendly-link";
+import { CardShell } from "@/components/ui/card-shell";
+import { cn } from "@/lib/utils";
 
-"use client";
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Clock, XCircle, CheckCircle2, AlertTriangle, UsersRound, PenSquare, CalendarPlus } from "lucide-react"; 
-
-interface ScheduleOption {
-  id: string;
-  days: string;
-  time: string;
-  type?: string; // e.g., Intensivo
-  status: "agotado" | "disponible" | "ultimas";
-  statusText: string;
-  notes?: string;
-}
-
-const scheduleData: ScheduleOption[] = [
-  {
-    id: "1",
-    days: "Lunes y Miércoles",
-    time: "9am - 12pm",
-    status: "agotado",
-    statusText: "Cupos Agotados",
-  },
-  {
-    id: "2",
-    days: "Martes y Viernes",
-    time: "9am - 12pm",
-    status: "disponible",
-    statusText: "Plazas Disponibles",
-  },
-  {
-    id: "3",
-    days: "Sábados",
-    time: "9am - 3pm",
-    type: "Intensivo",
-    status: "disponible",
-    statusText: "Plazas Disponibles",
-  },
-  {
-    id: "4",
-    days: "Domingos",
-    time: "9am - 3pm",
-    type: "Intensivo",
-    status: "disponible",
-    statusText: "Plazas Disponibles",
-  },
+const WEEK: { day: WeekDay; short: string; long: string }[] = [
+  { day: 1, short: "L", long: "Lunes" },
+  { day: 2, short: "M", long: "Martes" },
+  { day: 3, short: "X", long: "Miércoles" },
+  { day: 4, short: "J", long: "Jueves" },
+  { day: 5, short: "V", long: "Viernes" },
+  { day: 6, short: "S", long: "Sábado" },
+  { day: 7, short: "D", long: "Domingo" },
 ];
 
-export function ScheduleSection() {
-  const getStatusIcon = (status: ScheduleOption["status"]) => {
-    switch (status) {
-      case "agotado":
-        return <XCircle className="h-5 w-5" />;
-      case "disponible":
-        return <CheckCircle2 className="h-5 w-5 text-green-500" />;
-      case "ultimas":
-        return <AlertTriangle className="h-5 w-5 text-yellow-500" />;
-      default:
-        return null;
-    }
-  };
+function toMinutes(time: string) {
+  const [hours, minutes] = time.split(":").map(Number);
+  return hours * 60 + minutes;
+}
 
-  const getBadgeVariant = (status: ScheduleOption["status"]): "destructive" | "default" | "secondary" => {
-    switch (status) {
-      case "agotado":
-        return "destructive";
-      case "disponible":
-        return "secondary"; // Changed from "default" to "secondary"
-      case "ultimas":
-        return "secondary"; 
-      default:
-        return "default";
-    }
-  };
+function formatTime(time: string) {
+  return time.replace(/^0/, "");
+}
 
-  const handleCalendlyPopup = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
-    e.preventDefault();
-    if (typeof window !== 'undefined' && (window as any).Calendly) {
-      (window as any).Calendly.initPopupWidget({
-        url: 'https://calendly.com/cutioluis?background_color=000000&text_color=f6b5e9',
-      });
-    }
-  };
+function formatDuration(start: string, end: string) {
+  const minutes = toMinutes(end) - toMinutes(start);
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+  return rest ? `${hours} h ${rest} min` : `${hours} h`;
+}
+
+function formatDays(days: WeekDay[]) {
+  const names = WEEK.filter(({ day }) => days.includes(day)).map(({ long }) => long.toLowerCase());
+  const text = names.length > 1 ? `${names.slice(0, -1).join(", ")} y ${names.at(-1)}` : names[0];
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+export function ScheduleSection({ programas }: { programas: Programa[] }) {
+  if (programas.length === 0) return null;
 
   return (
-    <section id="schedule" className="py-16 md:py-24 bg-secondary">
+    <section id="schedule" className="py-20 md:py-28 bg-background">
       <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 md:mb-16">
-          <UsersRound className="h-12 w-12 mx-auto text-accent mb-4" />
-          <h2 className="text-3xl font-extrabold text-foreground sm:text-4xl md:text-5xl">
-            Nuestros Horarios <span className="text-accent">Flexibles</span>
+        <header className="text-center mb-14 md:mb-20">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">Horarios</p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+            Elige tu{" "}
+            <span className="bg-gradient-to-r from-primary to-primary-deep bg-clip-text text-transparent">
+              horario de clases
+            </span>
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-foreground/70 sm:text-xl">
-            Encuentra el horario perfecto para ti y comienza tu formación como profesional de la belleza.
+          <p className="mt-5 max-w-2xl mx-auto text-lg text-muted-foreground">
+            Cada carrera tiene sus días fijos. Encuentra la que mejor se adapta a tu semana.
           </p>
-        </div>
+        </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {scheduleData.map((schedule) => (
-            <Card key={schedule.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col bg-card rounded-xl overflow-hidden">
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between mb-2">
-                  <CardTitle className="text-xl font-semibold text-accent">{schedule.days}</CardTitle>
-                  {schedule.type && (
-                    <Badge variant="secondary" className="text-xs">
-                      {schedule.type}
-                    </Badge>
-                  )}
-                </div>
-                <div className="flex items-center text-foreground/80">
-                  <Clock className="h-4 w-4 mr-2 text-primary" />
-                  <span>{schedule.time}</span>
-                </div>
-              </CardHeader>
-              <CardContent className="flex-grow flex flex-col justify-between pt-2">
-                <div className="mb-4">
-                    <Badge variant={getBadgeVariant(schedule.status)} className="w-full justify-center py-2 text-sm">
-                        {getStatusIcon(schedule.status)}
-                        <span className="ml-2">{schedule.statusText}</span>
-                    </Badge>
-                    {schedule.notes && <p className="text-xs text-foreground/60 mt-2 text-center">{schedule.notes}</p>}
-                </div>
-                <Button
-                  asChild={schedule.status !== "agotado"}
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                  disabled={schedule.status === "agotado"}
-                  onClick={schedule.status !== "agotado" ? undefined : (e) => e.preventDefault()} // Prevent action if not a link
-                >
-                  {schedule.status !== "agotado" ? (
-                    <a
-                      href={"https://walink.co/bd3d37"}
-                      target={"_blank"}
-                      rel={"noopener noreferrer"}
-                      className="flex items-center justify-center w-full" // Ensure anchor takes full button space
-                    >
-                      <PenSquare className="h-4 w-4 mr-2" />
-                      Inscríbete por WhatsApp
-                    </a>
-                  ) : (
-                    <span className="flex items-center justify-center w-full"> {/* Use span for disabled state */}
-                      <XCircle className="h-4 w-4 mr-2" />
-                      {schedule.statusText}
-                    </span>
-                  )}
-                </Button>
-              </CardContent>
-            </Card>
+        <ul className="flex flex-wrap justify-center gap-6 lg:gap-8">
+          {programas.map((programa) => (
+            <li key={programa.id} className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.334rem)]">
+              <ScheduleCard programa={programa} />
+            </li>
           ))}
-        </div>
-        <p className="mt-12 text-center text-foreground/70">
-          ¿No encuentras un horario que te funcione o tienes dudas? <a href="#" onClick={handleCalendlyPopup} className="text-accent font-semibold hover:underline">Agenda una asesoría gratuita</a>, ¡podemos ayudarte!
+        </ul>
+
+        <p className="mt-14 text-center text-muted-foreground">
+          ¿Tienes dudas sobre qué horario te conviene?{" "}
+          <CalendlyLink className="font-semibold text-primary underline-offset-4 hover:underline">
+            Agenda una asesoría gratuita
+          </CalendlyLink>
         </p>
       </div>
     </section>
+  );
+}
+
+function ScheduleCard({ programa }: { programa: Programa }) {
+  return (
+    <CardShell className="flex flex-col">
+      <div className="border-b border-white/[0.06] px-7 py-6">
+        <p className="text-sm font-medium text-primary-deep">{programa.duracion}</p>
+        <h3 className="mt-1 text-xl font-bold leading-snug text-white">{programa.nombre}</h3>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-6 px-7 py-6">
+        {programa.horarios.map((horario) => (
+          <ModalityBlock key={`${horario.modalidad}-${horario.inicio}`} horario={horario} />
+        ))}
+
+        <Link
+          href={`/programs/${programa.id}`}
+          className="relative z-20 mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-white"
+        >
+          Ver carrera
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </Link>
+      </div>
+    </CardShell>
+  );
+}
+
+function ModalityBlock({ horario }: { horario: Horario }) {
+  const { modalidad: label, dias: days, inicio: start, fin: end } = horario;
+
+  return (
+    <div className="flex flex-col gap-3">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground/70">{label}</p>
+
+      <ol className="flex gap-1.5" aria-label={`Días: ${formatDays(days)}`}>
+        {WEEK.map(({ day, short, long }) => {
+          const active = days.includes(day);
+          return (
+            <li
+              key={day}
+              title={long}
+              aria-hidden
+              className={cn(
+                "flex h-9 flex-1 items-center justify-center rounded-lg text-xs font-semibold",
+                active
+                  ? "bg-gradient-to-br from-primary to-primary-deep text-primary-foreground"
+                  : "border border-white/[0.06] text-muted-foreground/40"
+              )}
+            >
+              {short}
+            </li>
+          );
+        })}
+      </ol>
+
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-sm">
+        <span className="flex items-center gap-2 text-white">
+          <Clock className="h-4 w-4 text-primary" />
+          {formatTime(start)} – {formatTime(end)}
+        </span>
+        <span className="text-xs text-muted-foreground">{formatDuration(start, end)} por clase</span>
+      </div>
+      <p className="text-xs text-muted-foreground">{formatDays(days)}</p>
+    </div>
   );
 }
