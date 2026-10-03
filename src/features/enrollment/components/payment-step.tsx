@@ -130,6 +130,7 @@ export function PaymentStep({
                 value={value.comentario}
                 error={errors.comentario}
                 maxLength={MAX_COMMENT_LENGTH}
+                placeholder="¿Algo que debamos saber sobre tu inscripción?"
                 onChange={(event) => onChange({ comentario: event.target.value })}
                 onBlur={() => onBlur("comentario")}
               />

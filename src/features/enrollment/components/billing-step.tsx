@@ -86,6 +86,7 @@ export function BillingStep({ value, errors, onChange, onBlur, contact }: Props)
                 error={errors.identificacion}
                 readOnly={isConsumerFinal}
                 maxLength={20}
+                placeholder="Cédula, RUC o pasaporte"
                 autoComplete="off"
                 className="tabular-nums"
                 onChange={(event) => onChange({ identificacion: event.target.value.replace(/\s/g, "") })}
@@ -98,6 +99,7 @@ export function BillingStep({ value, errors, onChange, onBlur, contact }: Props)
                 value={value.razonSocial}
                 error={errors.razonSocial}
                 readOnly={isConsumerFinal}
+                placeholder="Ej. María Pérez o Empresa S.A."
                 autoComplete="organization"
                 onChange={(event) => onChange({ razonSocial: event.target.value })}
                 onBlur={() => onBlur("razonSocial")}
@@ -112,6 +114,7 @@ export function BillingStep({ value, errors, onChange, onBlur, contact }: Props)
                 type="email"
                 value={value.email}
                 error={errors.email}
+                placeholder="facturacion@correo.com"
                 autoComplete="off"
                 onChange={(event) => onChange({ email: event.target.value })}
                 onBlur={() => onBlur("email")}
@@ -124,6 +127,7 @@ export function BillingStep({ value, errors, onChange, onBlur, contact }: Props)
                 inputMode="tel"
                 value={value.telefono}
                 error={errors.telefono}
+                placeholder="Ej. 0991234567"
                 autoComplete="off"
                 onChange={(event) => onChange({ telefono: event.target.value })}
                 onBlur={() => onBlur("telefono")}
@@ -138,7 +142,7 @@ export function BillingStep({ value, errors, onChange, onBlur, contact }: Props)
           id={id("direccion")}
           value={value.direccion}
           error={errors.direccion}
-          placeholder="Quito, Av. Amazonas y Naciones Unidas"
+          placeholder="Ciudad, calle principal y secundaria"
           autoComplete="street-address"
           maxLength={300}
           onChange={(event) => onChange({ direccion: event.target.value })}

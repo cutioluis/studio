@@ -16,6 +16,7 @@ export function ContactStep({ value, errors, onChange, onBlur }: StepProps<Conta
             id={id("nombres")}
             value={value.nombres}
             error={errors.nombres}
+            placeholder="Ej. María José"
             autoComplete="given-name"
             onChange={(event) => onChange({ nombres: event.target.value })}
             onBlur={() => onBlur("nombres")}
@@ -26,6 +27,7 @@ export function ContactStep({ value, errors, onChange, onBlur }: StepProps<Conta
             id={id("apellidos")}
             value={value.apellidos}
             error={errors.apellidos}
+            placeholder="Ej. Pérez López"
             autoComplete="family-name"
             onChange={(event) => onChange({ apellidos: event.target.value })}
             onBlur={() => onBlur("apellidos")}
@@ -56,6 +58,7 @@ export function ContactStep({ value, errors, onChange, onBlur }: StepProps<Conta
             error={errors.numeroDocumento}
             inputMode={isCedula ? "numeric" : "text"}
             maxLength={isCedula ? 10 : 20}
+            placeholder={isCedula ? "10 dígitos" : "Ej. A1234567"}
             autoComplete="off"
             className="tabular-nums"
             onChange={(event) =>
@@ -85,6 +88,7 @@ export function ContactStep({ value, errors, onChange, onBlur }: StepProps<Conta
             type="email"
             value={value.email}
             error={errors.email}
+            placeholder="nombre@correo.com"
             autoComplete="email"
             onChange={(event) => onChange({ email: event.target.value })}
             onBlur={() => onBlur("email")}
