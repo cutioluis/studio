@@ -10,6 +10,7 @@ import { BlogTeaserSection } from "@/components/landing-spark/blog-teaser-sectio
 import { CallToActionSection } from "@/components/landing-spark/call-to-action-section";
 import { AnnouncementBanner } from "@/components/layout/announcement-banner";
 import { getCareers } from "@/features/catalog/infrastructure/catalog-repository";
+import { MotionProvider } from "@/components/motion/reveal";
 
 
 // Hourly ISR: careers and schedules come from the database.
@@ -23,13 +24,15 @@ export default async function HomePage() {
       <Navbar />
       <AnnouncementBanner />
       <main className="flex-grow">
-        <CoverSection />
-        <InteractiveGallery programas={careers} />
-        <InstructorSection />
-        <ScheduleSection programas={careers} />
-        <LocationSection />
-        <BlogTeaserSection />
-        <CallToActionSection />
+        <MotionProvider>
+          <CoverSection />
+          <InteractiveGallery programas={careers} />
+          <ScheduleSection programas={careers} />
+          <LocationSection />
+          <InstructorSection />
+          <BlogTeaserSection />
+          <CallToActionSection />
+        </MotionProvider>
       </main>
       <Footer />
     </div>

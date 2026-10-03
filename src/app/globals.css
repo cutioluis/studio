@@ -24,8 +24,8 @@ body {
     --secondary: 240 7% 14%; /* Slightly lifted charcoal for chips/secondary surfaces */
     --secondary-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --muted: 240 6% 16%; /* Muted charcoal surface */
-    --muted-foreground: 240 3% 64%; /* #A0A0A5 - Light Gray */
+    --muted: 240 6% 35%; /* Muted charcoal surface */
+    --muted-foreground: 240 5% 90%; /* #D7D7DB - Soft Light Gray */
 
     --accent: 8 57% 85%; /* #EEC7C1 - Light Rose Gold */
     --accent-foreground: 240 9% 7%; /* #0F0F12 */
@@ -72,7 +72,7 @@ body {
     --secondary-foreground: 0 0% 100%;
 
     --muted: 240 6% 16%;
-    --muted-foreground: 240 3% 64%;
+    --muted-foreground: 240 5% 85%;
 
     --accent: 8 57% 85%;
     --accent-foreground: 240 9% 7%;

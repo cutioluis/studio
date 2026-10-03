@@ -11,6 +11,7 @@ import { getCareerBySlug, getCareers } from "@/features/catalog/infrastructure/c
 import { JsonLd } from "@/components/utils/json-ld";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+import { IconSwap, ShineSweep } from "@/components/ui/button-effects";
 
 const ROSE_GRADIENT = "bg-gradient-to-r from-primary to-primary-deep";
 const BENEFICIOS = ["Acceso de por vida", "Certificado incluido", "Garantía de satisfacción"];
@@ -100,8 +101,8 @@ export default async function ProgramPage({ params }: Props) {
               )}
             </ModuleExplorer>
 
-            {/* Inscripción */}
-            <div className="lg:col-span-1">
+            {/* Inscripción: first on mobile, right column on desktop */}
+            <div className="order-first lg:order-none lg:col-span-1">
               <Card className="overflow-hidden border border-primary-deep/30 bg-card">
                 <div className={cn("h-px w-full", ROSE_GRADIENT)} />
                 <CardContent className="space-y-6 p-6">
@@ -124,11 +125,13 @@ export default async function ProgramPage({ params }: Props) {
                   <Link
                     href={`/inscripcion?carrera=${programa.id}`}
                     className={cn(
-                      "block w-full rounded-lg px-4 py-3 text-center text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90",
+                      "group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg px-4 py-3 text-sm font-semibold text-primary-foreground shadow-[0_10px_30px_-12px_hsl(var(--primary)/0.55)] transition-[transform,box-shadow] duration-500 ease-out hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-12px_hsl(var(--primary)/0.75)]",
                       ROSE_GRADIENT
                     )}
                   >
-                    Inscribirse Ahora
+                    <ShineSweep />
+                    <span className="relative">Inscribirse Ahora</span>
+                    <IconSwap />
                   </Link>
 
                   <ul className="space-y-2 border-t border-white/[0.08] pt-5 text-xs text-muted-foreground">

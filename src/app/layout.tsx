@@ -1,6 +1,7 @@
 
 import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
+import { Great_Vibes, Instrument_Serif } from 'next/font/google';
 import './globals.css';
 import CalendlyWidget from '@/components/utils/calendly-widget';
 import { siteConfig } from '@/config/site';
@@ -9,6 +10,23 @@ import { organizationJsonLd } from '@/lib/seo';
 
 // Regenerate static pages daily so date-based content (banner month, footer year) stays current.
 export const revalidate = 86400;
+
+// Calligraphic accent font for decorative headings (font-script).
+const scriptFont = Great_Vibes({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-script',
+});
+
+// Editorial serif for italic accents in headings (font-serif).
+const serifFont = Instrument_Serif({
+  weight: '400',
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-serif',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -71,7 +89,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={siteConfig.language} className={GeistSans.variable}>
+    <html lang={siteConfig.language} className={`${GeistSans.variable} ${scriptFont.variable} ${serifFont.variable}`}>
       <body className="antialiased font-sans">
         <JsonLd data={organizationJsonLd()} />
         {children}

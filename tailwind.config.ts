@@ -12,6 +12,8 @@ export default {
   	extend: {
   		fontFamily: {
         sans: ['var(--font-geist-sans)'], // Added to ensure Geist is primary sans-serif
+        script: ['var(--font-script)', 'cursive'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
       },
   		colors: {
   			background: 'hsl(var(--background))',

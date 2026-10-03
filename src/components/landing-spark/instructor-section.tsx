@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { instructors as defaultInstructors, type Instructor } from "@/data/instructors";
 import { CardShell } from "@/components/ui/card-shell";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 
 interface InstructorSectionProps {
   instructors?: Instructor[];
@@ -21,25 +22,37 @@ export function InstructorSection({
   return (
     <section id="instructor" className="py-20 md:py-28 bg-background">
       <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <header className="text-center mb-14 md:mb-20">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">Nuestros instructores</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">{title}</h2>
-          <p className="mt-5 max-w-2xl mx-auto text-lg text-muted-foreground">{subtitle}</p>
-        </header>
+        <RevealGroup as="header" className="text-center mb-14 md:mb-20">
+          <RevealItem variant="text">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">Nuestros instructores</p>
+          </RevealItem>
+          <RevealItem variant="text">
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">{title}</h2>
+          </RevealItem>
+          <RevealItem variant="text">
+            <p className="mt-5 max-w-2xl mx-auto text-lg text-muted-foreground">{subtitle}</p>
+          </RevealItem>
+        </RevealGroup>
 
         <div className="flex flex-col gap-6 lg:gap-8">
           {featured.map((instructor) => (
-            <FeaturedInstructorCard key={instructor.id} instructor={instructor} />
+            <Reveal key={instructor.id}>
+              <FeaturedInstructorCard instructor={instructor} />
+            </Reveal>
           ))}
 
           {team.length > 0 && (
-            <ul className="flex flex-wrap justify-center gap-6 lg:gap-8">
+            <RevealGroup as="ul" stagger={0.15} className="flex flex-wrap justify-center gap-6 lg:gap-8">
               {team.map((instructor) => (
-                <li key={instructor.id} className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.334rem)]">
+                <RevealItem
+                  as="li"
+                  key={instructor.id}
+                  className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.334rem)]"
+                >
                   <InstructorCard instructor={instructor} />
-                </li>
+                </RevealItem>
               ))}
-            </ul>
+            </RevealGroup>
           )}
         </div>
       </div>

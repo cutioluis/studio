@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { ArrowRight, Clock } from "lucide-react";
+import { Clock } from "lucide-react";
 import type { Horario, Programa, WeekDay } from "@/features/catalog/domain/types";
 import { CalendlyLink } from "@/components/utils/calendly-link";
 import { CardShell } from "@/components/ui/card-shell";
 import { cn } from "@/lib/utils";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
+import { IconSwap } from "@/components/ui/button-effects";
 
 const WEEK: { day: WeekDay; short: string; long: string }[] = [
   { day: 1, short: "L", long: "Lunes" },
@@ -43,33 +45,39 @@ export function ScheduleSection({ programas }: { programas: Programa[] }) {
   return (
     <section id="schedule" className="py-20 md:py-28 bg-background">
       <div className="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <header className="text-center mb-14 md:mb-20">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">Horarios</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
-            Elige tu{" "}
-            <span className="bg-gradient-to-r from-primary to-primary-deep bg-clip-text text-transparent">
-              horario de clases
-            </span>
-          </h2>
-          <p className="mt-5 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Cada carrera tiene sus días fijos. Encuentra la que mejor se adapta a tu semana.
-          </p>
-        </header>
+        <RevealGroup as="header" className="text-center mb-14 md:mb-20">
+          <RevealItem variant="text">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">Horarios</p>
+          </RevealItem>
+          <RevealItem variant="text">
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+              Elige tu{" "}
+              <span className="bg-gradient-to-r from-primary to-primary-deep bg-clip-text text-transparent">
+                horario de clases
+              </span>
+            </h2>
+          </RevealItem>
+          <RevealItem variant="text">
+            <p className="mt-5 max-w-2xl mx-auto text-lg text-muted-foreground">
+              Cada carrera tiene sus días fijos. Encuentra la que mejor se adapta a tu semana.
+            </p>
+          </RevealItem>
+        </RevealGroup>
 
-        <ul className="flex flex-wrap justify-center gap-6 lg:gap-8">
+        <RevealGroup as="ul" stagger={0.15} className="flex flex-wrap justify-center gap-6 lg:gap-8">
           {programas.map((programa) => (
-            <li key={programa.id} className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.334rem)]">
+            <RevealItem as="li" key={programa.id} className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.334rem)]">
               <ScheduleCard programa={programa} />
-            </li>
+            </RevealItem>
           ))}
-        </ul>
+        </RevealGroup>
 
-        <p className="mt-14 text-center text-muted-foreground">
+        <Reveal as="div" className="mt-14 text-center text-muted-foreground">
           ¿Tienes dudas sobre qué horario te conviene?{" "}
           <CalendlyLink className="font-semibold text-primary underline-offset-4 hover:underline">
             Agenda una asesoría gratuita
           </CalendlyLink>
-        </p>
+        </Reveal>
       </div>
     </section>
   );
@@ -90,10 +98,10 @@ function ScheduleCard({ programa }: { programa: Programa }) {
 
         <Link
           href={`/programs/${programa.id}`}
-          className="relative z-20 mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-white"
+          className="group/btn relative z-20 mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-white"
         >
           Ver carrera
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          <IconSwap direction="right" />
         </Link>
       </div>
     </CardShell>

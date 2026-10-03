@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, Home, BookOpen, Sparkles, CalendarDays, MapPinIcon, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { IconSwap } from "@/components/ui/button-effects";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Logo } from "@/components/logo";
 import { usePathname } from 'next/navigation';
@@ -101,8 +102,11 @@ export function Navbar() {
         
         <nav className="hidden md:flex items-center space-x-6">
           {currentNavLinks.map(link => renderLink(link))}
-          <Button asChild size="sm" variant="default">
-            <Link href="/inscripcion">Inscríbete</Link>
+          <Button asChild size="sm" variant="default" className="group/btn">
+            <Link href="/inscripcion">
+              Inscríbete
+              <IconSwap />
+            </Link>
           </Button>
         </nav>
 
@@ -125,9 +129,10 @@ export function Navbar() {
                 <nav className="flex flex-col space-y-1"> {/* Reduced space-y for denser mobile nav links */}
                   {currentNavLinks.map(link => renderLink(link, true))}
                 </nav>
-                <Button asChild variant="default" className="w-full mt-auto">
+                <Button asChild variant="default" className="group/btn w-full mt-auto">
                   <Link href="/inscripcion" onClick={() => setIsMobileMenuOpen(false)}>
                     Inscríbete Ahora
+                    <IconSwap />
                   </Link>
                 </Button>
               </div>
